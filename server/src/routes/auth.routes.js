@@ -5,12 +5,12 @@ const { User } = require("../../db/models");
 const authRouter = express.Router();
 
 authRouter.get("/check-session", (req, res) => {
-  console.log(req.session);
-  console.log(req.session.user_sid);
   
-  
-  if (req.session && req.session.user_sid) {
-    res.status(200).json({ userId: req.session.user_sid });
+  if (req.session.user_sid) {
+    const {user} = res.locals;
+    
+    res.status(200).json({ user });
+
   } else {
     res.status(401).json({ message: "Not authenticated" });
   }

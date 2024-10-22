@@ -41,7 +41,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         });
         if (response.status === 200) {
           const data = await response.json();
-          setUser(data.userId);
+          setUser(data.user);
         } else {
           setUser(null); 
         }

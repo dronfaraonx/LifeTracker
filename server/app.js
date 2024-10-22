@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config()
 
 const authRouter = require('./src/routes/auth.routes')
-const userSession = require('./src/middleware/getUser');
+// const userSession = require('./src/middleware/getUser');
 
 const app = express();
 
@@ -13,11 +13,10 @@ const serverConfig = require('./src/middleware/serverConfig')
 const sessionConfig = require('./src/middleware/sessionConfig')
 
 
-serverConfig(app);
 sessionConfig(app)
+serverConfig(app);
 
 app.use('/api/auth', authRouter);
-app.use(userSession);
 
 
 app.listen(PORT, () => {

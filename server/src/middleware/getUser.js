@@ -1,11 +1,11 @@
 const { User } = require("../../db/models");
 
-const userSession = async (req, res, next) => {
+const userSession = async (req, res, next) => {  
   try {
     if (req.session?.user_sid) {
       const user = await User.findByPk(req.session.user_sid);
       if (user) {
-        res.locals.user = user.get();  
+        res.locals.user = user;  
       } else {
         req.session.destroy();  
         res.clearCookie('user_sid'); 

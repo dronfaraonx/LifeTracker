@@ -34,9 +34,7 @@ const LoginPage = () => {
     try {
       const res = await axios.post("http://localhost:8000/api/auth/login", { email, password }, {withCredentials: true}, );
       setUser(res.data.user); 
-      
-      localStorage.setItem("user", JSON.stringify(res.data.user)); 
-
+    
       navigate(`/`); 
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
