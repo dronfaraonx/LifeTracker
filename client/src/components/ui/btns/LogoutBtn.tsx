@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useUser } from '../../../context/auth';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const LogoutButton: React.FC = () => {
   const { setUser } = useUser();
   const [isLoading, setIsLoading] = useState(false);
@@ -11,7 +13,7 @@ const handleLogout = async (): Promise<void> => {
   setErrorMessage(null);
 
   try {
-    const response = await fetch('http://localhost:8000/api/auth/logout', {
+    const response = await fetch(`${API_URL}/auth/logout`, {
       method: 'POST',
       credentials: 'include', 
     });
