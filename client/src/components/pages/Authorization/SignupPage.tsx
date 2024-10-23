@@ -1,46 +1,49 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; 
-import { Form, Button, FormFeedback, FormGroup, Input, Label, Alert } from "reactstrap";
+import { Link, useNavigate} from "react-router-dom";
+import { TextField, Button, Alert, Box, CircularProgress, Typography } from "@mui/material";
 import { FormDataType } from "./authTypes";
-import { useUser } from '../../../context/auth';
+import { useUser } from "../../../context/auth";
 
 const SignupPage = () => {
-  const { setUser } = useUser();  
-  const [formData, setFormData] = useState<FormDataType>({ name: '', email: '', password: '', repeat: '' });
+  const { setUser } = useUser();
+  const [formData, setFormData] = useState<FormDataType>({ name: "", email: "", password: "", repeat: "" });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate(); 
-  
+  const navigate = useNavigate();
+
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    
+
     if (errorMessage) {
       setErrorMessage(null);
     }
   };
-const API_URL = import.meta.env.VITE_API_URL;
-console.log(API_URL);
 
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true); 
+    setIsLoading(true);
 
     if (formData.password !== formData.repeat) {
       setErrorMessage("Passwords do not match");
-      setIsLoading(false); 
+      setIsLoading(false);
       return;
     }
 
     try {
-      const res = await axios.post(`${API_URL}/api/auth/signup`, {
-        ...formData,
-        repeatPassword: formData.repeat,
-      }, {withCredentials: true});
-      setUser(res.data.user); 
-      navigate('/'); 
+      const res = await axios.post(
+        `${API_URL}/api/auth/signup`,
+        {
+          ...formData,
+          repeatPassword: formData.repeat,
+        },
+        { withCredentials: true }
+      );
+      setUser(res.data.user);
+      navigate("/");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         setErrorMessage(error.response.data.message || "Signup failed. Please try again.");
@@ -48,69 +51,74 @@ console.log(API_URL);
         setErrorMessage("Signup failed. Please try again.");
       }
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
 
   return (
-    <>
-      <Form onSubmit={submitHandler}>
-        <FormGroup>
-          <Label for="name">Name</Label>
-          <Input
-            value={formData.name}
-            onChange={changeHandler}
-            id="name"
-            name="name"
-            placeholder="Name"
-            type="text"
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input
-            value={formData.email}
-            onChange={changeHandler}
-            id="email"
-            name="email"
-            placeholder="Email"
-            type="email"
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
-            value={formData.password}
-            onChange={changeHandler}
-            id="password"
-            name="password"
-            placeholder="Password"
-            type="password"
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="repeat">Repeat Password</Label>
-          <Input
-            invalid={formData.repeat.length > 0 && formData.repeat !== formData.password}
-            value={formData.repeat}
-            onChange={changeHandler}
-            id="repeat"
-            name="repeat"
-            placeholder="Repeat Password"
-            type="password"
-            required
-          />
-          <FormFeedback>Passwords should match</FormFeedback>
-        </FormGroup>
-        {errorMessage && <Alert color="danger">{errorMessage}</Alert>}
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? 'Submitting...' : 'Submit'}
+    <Box className="login-container" display="flex" justifyContent="center" alignItems="center" height="100vh">
+      <Box
+        component="form"
+        onSubmit={submitHandler}
+        sx={{ maxWidth: 400, margin: "0 auto", display: "flex", flexDirection: "column", gap: 2 }}
+        p={4} boxShadow={3} borderRadius={2} width="300px" bgcolor="white"
+      >
+        <Typography variant="h4" align="center" gutterBottom>
+          Sign up
+        </Typography>
+        <TextField
+          label="Name"
+          name="name"
+          value={formData.name}
+          onChange={changeHandler}
+          variant="outlined"
+          required
+        />
+        <TextField
+          label="Email"
+          name="email"
+          value={formData.email}
+          onChange={changeHandler}
+          variant="outlined"
+          type="email"
+          required
+        />
+        <TextField
+          label="Password"
+          name="password"
+          value={formData.password}
+          onChange={changeHandler}
+          variant="outlined"
+          type="password"
+          required
+        />
+        <TextField
+          label="Repeat Password"
+          name="repeat"
+          value={formData.repeat}
+          onChange={changeHandler}
+          variant="outlined"
+          type="password"
+          required
+          error={formData.repeat.length > 0 && formData.repeat !== formData.password}
+          helperText={formData.repeat.length > 0 && formData.repeat !== formData.password ? "Passwords should match" : ""}
+        />
+
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+
+        <Button type="submit" variant="contained" color="primary" disabled={isLoading}>
+          {isLoading ? <CircularProgress size={24} /> : "Submit"}
         </Button>
-      </Form>
-    </>
+      <Box display="flex" justifyContent="center" mt={2}>
+        <Typography variant="body2">
+          Have already an account?{" "}
+          <Link to="/login">
+            Login
+          </Link>
+        </Typography>
+      </Box>
+      </Box>
+    </Box>
   );
 };
 

@@ -33,27 +33,31 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [isLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await fetch(`${API_URL}/api/auth/check-session`, {
-          method: 'GET',
-          headers: {'Content-Type': 'application/json'},
-          credentials: 'include',
-        });
-        if (response.status === 200) {
-          const data = await response.json();
-          setUser(data.user);
-        } else {
-          setUser(null); 
-        }
-      } catch (error) {
-        console.error("Failed to fetch user session:", error);
-        // setUser(null); 
-      }
-    };
+  const fetchUser = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/auth/check-session`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
 
-    fetchUser();
-  }, []);
+      if (response.status === 200) {
+        const data = await response.json();
+        setUser(data.user);
+      } else if (response.status === 401) {
+        console.log('Error: Unauthorized access');
+      } else {
+        setUser(null); 
+      }
+    } catch (error) {
+      console.error("Failed to fetch user session:", error);
+      // setUser(null); 
+    }
+  };
+
+  fetchUser();
+}, []);
+
 
   return (
     <UserContext.Provider value={{ user, setUser, isLoading }}>
