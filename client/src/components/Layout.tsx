@@ -1,13 +1,14 @@
 import { Col, Container, Row } from 'reactstrap'
 import NavigationBar from './ui/NavigationBar'
 import { Outlet } from 'react-router-dom'
+import SideBar from './ui/SideBar'
 
 export default function Layout() {
   return (
     <Container>
       <Row>
-        <Col xs="12">
-          <NavigationBar/>
+        <Col >
+          <SideBar/>
         </Col>
       </Row>
       <Row>

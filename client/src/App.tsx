@@ -10,33 +10,62 @@ const Layout = React.lazy(() => import('./components/Layout'));
 const MainPage = React.lazy(() => import('./components/pages/MainPage/MainPage'));
 
 import { UserProvider } from './context/auth';
+import ProfilePage from './components/pages/ProfilePage/ProfilePage';
+import { Container } from '@mui/material';
+import Loading from './components/ui/Loadint';
 
 function App() {
+
   
   const router = createBrowserRouter([
     {
-      element: <Suspense fallback={<div>Loading...</div>}><Layout /></Suspense>,
-      children: [
-        {
-          path: "/",
-          element: <Suspense fallback={<div>Loading Main Page...</div>}><MainPage /></Suspense>,
-        },
-        {
-          path: "/signup",
-          element: <Suspense fallback={<div>Loading Signup Page...</div>}><SignupPage /></Suspense>, 
-        },
-        {
-          path: "/login",
-          element: <Suspense fallback={<div>Loading Login Page...</div>}><LoginPage /></Suspense>,
-        },
-      ],
+      element: (
+    <Suspense fallback={<Loading message="Loading Layout..." />}>
+      <Layout />
+    </Suspense>
+  ),
+  children: [
+    {
+      path: "/",
+      element: (
+        <Suspense fallback={<Loading message="Loading Main Page..." />}>
+          <MainPage />
+        </Suspense>
+      ),
     },
+    {
+      path: "/signup",
+      element: (
+        <Suspense fallback={<Loading message="Loading Signup Page..." />}>
+          <SignupPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/login",
+      element: (
+        <Suspense fallback={<Loading message="Loading Login Page..." />}>
+          <LoginPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/profile",
+      element: (
+        <Suspense fallback={<Loading message="Loading Profile Page..." />}>
+          <ProfilePage />
+        </Suspense>
+      ),
+    },
+  ]},
   ]);
 
   return (
+    <Container sx={{bgcolor: "#F9ECFF", width:'100%', height: '100vh'}} >
     <UserProvider>
       <RouterProvider router={router} />
     </UserProvider>
+    </Container>
   );
 }
 

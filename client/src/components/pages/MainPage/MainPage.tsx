@@ -1,17 +1,19 @@
 // import React, { useEffect } from 'react';
 // import axios from 'axios';
+import { Box } from '@mui/material';
 import { useUser } from '../../../context/auth';
 
 const MainComponent = () => {
   const { user } = useUser();
   return (
-    <div>
-      {user ? (
-        <p>Welcome back, {user.name}!</p>
-      ) : (
-        <p>Please log in ☝️</p>
-      )}
-    </div>
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      textAlign="center" // Centers the text horizontally
+    >
+      Ghbsad
+    </Box>
   );
 };
 
