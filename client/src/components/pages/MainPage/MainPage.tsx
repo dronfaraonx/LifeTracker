@@ -10,7 +10,6 @@ const MainComponent = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-     // Makes the Box take the full height of the viewport
       textAlign="center" // Centers the text horizontally
     >
       Ghbsad

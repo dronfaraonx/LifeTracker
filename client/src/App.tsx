@@ -61,7 +61,7 @@ function App() {
   ]);
 
   return (
-    <Container sx={{bgcolor: "#F9ECFF"}} >
+    <Container sx={{bgcolor: "#F9ECFF", width:'100%', height: '100vh'}} >
     <UserProvider>
       <RouterProvider router={router} />
     </UserProvider>
