@@ -15,6 +15,7 @@ interface UserContextType {
 interface UserProviderProps {
   children: ReactNode;
 }
+const API_URL = process.env.REACT_APP_API_URL;
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
@@ -26,15 +27,15 @@ export const useUser = () => {
   }
   return context;
 };
-
+ 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/auth/check-session', {
+        const response = await fetch(`${API_URL}/auth/check-session`, {
           method: 'GET',
           headers: {'Content-Type': 'application/json'},
           credentials: 'include',

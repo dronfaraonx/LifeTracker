@@ -20,6 +20,7 @@ const SignupPage = () => {
       setErrorMessage(null);
     }
   };
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ const SignupPage = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/signup", {
+      const res = await axios.post(`${API_URL}/auth/signup`, {
         ...formData,
         repeatPassword: formData.repeat,
       }, {withCredentials: true});
