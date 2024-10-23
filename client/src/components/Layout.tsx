@@ -1,4 +1,3 @@
-import React from 'react'
 import { Col, Container, Row } from 'reactstrap'
 import NavigationBar from './ui/NavigationBar'
 import { Outlet } from 'react-router-dom'
