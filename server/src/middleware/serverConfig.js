@@ -5,7 +5,7 @@ const cors = require('cors');
 const userSession = require('./getUser');
 
 const corsOptions = {
- origin: ['http://localhost:5173', 'http://87.228.25.111/'],
+ origin: ['http://localhost:5173', 'http://87.228.25.111'],
  optionsSuccessStatus: 200,
  credentials: true
 };

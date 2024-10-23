@@ -20,7 +20,9 @@ const SignupPage = () => {
       setErrorMessage(null);
     }
   };
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+const API_URL = import.meta.env.VITE_API_URL;
+console.log(API_URL);
+
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
     }
 
     try {
-      const res = await axios.post(`${API_URL}/auth/signup`, {
+      const res = await axios.post(`${API_URL}/api/auth/signup`, {
         ...formData,
         repeatPassword: formData.repeat,
       }, {withCredentials: true});

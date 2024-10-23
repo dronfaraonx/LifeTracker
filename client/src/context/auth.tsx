@@ -15,7 +15,7 @@ interface UserContextType {
 interface UserProviderProps {
   children: ReactNode;
 }
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
@@ -35,7 +35,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`${API_URL}/auth/check-session`, {
+        const response = await fetch(`${API_URL}/api/auth/check-session`, {
           method: 'GET',
           headers: {'Content-Type': 'application/json'},
           credentials: 'include',

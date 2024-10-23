@@ -5,7 +5,7 @@ import { Form, Button, FormGroup, Input, Label, Alert } from "reactstrap";
 import { useUser } from '../../../context/auth';
 import './login.css'; 
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 const LoginPage = () => {
@@ -35,7 +35,7 @@ const LoginPage = () => {
     setIsLoading(true); 
 
     try {
-      const res = await axios.post(`${API_URL}/auth/login`, { email, password }, {withCredentials: true}, );
+      const res = await axios.post(`${API_URL}/api/auth/login`, { email, password }, {withCredentials: true}, );
       setUser(res.data.user); 
     
       navigate(`/`); 
