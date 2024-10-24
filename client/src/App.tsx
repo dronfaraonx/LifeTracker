@@ -1,71 +1,70 @@
 import React, { Suspense } from 'react';
 import './App.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 const LoginPage = React.lazy(() => import('./components/pages/Authorization/LoginPage'));
 const SignupPage = React.lazy(() => import('./components/pages/Authorization/SignupPage'));
-const Layout = React.lazy(() => import('./components/Layout'));
-const MainPage = React.lazy(() => import('./components/pages/MainPage/MainPage'));
+// const Layout = React.lazy(() => import('./components/Layout'));
+const Dashboard = React.lazy(() => import('./components/pages/Dashboard/Dashboard'));
 
 import { UserProvider } from './context/auth';
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
-import { Container } from '@mui/material';
-import Loading from './components/ui/Loadint';
+import Loading from './components/ui/Loading';
+import Header from './components/ui/Header';
+
+
 
 function App() {
-
-  
-  const router = createBrowserRouter([
-    {
-      element: (
-    <Suspense fallback={<Loading message="Loading Layout..." />}>
-      <Layout />
-    </Suspense>
-  ),
-  children: [
-    {
-      path: "/",
-      element: (
-        <Suspense fallback={<Loading message="Loading Main Page..." />}>
-          <MainPage />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/signup",
-      element: (
-        <Suspense fallback={<Loading message="Loading Signup Page..." />}>
-          <SignupPage />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/login",
-      element: (
-        <Suspense fallback={<Loading message="Loading Login Page..." />}>
-          <LoginPage />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/profile",
-      element: (
-        <Suspense fallback={<Loading message="Loading Profile Page..." />}>
-          <ProfilePage />
-        </Suspense>
-      ),
-    },
-  ]},
-  ]);
-
   return (
-    <Container sx={{bgcolor: "#F9ECFF", width:'100%', height: '100vh'}} >
     <UserProvider>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Header/>
+        <Routes>
+           <Route
+            path="/dashboard"
+            element={
+              <Suspense fallback={<Loading message="Loading Dashboard..." />}>
+                <Dashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<Loading message="Loading Dashboard..." />}>
+                <Dashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Suspense fallback={<Loading message="Loading Signup Page..." />}>
+                <SignupPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<Loading message="Loading Login Page..." />}>
+                <LoginPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Suspense fallback={<Loading message="Loading Profile Page..." />}>
+                <ProfilePage />
+              </Suspense>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </UserProvider>
-    </Container>
   );
 }
 

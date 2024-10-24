@@ -1,28 +1,75 @@
 import React, { useState } from 'react';
 import './profile.style.css'; 
+import { Divider, Box, Button } from '@mui/material';
 
 export default function ProfilePage() {
   const [name, setName] = useState('');
+  const [birth, setBirth] = useState('');
   const [email, setEmail] = useState('');
-  const [bio, setBio] = useState('');
+  const [location, setLocation] = useState('');
+  const [phone, setPhone] = useState(null);
+  const [image, setImage] = useState(''); 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ name, email, bio });
+    console.log({ name, email, phone, location });
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader); // Set the image source to the result of FileReader
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+    }
   };
 
   return (
-    <div className="container">
-      <h2 className="title">Add Personal Information</h2>
+    <Box display="flex" alignItems="flex-start" className="container">
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        className="form"
+        sx={{
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+          padding: '16px',
+          marginRight: '16px'
+        }}
+      >
+        <h2 className="title">My Profile</h2>
 
-      <form onSubmit={handleSubmit} className="form">
+        <div className="image-upload">
+          <img 
+            src={image || 'https://via.placeholder.com/150'} // Default image if none is uploaded
+            alt="Profile"
+            className="profile-image" 
+            style={{ width: '150px', height: '150px', borderRadius: '50%', marginBottom: '16px' }} 
+          />
+          <Button 
+            variant="contained" 
+            component="label"
+            sx={{ marginBottom: '16px' }}
+          >
+            Change Image
+            <input 
+              type="file" 
+              hidden 
+              accept="image/*" 
+              onChange={handleImageChange} 
+            />
+          </Button>
+        </div>
+
         <label className="label">
           Name:
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
             className="input" 
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </label>
@@ -31,24 +78,34 @@ export default function ProfilePage() {
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
             className="input" 
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
         <label className="label">
-          Bio:
-          <textarea
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
+          Phone:
+          <input
+            type="text"
+            value={phone || ''}
             className="input" 
-            rows={4}
+            onChange={(e) => setPhone(e.target.value)} 
+          />
+        </label>
+        <label className="label">
+          Location:
+          <input
+            type="text"
+            value={location}
+            className="input" 
+            onChange={(e) => setLocation(e.target.value)} 
           />
         </label>
         <button type="submit" className="button">
           Save Information
         </button>
-      </form>
-    </div>
+      </Box>
+      <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
+    </Box>
   );
 }

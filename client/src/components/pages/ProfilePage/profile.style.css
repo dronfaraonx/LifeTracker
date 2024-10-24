@@ -6,6 +6,8 @@
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
+  margin-top: 20px;
+  margin-left: 120px;
 }
 
 .title {
@@ -37,4 +39,8 @@
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
+}
+
+.image-upload {
+  display: flex;
 }

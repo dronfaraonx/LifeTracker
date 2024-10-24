@@ -12,7 +12,6 @@ const Sidebar = () => {
         variant="permanent"
         sx={{
           width: 240,
-          
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
             width: 240,
@@ -44,6 +43,7 @@ const Sidebar = () => {
           >
             <ListItemText primary="Profile" />
           </ListItem>
+          
           <ListItem
             button
             component={Link}

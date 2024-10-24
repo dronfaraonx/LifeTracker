@@ -1,95 +1,147 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.app {
+body {
+  font-family: "Open Sans", sans-serif !important;
+  background: #2e2c2c;
+  overflow-x: hidden;
+}
+
+header {
+  width: 100%;
+  height: 55px;
+  background: #e4e1e1;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
   display: flex;
+  /* Add flexbox */
+  justify-content: center;
+  align-items: center;
 }
 
-.sidebar {
-  width: 20%;
-  background-color: #f8f9fa;
-  padding: 20px;
+header .row {
+  margin: 0px !important;
 }
 
-.content {
-  width: 80%;
-  padding: 20px;
+header .logo {
+  text-decoration: none;
 }
 
-.profile-card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+header .logo img {
+  width: 70px;
 }
 
-.profile-info p {
-  margin: 5px 0;
+header .logo span {
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
 }
 
-.settings .notifications label {
-  display: block;
-  margin-bottom: 10px;
+header button.rounded-circle {
+  /* min-width: 40px !important; */
+  width: 40px !important;
+  height: 40px !important;
+  background: #ffffff !important;
+  color: #292929;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
 }
 
-/* @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+header button.rounded-circle {
+  min-width: 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+  background: #f0f5ff !important;
+  color: #000000;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+header button.rounded-circle svg {
+  color: #292929;
+  font-size: 18px !important;
+  transition: all 0.2s ease-in-out;
 }
 
-.card {
-  padding: 2em;
+header button.rounded-circle:hover svg {
+  color: #87878a !important;
 }
 
-@media (max-width: 768px) {
-  #root {
-    padding: 1rem;
-  }
-
-  .logo {
-    height: 4em;
-    padding: 1rem;
-  }
-
-  .card {
-    padding: 1.5em;
-  }
-
-  .read-the-docs {
-    font-size: 0.9rem;
-  }
+.myAcc {
+  text-align: left !important;
+  color: #0858f7 !important;
+  text-transform: capitalize !important;
 }
 
-@media (max-width: 480px) {
-  #root {
-    padding: 0.5rem;
-  }
+.userImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #3b3c3e;
+  padding: 2px;
+  border-radius: 100%;
+}
 
-  .logo {
-    height: 3em;
-    padding: 0.5rem;
-  }
+.userImg .rounded-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%px;
+  height: 100%px;
+  cursor: pointer;
+  position: relative;
+}
 
-  .card {
-    padding: 1em;
-  }
+.userImg .rounded-circle img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
 
-  .read-the-docs {
-    font-size: 0.8rem;
-  }
-} */
+.userImg.lg {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.myAccWrapper {
+  display: flex;
+  height: 50px;
+  justify-content: center;
+}
+
+.userInfo {
+  margin-top: 12px;
+  padding-left: 10px;
+}
+
+.userInfo h4 {
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 600;
+  margin-bottom: 0px;
+  color: #292929;
+}
+
+.userInfo p {
+  margin-top: 0px;
+  font-size: 12px;
+  color: #000;
+  opacity: 0.7;
+}
+
+
+.myAcc-btn:hover {
+  color: #87878a !important;
+  background: rgb(215, 215, 215) !important;
+}
