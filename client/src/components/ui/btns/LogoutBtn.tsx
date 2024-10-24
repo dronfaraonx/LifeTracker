@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useUser } from '../../../context/auth';
-import { ListItem, ListItemText } from '@mui/material';
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Logout from '@mui/icons-material/Logout';
+
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -38,21 +40,12 @@ const LogoutButton: React.FC = () => {
 
   return (
     <>
-  <ListItem 
-      button 
-      onClick={handleLogout} 
-      disabled={isLoading}
-      sx={{
-        '&:hover': {
-          background: 'linear-gradient(90deg, #5271C4 0%, #B19FFF 48%, #ECA1FE 100%)', // Use background instead of backgroundColor
-        },
-        color: 'white', 
-        transition: 'background 0.3s ease', 
-        borderRadius: '10px'
-      }}
-    >
-      <ListItemText primary={isLoading ? 'Logging out...' : 'Logout'} />
-    </ListItem>
+    <MenuItem onClick={handleLogout}>
+      <ListItemIcon >
+          <Logout fontSize="small"/>
+      </ListItemIcon>
+      {isLoading ? 'Logging out...' : 'Logout'}
+    </MenuItem>
 
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>} {/* Show error message if any */}
     </>
