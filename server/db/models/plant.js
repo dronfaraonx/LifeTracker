@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const PlantCategory = require('../migrations/9-plant-category');
 module.exports = (sequelize, DataTypes) => {
   class Plant extends Model {
     /**
@@ -10,14 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Inventory, Category, Plant, Order, Order_item}) {
-      this.hasOne(Inventory, 
-        {foreignKey: "plant_id"}
-      ),
-      this.belongsToMany(Category, {through: PlantCategory}),
-      this.belongsToMany(Plant, {through: Cart_Plant}),
-      this.belongsToMany(Order, {through: Order_item})
-
+    static associate({Category}) {
+      this.belongsTo(Category, {foreignKey: "category_id"})
+      // define association here
     }
   }
   Plant.init({
@@ -25,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     photo: DataTypes.STRING,
     price: DataTypes.INTEGER,
+    seller_id: DataTypes.INTEGER,
     category_id: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     code: DataTypes.STRING
   }, {
     sequelize,

@@ -2,12 +2,13 @@
 // import axios from 'axios';
 import { useUser } from '../../../context/auth';
 
-const Dashboard = () => {
+const MainPage = () => {
   const { user } = useUser();
   return (
-    
-    <h1>Dashboard Page, {user.name}</h1>
+    <div></div>
+    // <div>dashboard</div>
+    // <h1>Dashboard Page, {user.name}</h1>
   );
 };
 
-export default Dashboard;
+export default MainPage;
