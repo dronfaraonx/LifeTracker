@@ -1,20 +1,14 @@
 // import React, { useEffect } from 'react';
 // import axios from 'axios';
-import { Box } from '@mui/material';
 import { useUser } from '../../../context/auth';
 
-const MainComponent = () => {
+const MainPage = () => {
   const { user } = useUser();
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      textAlign="center" // Centers the text horizontally
-    >
-      Ghbsad
-    </Box>
+    <div></div>
+    // <div>dashboard</div>
+    // <h1>Dashboard Page, {user.name}</h1>
   );
 };
 
-export default MainComponent;
+export default MainPage;
