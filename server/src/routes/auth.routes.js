@@ -8,7 +8,8 @@ authRouter.get("/check-session", (req, res) => {
   
   if (req.session.user_sid) {
     const {user} = res.locals;
-    
+      console.log(user.name);
+
     res.status(200).json({ user });
 
   } else {
