@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -10,17 +10,19 @@ import {
   DialogTitle,
   DialogContent,
   Link,
+  Badge,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import logo from '../../../public/LOGO circle.png'; 
+import logo from '../../../public/LOGO circle.png';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate(); 
+  const [cartCount, setCartCount] = useState(0); 
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setOpen(true);
@@ -31,9 +33,13 @@ export default function Navbar() {
   };
 
   const handleLogoClick = () => {
-    navigate('/plants'); 
+    navigate('/plants');
   };
 
+  const handleAddToCart = () => {
+    setCartCount((prevCount) => prevCount + 1);
+  };
+  
   return (
     <nav>
       <AppBar
@@ -46,12 +52,11 @@ export default function Navbar() {
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-
-            <img 
-              src={logo} 
-              alt="Logo" 
-              style={{ height: 50, cursor: 'pointer' }} 
-              onClick={handleLogoClick} 
+            <img
+              src={logo}
+              alt="Logo"
+              style={{ height: 50, cursor: 'pointer' }}
+              onClick={handleLogoClick}
             />
             <Typography
               variant="body1"
@@ -117,8 +122,16 @@ export default function Navbar() {
             <IconButton>
               <FavoriteIcon sx={{ color: "gray" }} />
             </IconButton>
-            <IconButton>
-              <ShoppingCartIcon sx={{ color: "gray" }} />
+            <IconButton onClick={handleAddToCart}>
+              <Badge badgeContent={cartCount} color="primary" showZero
+sx={{
+  "& .MuiBadge-badge": {
+    backgroundColor: "green", 
+    color: "white",         
+  },
+}}>
+                <ShoppingCartIcon sx={{ color: "gray" }} />
+              </Badge>
             </IconButton>
           </Box>
         </Toolbar>
