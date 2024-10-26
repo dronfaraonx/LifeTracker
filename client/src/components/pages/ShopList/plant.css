@@ -7,11 +7,8 @@
 .plant-card {
   margin: 20px;
   width: 300px;
-  /* Adjust this based on your layout */
   background: none;
-  /* No borders */
   box-shadow: none;
-  /* Remove box shadow */
 }
 
 .card-link {
@@ -39,4 +36,9 @@
 .plant-name {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+.plant-card:hover {
+  background-color: transparent;
+  color: transparent;
 }

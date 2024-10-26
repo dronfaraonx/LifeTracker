@@ -2,12 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import PlantCard from './PlantCard';
 import './plant.css';
-import ShopItem from '../ShopItem/ShopItem';
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function ShopList() {
   const [plants, setPlants] = useState([]);
-  const [selectedPlant, setSelectedPlant] = useState(null);
 
   useEffect(() => {
     const fetchPlants = async () => {
@@ -30,7 +29,7 @@ export default function ShopList() {
         ) : (
           plants.map((plant) => (
             <div key={plant.id}>
-              <PlantCard plant={plant} setSelectedPlant={setSelectedPlant} />
+              <PlantCard plant={plant} />
             </div>
           ))
         )}

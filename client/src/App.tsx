@@ -51,7 +51,7 @@ function App() {
           ),
         },
         {
-          path: "/plants/:type/:id",
+          path: "/plants/:id",
           element: (
             <Suspense fallback={<Loading />}>
               <ShopItem />

@@ -15,4 +15,14 @@ shopRouter.get('/', async (req, res) => {
   }
 });
 
+shopRouter.get('/:id', async (req, res) => {
+  const {id} = req.params;
+  try {
+    const onePlant = await Plant.findByPk(id);
+    res.status(200).json(onePlant)
+  } catch (error) {
+    console.log('Error', error)
+    res.status(500).json({message: 'Ошибка на сервере'})
+  }
+})
 module.exports = shopRouter; 
