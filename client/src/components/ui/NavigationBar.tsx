@@ -16,12 +16,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
-import logo from '../../../public/LOGO circle.png';
+import logo from "../../../public/LOGO circle.png";
+import { useUser } from "../../context/auth";
+import AccountModal from "../pages/Authorization/modal/AccountModal";
+import LoginModal from "../pages/Authorization/modal/LoginModal";
 
 export default function Navbar() {
+  const { user } = useUser();
   const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0); 
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null); 
+  const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -33,13 +38,24 @@ export default function Navbar() {
   };
 
   const handleLogoClick = () => {
-    navigate('/plants');
+    navigate("/plants");
   };
+
+  const handleOpenMenu = (event: { currentTarget: React.SetStateAction<null>; }) => {
+    setAnchorEl(event.currentTarget); 
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null); 
+  };
+
+  const handleOpenLogin = () => setIsLoginOpen(true);
+  const handleCloseLogin = () => setIsLoginOpen(false);
 
   const handleAddToCart = () => {
     setCartCount((prevCount) => prevCount + 1);
   };
-  
+
   return (
     <nav>
       <AppBar
@@ -55,7 +71,7 @@ export default function Navbar() {
             <img
               src={logo}
               alt="Logo"
-              style={{ height: 50, cursor: 'pointer' }}
+              style={{ height: 50, cursor: "pointer" }}
               onClick={handleLogoClick}
             />
             <Typography
@@ -116,23 +132,42 @@ export default function Navbar() {
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <IconButton>
+            <IconButton onClick={user ? handleOpenMenu : handleOpenLogin}>
               <PersonIcon sx={{ color: "gray" }} />
             </IconButton>
-            <IconButton>
-              <FavoriteIcon sx={{ color: "gray" }} />
-            </IconButton>
-            <IconButton onClick={handleAddToCart}>
-              <Badge badgeContent={cartCount} color="primary" showZero
-sx={{
-  "& .MuiBadge-badge": {
-    backgroundColor: "green", 
-    color: "white",         
-  },
-}}>
-                <ShoppingCartIcon sx={{ color: "gray" }} />
-              </Badge>
-            </IconButton>
+
+            {user ? (
+              <AccountModal
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleCloseMenu}
+              />
+            ) : (
+              <LoginModal open={isLoginOpen} handleClose={handleCloseLogin} />
+            )}
+
+            {user && (
+              <>
+                <IconButton>
+                  <FavoriteIcon sx={{ color: "gray" }} />
+                </IconButton>
+                <IconButton onClick={handleAddToCart}>
+                  <Badge
+                    badgeContent={cartCount}
+                    color="primary"
+                    showZero
+                    sx={{
+                      "& .MuiBadge-badge": {
+                        backgroundColor: "green",
+                        color: "white",
+                      },
+                    }}
+                  >
+                    <ShoppingCartIcon sx={{ color: "gray" }} />
+                  </Badge>
+                </IconButton>
+              </>
+            )}
           </Box>
         </Toolbar>
 

@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';
+import { useUser } from '../../../context/auth';
+import SignupModal from '../Authorization/modal/SignUpModal';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function ShopItem() {
+  const {user} = useUser()
   const { id } = useParams();
   const navigate = useNavigate();
   const [plant, setPlant] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const fetchOnePlant = async () => {
@@ -17,7 +21,7 @@ export default function ShopItem() {
         const response = await axios.get(`${API_URL}/api/plants/${id}`);
         setPlant(response.data);
       } catch (error) {
-        console.log('Ошибка при загрузке информации о растении', error);
+        console.log('Ошибка при загрузке растения', error);
       } finally {
         setLoading(false);
       }
@@ -28,6 +32,9 @@ export default function ShopItem() {
   const handleBuy = () => {
     alert(`Вы купили ${plant.name}`);
   };
+
+  const handleModelRegOpen = () => setOpen(true);
+  const handleModelRegClose = () => setOpen(false);
 
   const handleBack = () => {
     navigate(-1);
@@ -59,11 +66,12 @@ export default function ShopItem() {
           <Button 
             variant="contained" 
             color="primary" 
-            onClick={handleBuy}
+            onClick={user ? handleBuy : handleModelRegOpen}
             sx={{ backgroundColor: 'green', color: 'white' }}
           >
             В корзину
           </Button>
+          <SignupModal open={open} onClose={handleModelRegClose} />
           <Button 
             variant="outlined" 
             onClick={handleBack}
