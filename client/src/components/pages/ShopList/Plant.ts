@@ -3,5 +3,6 @@ export default interface Plant {
   name: string; 
   type: string;
   photo: string;
+  description?: string
   price?: number;
 }
