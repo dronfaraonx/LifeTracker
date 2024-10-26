@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import {
   AppBar,
   Toolbar,
@@ -14,8 +15,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+import logo from '../../../public/LOGO circle.png'; 
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate(); 
 
   const handleClick = () => {
     setOpen(true);
@@ -25,9 +30,13 @@ export default function Navbar() {
     setOpen(false);
   };
 
+  const handleLogoClick = () => {
+    navigate('/plants'); 
+  };
+
   return (
     <nav>
-         <AppBar
+      <AppBar
         position="static"
         sx={{
           backgroundColor: "white",
@@ -36,7 +45,14 @@ export default function Navbar() {
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", gap: 4 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+
+            <img 
+              src={logo} 
+              alt="Logo" 
+              style={{ height: 50, cursor: 'pointer' }} 
+              onClick={handleLogoClick} 
+            />
             <Typography
               variant="body1"
               sx={{
@@ -88,7 +104,6 @@ export default function Navbar() {
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  // Handle search functionality here
                   console.log("Search:", e.currentTarget.value);
                 }
               }}
@@ -107,97 +122,52 @@ export default function Navbar() {
             </IconButton>
           </Box>
         </Toolbar>
-              <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          sx: {
-            position: "fixed",
-            top: "180px",
-            width: "100%",
-            height: "calc(100vh - 180px)",
-            margin: "0",
-            borderRadius: 0,
-            backgroundColor: "#f5f5f5",
-          },
-        }}
-      >
-        <DialogTitle>Каталог растений</DialogTitle>
-        <DialogContent>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-              padding: 2,
-            }}
-          >
-            <Link
-              href="#"
-              underline="hover"
-              color="inherit"
-              sx={{ fontSize: "1.2rem" }}
-            >
-              Монстера
-            </Link>
-            <Link
-              href="#"
-              underline="hover"
-              color="inherit"
-              sx={{ fontSize: "1.2rem" }}
-            >
-              Алоказия
-            </Link>
-          </Box>
 
-        </DialogContent>
-      </Dialog>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            sx: {
+              position: "fixed",
+              top: "180px",
+              width: "100%",
+              height: "calc(100vh - 180px)",
+              margin: "0",
+              borderRadius: 0,
+              backgroundColor: "#f5f5f5",
+            },
+          }}
+        >
+          <DialogTitle>Каталог растений</DialogTitle>
+          <DialogContent>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                padding: 2,
+              }}
+            >
+              <Link
+                href="#"
+                underline="hover"
+                color="inherit"
+                sx={{ fontSize: "1.2rem" }}
+              >
+                Монстера
+              </Link>
+              <Link
+                href="#"
+                underline="hover"
+                color="inherit"
+                sx={{ fontSize: "1.2rem" }}
+              >
+                Алоказия
+              </Link>
+            </Box>
+          </DialogContent>
+        </Dialog>
       </AppBar>
-            <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          sx: {
-            position: "fixed",
-            top: "180px",
-            width: "100%",
-            height: "calc(100vh - 180px)",
-            margin: "0",
-            borderRadius: 0,
-            backgroundColor: "#f5f5f5",
-          },
-        }}
-      >
-        <DialogTitle>Каталог растений</DialogTitle>
-        <DialogContent>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-              padding: 2,
-            }}
-          >
-            <Link
-              href="#"
-              underline="hover"
-              color="inherit"
-              sx={{ fontSize: "1.2rem" }}
-            >
-              Монстера
-            </Link>
-            <Link
-              href="#"
-              underline="hover"
-              color="inherit"
-              sx={{ fontSize: "1.2rem" }}
-            >
-              Алоказия
-            </Link>
-          </Box>
-        </DialogContent>
-      </Dialog>
-    
     </nav>
   );
 }

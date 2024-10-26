@@ -12,7 +12,7 @@ export default function ShopItem() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchPlantDetails = async () => {
+    const fetchOnePlant = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/plants/${id}`);
         setPlant(response.data);
@@ -22,7 +22,7 @@ export default function ShopItem() {
         setLoading(false);
       }
     };
-    fetchPlantDetails();
+    fetchOnePlant();
   }, [id]);
 
   const handleBuy = () => {

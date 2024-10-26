@@ -59,7 +59,7 @@ const MainPage = () => {
                 color: "white",
               }}
             >
-              Купить растения
+              Перейти в магазин
             </Button>
           </Link>
         </Box>

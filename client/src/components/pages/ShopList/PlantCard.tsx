@@ -16,7 +16,7 @@ export default function PlantCard({ plant }) {
             className="plant-image"
           />
           <CardContent className="card-content">
-            <Typography variant="h6" className="plant-name">
+            <Typography variant="h1" className="plant-name">
               {plant.type} {plant.name}
             </Typography>
             <Typography variant="body2" color="textSecondary">

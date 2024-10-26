@@ -11,6 +11,11 @@
   box-shadow: none;
 }
 
+.plant-card:hover {
+  background-color: transparent;
+  color: transparent;
+}
+
 .card-link {
   display: block;
   text-decoration: none;
@@ -36,9 +41,4 @@
 .plant-name {
   font-size: 1.2rem;
   font-weight: bold;
-}
-
-.plant-card:hover {
-  background-color: transparent;
-  color: transparent;
 }
