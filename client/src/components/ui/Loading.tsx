@@ -1,7 +1,7 @@
 import React from 'react';
 import { CircularProgress, Box, Typography } from '@mui/material';
 
-const Loading: React.FC= () => {
+const Loading: React.FC<{ message?: string }> = ({ message }) => {
   return (
     <Box
       display="flex"
@@ -12,7 +12,7 @@ const Loading: React.FC= () => {
     >
       <CircularProgress />
       <Typography variant="h6" marginTop={2}>
-        
+        {message || 'Loading...'}
       </Typography>
     </Box>
   );
