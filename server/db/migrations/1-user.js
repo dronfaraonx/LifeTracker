@@ -18,8 +18,9 @@ module.exports = {
       hashpass: {
         type: Sequelize.STRING
       },
-      status: {
-        type: Sequelize.STRING
+      isSeller: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       firstName: {
         type: Sequelize.STRING
