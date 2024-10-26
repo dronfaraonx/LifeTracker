@@ -1,15 +1,21 @@
 import React from 'react';
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
 import './plant.css'; 
-import Plant from './Plant'
+import Plant from './Plant';
 
+interface PlantCardProps {
+  plant: Plant;
+  setSelectedPlant: (plant: Plant) => void;
+}
 
+export default function PlantCard({ plant, setSelectedPlant }: PlantCardProps) {
+  const handleClick = () => {
+    setSelectedPlant(plant);
+  }
 
-
-export default function PlantCard({ plant }: { plant: Plant }) {
   return (
     <Card className="plant-card">
-      <CardActionArea href={`/plants/${plant.id}`} className="card-link">
+      <CardActionArea onClick={handleClick} className="card-link">
         <CardMedia
           component="img"
           alt={plant.name}
