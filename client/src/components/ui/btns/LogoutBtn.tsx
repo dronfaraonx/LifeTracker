@@ -25,7 +25,7 @@ const LogoutButton: React.FC = () => {
 
       if (response.ok) {
         setUser(null);
-        navigate('/login'); 
+        navigate('/'); 
       } else {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Logout failed');
@@ -44,10 +44,10 @@ const LogoutButton: React.FC = () => {
       <ListItemIcon >
           <Logout fontSize="small"/>
       </ListItemIcon>
-      {isLoading ? 'Logging out...' : 'Logout'}
+      {isLoading ? 'Выхожу...' : 'Выйти'}
     </MenuItem>
 
-      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>} {/* Show error message if any */}
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
     </>
   );
 };
