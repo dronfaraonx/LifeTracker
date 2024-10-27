@@ -4,8 +4,10 @@ const { Category } = require('../../db/models');
 const categoryRouter = express.Router();
 
 categoryRouter.get('/', async (req, res) => {
-  try {
-    const categories = await Category.findAll();
+ try {
+    const categories = await Category.findAll({
+
+    });
     console.log(JSON.stringify(categories));
     
     res.json(categories);

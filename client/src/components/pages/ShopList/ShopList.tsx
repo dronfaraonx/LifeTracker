@@ -8,7 +8,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 export default function ShopList() {
   const [plants, setPlants] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [filter, setFilter] = useState('');
   const [plantType, setPlantType] = useState('');
   const [categoryId, setCategoryId] = useState('');
 
@@ -25,7 +24,13 @@ export default function ShopList() {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/categories`);
-        setCategories(response.data);
+        // Используем Set для удаления дубликатов категорий по name (при необходимости)
+        const uniqueCategories = Array.from(
+          new Set(response.data.map((category) => category.name))
+        ).map((name) =>
+          response.data.find((category) => category.name === name)
+        );
+        setCategories(uniqueCategories);
       } catch (error) {
         console.error('Ошибка при загрузке категорий:', error);
       }
@@ -41,7 +46,7 @@ export default function ShopList() {
     return matchesType && matchesCategory;
   });
 
-  const uniqueTypes = [...new Set(plants.map(plant => plant.type))];
+  const uniqueCategories = [...new Set(plants.map(plant => plant.type))];
 
   return (
     <div style={{ display: 'flex' }}>
@@ -69,7 +74,7 @@ export default function ShopList() {
             style={{ width: '100%' }}
           >
             <option value="">Все типы</option>
-            {uniqueTypes
+            {uniqueCategories
               .filter(type => plants.some(plant => plant.category_id === Number(categoryId) && plant.type === type))
               .map((type, index) => (
                 <option key={index} value={type}>{type}</option>

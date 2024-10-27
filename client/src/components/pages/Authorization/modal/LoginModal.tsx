@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   TextField,
   Button,
   Alert,
   CircularProgress,
-  Box,
   Typography,
-  Link,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -41,7 +39,7 @@ const LoginModal = ({ open, handleClose }) => {
     try {
       const res = await axios.post(`${API_URL}/api/auth/login`, formData, { withCredentials: true });
       setUser(res.data.user);
-      handleClose(); // Call handleClose after successful login
+      handleClose();
       navigate(`/`);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

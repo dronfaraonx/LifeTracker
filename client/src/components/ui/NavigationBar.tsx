@@ -20,6 +20,7 @@ import logo from "../../../public/LOGO circle.png";
 import { useUser } from "../../context/auth";
 import AccountModal from "../pages/Authorization/modal/AccountModal";
 import LoginModal from "../pages/Authorization/modal/LoginModal";
+import SignupModal from "../pages/Authorization/modal/SignUpModal";
 
 export default function Navbar() {
   const { user } = useUser();
@@ -143,7 +144,7 @@ export default function Navbar() {
                 onClose={handleCloseMenu}
               />
             ) : (
-              <LoginModal open={isLoginOpen} handleClose={handleCloseLogin} />
+              <SignupModal open={isLoginOpen} onClose={handleCloseLogin} />
             )}
 
             {user && (

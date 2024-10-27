@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  TextField, Button, Alert, Box, CircularProgress, Typography, Dialog, DialogTitle, DialogContent, DialogActions
+  TextField, Button, Alert, Box, CircularProgress, Tabs, Tab, Dialog, DialogTitle, DialogContent, DialogActions
 } from "@mui/material";
-import { FormDataType } from "../authTypes"
+import { FormDataType } from "../authTypes";
 import { useUser } from "../../../../context/auth";
 
 interface SignupModalProps {
@@ -17,6 +17,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
   const [formData, setFormData] = useState<FormDataType>({ name: "", email: "", password: "", repeat: "" });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate();
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,52 +35,58 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (formData.password !== formData.repeat) {
+    if (activeTab === 1 && formData.password !== formData.repeat) {
       setErrorMessage("Пароли не сходятся");
       setIsLoading(false);
       return;
     }
 
     try {
-      const res = await axios.post(
-        `${API_URL}/api/auth/signup`,
-        {
-          ...formData,
-          repeatPassword: formData.repeat,
-        },
-        { withCredentials: true }
-      );
+      const endpoint = activeTab === 0 ? `${API_URL}/api/auth/login` : `${API_URL}/api/auth/signup`;
+      const requestData = activeTab === 0 ? { email: formData.email, password: formData.password } : formData;
+
+      const res = await axios.post(endpoint, requestData, { withCredentials: true });
       setUser(res.data.user);
-      navigate("/");
-      onClose(); // Close the modal after successful signup
+      navigate(-1);
+      onClose();
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        setErrorMessage(error.response.data.message || "Signup failed. Please try again.");
-      } else {
-        setErrorMessage("Signup failed. Please try again.");
-      }
+      console.log(error);
+      setErrorMessage("Произошла ошибка. Пожалуйста, проверьте введённые данные.");
     } finally {
       setIsLoading(false);
     }
   };
 
+  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setActiveTab(newValue);
+    setErrorMessage(null);
+  };
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
-      <DialogTitle>Sign Up</DialogTitle>
+      <DialogTitle sx={{ margin: '16px' }}>
+        {activeTab === 0 ? "Вход" : "Регистрация"}
+      </DialogTitle>
       <DialogContent>
+        <Tabs value={activeTab} onChange={handleTabChange} centered>
+          <Tab label="Логин" />
+          <Tab label="Регистрация" />
+        </Tabs>
         <Box
           component="form"
           onSubmit={submitHandler}
-          sx={{ display: "flex", flexDirection: "column", gap: 1, padding: '10px'}}
+          sx={{ display: "flex", flexDirection: "column", gap: 1, mb: '10px' }}
         >
-          <TextField
-            label="Имя"
-            name="name"
-            value={formData.name}
-            onChange={changeHandler}
-            variant="outlined"
-            required
-          />
+          {activeTab === 1 && (
+            <TextField
+              label="Имя"
+              name="name"
+              value={formData.name}
+              onChange={changeHandler}
+              variant="outlined"
+              required
+            />
+          )}
           <TextField
             label="Эл. Почта"
             name="email"
@@ -98,17 +105,19 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
             type="password"
             required
           />
-          <TextField
-            label="Повторить пароль"
-            name="repeat"
-            value={formData.repeat}
-            onChange={changeHandler}
-            variant="outlined"
-            type="password"
-            required
-            error={formData.repeat.length > 0 && formData.repeat !== formData.password}
-            helperText={formData.repeat.length > 0 && formData.repeat !== formData.password ? "Пароли должны совпадать" : ""}
-          />
+          {activeTab === 1 && (
+            <TextField
+              label="Повторить пароль"
+              name="repeat"
+              value={formData.repeat}
+              onChange={changeHandler}
+              variant="outlined"
+              type="password"
+              required
+              error={formData.repeat.length > 0 && formData.repeat !== formData.password}
+              helperText={formData.repeat.length > 0 && formData.repeat !== formData.password ? "Пароли должны совпадать" : ""}
+            />
+          )}
 
           {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         </Box>
@@ -116,7 +125,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
       <DialogActions>
         <Button onClick={onClose} variant="outlined">Закрыть</Button>
         <Button type="submit" variant="contained" color="primary" onClick={submitHandler} disabled={isLoading} sx={{ backgroundColor: 'green', color: 'white' }}>
-          {isLoading ? <CircularProgress size={24} /> : "Зарегистрироваться"}
+          {isLoading ? <CircularProgress size={24} /> : activeTab === 0 ? "Войти" : "Зарегистрироваться"}
         </Button>
       </DialogActions>
     </Dialog>
