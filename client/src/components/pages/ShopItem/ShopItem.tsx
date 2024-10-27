@@ -4,16 +4,19 @@ import axios from 'axios';
 import { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';
 import { useUser } from '../../../context/auth';
 import SignupModal from '../Authorization/modal/SignUpModal';
+import { useCart } from '../../../context/CountCart';
+import Plant from '../ShopList/Plant';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function ShopItem() {
-  const {user} = useUser()
+  const { user } = useUser();
   const { id } = useParams();
   const navigate = useNavigate();
-  const [plant, setPlant] = useState(null);
+  const [plant, setPlant] = useState<Plant | null>(null);
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const {handleBuy} = useCart()
 
   useEffect(() => {
     const fetchOnePlant = async () => {
@@ -22,16 +25,13 @@ export default function ShopItem() {
         setPlant(response.data);
       } catch (error) {
         console.log('Ошибка при загрузке растения', error);
+        alert('Не удалось загрузить растение. Попробуйте позже.');
       } finally {
         setLoading(false);
       }
     };
     fetchOnePlant();
   }, [id]);
-
-  const handleBuy = () => {
-    alert(`Вы купили ${plant.name}`);
-  };
 
   const handleModelRegOpen = () => setOpen(true);
   const handleModelRegClose = () => setOpen(false);
@@ -41,7 +41,7 @@ export default function ShopItem() {
   };
 
   if (loading) {
-    return <div></div>;
+    return <div>Загрузка...</div>; 
   }
 
   return (
@@ -67,6 +67,7 @@ export default function ShopItem() {
             variant="contained" 
             color="primary" 
             onClick={user ? handleBuy : handleModelRegOpen}
+            disabled={loading}
             sx={{ backgroundColor: 'green', color: 'white' }}
           >
             В корзину

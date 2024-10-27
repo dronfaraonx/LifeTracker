@@ -12,6 +12,7 @@ const Loading = React.lazy(() => import('./components/ui/Loading'));
 const Layout = React.lazy(() => import('./components/Layout')); 
 
 import { UserProvider } from './context/auth';
+import { CartCounterProvider } from './context/CountCart';
 
 function App() {
   const router = createBrowserRouter([
@@ -65,7 +66,9 @@ function App() {
 
   return (
     <UserProvider>
-      <RouterProvider router={router} /> 
+      <CartCounterProvider>
+              <RouterProvider router={router} /> 
+      </CartCounterProvider>
     </UserProvider>
   );
 }
