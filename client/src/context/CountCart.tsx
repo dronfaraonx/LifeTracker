@@ -14,17 +14,18 @@ export const CartCounterProvider = ({ children }) => {
     setCartCounter(currentCount);
   }, []);
 
-  const handleBuy = (plantName) => {
+  const handleAddtoCart = (plantName) => {
     const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
     const newCount = currentCount + 1;
 
     localStorage.setItem('cartCount', newCount);
     setCartCounter(newCount);
-   
+    console.log(cartCounter);
+    
   };
 
   return (
-    <CartContext.Provider value={{ cartCounter, handleBuy }}>
+    <CartContext.Provider value={{ cartCounter, handleAddtoCart }}>
       {children}
     </CartContext.Provider>
   );

@@ -16,7 +16,27 @@ export default function ShopItem() {
   const [plant, setPlant] = useState<Plant | null>(null);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const {handleBuy} = useCart()
+  const {handleAddtoCart} = useCart()   
+
+  // useEffect(() => {
+  // const fetchCartPlant = async () => {
+  //   if (!plant?.id || !user?.id) {
+  //     return;
+  //   }
+  //   const cartItem = {
+  //     plant_id: plant.id,
+  //     user_id: user.id
+  //   };
+  //     try {
+  //       const response = await axios.post(`${API_URL}/api/cart`, cartItem, {withCredentials: true})
+  //       console.log('Растение добавлено:', response.data);
+        
+  //     } catch (error) {
+  //       console.log('Ошибка при добавлении растения в корзину', error);
+  //     }
+  //   }
+  //   fetchCartPlant()
+  // }, [plant, user])
 
   useEffect(() => {
     const fetchOnePlant = async () => {
@@ -66,7 +86,7 @@ export default function ShopItem() {
           <Button 
             variant="contained" 
             color="primary" 
-            onClick={user ? handleBuy : handleModelRegOpen}
+            onClick={user ? handleAddtoCart : handleModelRegOpen}
             disabled={loading}
             sx={{ backgroundColor: 'green', color: 'white' }}
           >
