@@ -11,7 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 const serverConfig = require('./src/middleware/serverConfig')
-const sessionConfig = require('./src/middleware/sessionConfig')
+const sessionConfig = require('./src/middleware/sessionConfig');
+const categoryRouter = require('./src/routes/category.routes');
+const plantsRouter = require('./src/routes/plants.routes');
+const seedsRouter = require('./src/routes/seeds.routes');
+const clonesRouter = require('./src/routes/clones.routes');
 
 
 sessionConfig(app)
@@ -19,6 +23,10 @@ serverConfig(app);
 
 app.use('/api/auth', authRouter);
 app.use('/api/plants', shopRouter)
+app.use('/api/categories', categoryRouter)
+app.use('/api/allplants', plantsRouter)
+app.use('/api/seeds', seedsRouter)
+app.use('/api/clones', clonesRouter)
 
 
 app.listen(PORT, () => {
