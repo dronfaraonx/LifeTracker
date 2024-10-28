@@ -28,9 +28,8 @@ authRouter.post("/signup", async (req, res) => {
 
     const hashpass = await bcrypt.hash(password, 10);
     const newUser = await User.create({ name, email, hashpass });
-
+    
     req.session.user_sid = newUser.id;
-
     return res.json({ user: newUser });
   } catch (error) {
     console.error("Error during signup:", error);
