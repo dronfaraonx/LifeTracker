@@ -13,6 +13,7 @@ const Layout = React.lazy(() => import('./components/Layout'));
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
+import Cart from './components/pages/Cart/Cart';
 
 function App() {
   const router = createBrowserRouter([
@@ -59,7 +60,14 @@ function App() {
             </Suspense>
           ),
         },
-       
+        {
+          path: "/cart/:id",
+          element: (
+            <Suspense fallback={<Loading/>}>
+              <Cart />
+            </Suspense>
+          )
+        }
       ],
     },
   ]);

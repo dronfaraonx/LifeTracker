@@ -42,6 +42,10 @@ export default function Navbar() {
     navigate("/plants");
   };
 
+    const handleCartClick = () => {
+    navigate(`/cart/${user.id}`);
+  };
+
   const handleOpenMenu = (event: { currentTarget: React.SetStateAction<null>; }) => {
     setAnchorEl(event.currentTarget); 
   };
@@ -148,7 +152,7 @@ export default function Navbar() {
                 <IconButton>
                   <FavoriteIcon sx={{ color: "gray" }} />
                 </IconButton>
-                <IconButton >
+                <IconButton onClick={handleCartClick}>
                   <Badge
                     badgeContent={cartCounter}
                     color="primary"

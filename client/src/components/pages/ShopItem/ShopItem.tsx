@@ -47,7 +47,8 @@ export default function ShopItem() {
   
   const cartItem = {
     plant_id: plant.id,
-    user_id: user.id
+    user_id: user.id,
+    quantity: 1
   }
 
   try {
