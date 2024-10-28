@@ -45,9 +45,7 @@ export default function Navbar() {
     const handleCartClick = () => {
     navigate(`/cart/${user.id}`);
   };
-   const handleAccClick = () => {
-    navigate('/account');
-  };
+
   const handleOpenMenu = (event: { currentTarget: React.SetStateAction<null>; }) => {
     setAnchorEl(event.currentTarget); 
   };
@@ -60,13 +58,13 @@ export default function Navbar() {
   const handleCloseLogin = () => setIsLoginOpen(false);
 
   return (
-    <nav>
+    <nav className="head">
       <AppBar
         position="static"
         sx={{
-          backgroundColor: "white",
+          backgroundColor: 'darkgreen',
           boxShadow: "none",
-          borderBottom: "2px solid green",
+          borderBottom: "2px solid black",
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -74,13 +72,13 @@ export default function Navbar() {
             <img
               src={logo}
               alt="Logo"
-              style={{ height: 50, cursor: "pointer" }}
+              style={{ height: 70, cursor: "pointer" }}
               onClick={handleLogoClick}
             />
             <Typography
               variant="body1"
               sx={{
-                color: "gray",
+                color: "white",
                 fontFamily: "Roboto, sans-serif",
                 cursor: "pointer",
               }}
@@ -90,19 +88,19 @@ export default function Navbar() {
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "gray", fontFamily: "Roboto, sans-serif" }}
+              sx={{ color: "white", fontFamily: "Roboto, sans-serif" }}
             >
               Клоны
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "gray", fontFamily: "Roboto, sans-serif" }}
+              sx={{ color: "white", fontFamily: "Roboto, sans-serif" }}
             >
               Семена
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "gray", fontFamily: "Roboto, sans-serif" }}
+              sx={{ color: "white", fontFamily: "Roboto, sans-serif" }}
             >
               Оплата и доставка
             </Typography>
@@ -117,7 +115,7 @@ export default function Navbar() {
               padding: "5px 10px",
             }}
           >
-            <SearchIcon sx={{ color: "gray" }} />
+            <SearchIcon sx={{ color: "black" }} />
             <input
               placeholder="Поиск"
               style={{
@@ -136,7 +134,7 @@ export default function Navbar() {
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <IconButton onClick={user ? handleOpenMenu : handleOpenLogin}>
-              <PersonIcon sx={{ color: "gray" }} />
+              <PersonIcon sx={{ color: "white" }} />
             </IconButton>
 
             {user ? (
@@ -152,7 +150,7 @@ export default function Navbar() {
             {user && (
               <>
                 <IconButton>
-                  <FavoriteIcon sx={{ color: "gray" }} />
+                  <FavoriteIcon sx={{ color: "white" }} />
                 </IconButton>
                 <IconButton onClick={handleCartClick}>
                   <Badge
@@ -166,7 +164,7 @@ export default function Navbar() {
                       },
                     }}
                   >
-                    <ShoppingCartIcon sx={{ color: "gray" }} />
+                    <ShoppingCartIcon sx={{ color: "white" }} />
                   </Badge>
                 </IconButton>
               </>

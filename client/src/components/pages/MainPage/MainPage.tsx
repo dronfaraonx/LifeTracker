@@ -16,7 +16,6 @@ const MainPage = () => {
         sx={{
           position: "relative",
           width: "100vw",
-          height: "94vh",
           overflow: "hidden",
         }}
       >
