@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
+import { useUser } from './auth';
 const CartContext = createContext(0);
 
 export const useCart = () => {
@@ -8,20 +8,26 @@ export const useCart = () => {
 
 export const CartCounterProvider = ({ children }) => {
   const [cartCounter, setCartCounter] = useState(0);
+  const { user } = useUser();
 
   useEffect(() => {
-    const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
-    setCartCounter(currentCount);
-  }, []);
+    if (user?.id) {
+      const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`)) || 0;
+      setCartCounter(currentCount);
+    }
+  }, [user]);
 
   const handleAddtoCart = (plantName) => {
-    const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
-    const newCount = currentCount + 1;
+    if (user?.id) {
+      const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`)) || 0;
+      const newCount = currentCount + 1;
 
-    localStorage.setItem('cartCount', newCount);
-    setCartCounter(newCount);
-    console.log(cartCounter);
-    
+      localStorage.setItem(`cartCount_${user.id}`, newCount); 
+      setCartCounter(newCount);
+      console.log(`Новый заказ для юзера ${user.id}:`, newCount);
+    } else {
+      console.log('Не залогинен');
+    }
   };
 
   return (
