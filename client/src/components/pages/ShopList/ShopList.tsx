@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PlantCard from './PlantCard';
 import './plant.css';
-import { Select, MenuItem, Typography, Slider, Box, InputLabel, FormControl } from '@mui/material';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -11,9 +10,6 @@ export default function ShopList() {
   const [categories, setCategories] = useState([]);
   const [plantType, setPlantType] = useState('');
   const [categoryId, setCategoryId] = useState('');
-  const [priceRange, setPriceRange] = useState([0, 1000]); 
-  const [size, setSize] = useState('');
-  const [lightRequirement, setLightRequirement] = useState('');
 
   useEffect(() => {
     const fetchPlants = async () => {
@@ -46,106 +42,60 @@ export default function ShopList() {
   const filteredPlants = plants.filter(plant => {
     const matchesType = plantType ? plant.type === plantType : true;
     const matchesCategory = categoryId ? plant.category_id === Number(categoryId) : true;
-    const matchesPrice = plant.price >= priceRange[0] && plant.price <= priceRange[1];
-    const matchesSize = size ? plant.size === size : true;
-    const matchesLight = lightRequirement ? plant.light === lightRequirement : true;
-
-    return matchesType && matchesCategory && matchesPrice && matchesSize && matchesLight;
+    return matchesType && matchesCategory;
   });
 
   const uniqueCategories = [...new Set(plants.map(plant => plant.type))];
 
   return (
-    <Box display="flex">
-      <Box sx={{ width: '250px', padding: '20px', borderRight: '1px solid #ccc' }}>
-        <Typography variant="h6" gutterBottom>Фильтры</Typography>
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '250px', padding: '20px', borderRight: '1px solid #ccc' }}>
+        <h3>Фильтры</h3>
 
-        {/* Category Filter */}
-        <FormControl fullWidth sx={{ marginBottom: '20px' }}>
-          <InputLabel id="category-select-label">Категория</InputLabel>
-          <Select
-            labelId="category-select-label"
-            value={categoryId}
-            label="Категория"
-            onChange={(e) => {
-              setCategoryId(e.target.value);
-              setPlantType('');
-            }}
-          >
-            <MenuItem value="">Все категории</MenuItem>
-            {categories.map((category) => (
-              <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <select
+          value={categoryId}
+          onChange={(e) => {
+            setCategoryId(e.target.value);
+            setPlantType('');
+          }}
+          style={{ width: '100%', marginBottom: '10px' }}
+        >
+          <option value="">Все категории</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>{category.name}</option>
+          ))}
+        </select>
 
         {categoryId && (
-          <FormControl fullWidth sx={{ marginBottom: '20px' }}>
-            <InputLabel id="type-select-label">Тип растения</InputLabel>
-            <Select
-              labelId="type-select-label"
-              value={plantType}
-              label="Тип растения"
-              onChange={(e) => setPlantType(e.target.value)}
-            >
-              <MenuItem value="">Все типы</MenuItem>
-              {uniqueCategories
-                .filter(type => plants.some(plant => plant.category_id === Number(categoryId) && plant.type === type))
-                .map((type, index) => (
-                  <MenuItem key={index} value={type}>{type}</MenuItem>
-                ))}
-            </Select>
-          </FormControl>
+          <select
+            value={plantType}
+            onChange={(e) => setPlantType(e.target.value)}
+            style={{ width: '100%' }}
+          >
+            <option value="">Все типы</option>
+            {uniqueCategories
+              .filter(type => plants.some(plant => plant.category_id === Number(categoryId) && plant.type === type))
+              .map((type, index) => (
+                <option key={index} value={type}>{type}</option>
+              ))}
+          </select>
         )}
+      </div>
 
-        <Typography gutterBottom>Ценовой диапазон</Typography>
-        <Slider
-          value={priceRange}
-          onChange={(e, newValue) => setPriceRange(newValue)}
-          valueLabelDisplay="auto"
-          min={0}
-          max={10000}
-          sx={{ marginBottom: '20px' }}
-        />
-
-        {/* Size Filter */}
-        <FormControl fullWidth sx={{ marginBottom: '20px' }}>
-          <InputLabel id="size-select-label">Размер</InputLabel>
-          <Select
-            labelId="size-select-label"
-            value={size}
-            label="Размер"
-            onChange={(e) => setSize(e.target.value)}
-          >
-            <MenuItem value="">Все размеры</MenuItem>
-            <MenuItem value="small">Маленький</MenuItem>
-            <MenuItem value="medium">Средний</MenuItem>
-            <MenuItem value="large">Большой</MenuItem>
-          </Select>
-        </FormControl>
-
-        {/* Light Requirement Filter */}
-        <FormControl fullWidth>
-          <InputLabel id="light-select-label">Освещение</InputLabel>
-          <Select
-            labelId="light-select-label"
-            value={lightRequirement}
-            label="Освещение"
-            onChange={(e) => setLightRequirement(e.target.value)}
-          >
-            <MenuItem value="">Все условия освещения</MenuItem>
-            <MenuItem value="low">Низкий</MenuItem>
-            <MenuItem value="medium">Средний</MenuItem>
-            <MenuItem value="high">Высокий</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-
-      <Box className="plant-list" sx={{ padding: '20px' }}>
-        {filteredPlants.map((plant) => (
-          <PlantCard key={plant.id} plant={plant} />
-        ))}
-      </Box>
-    </Box>
+      <div style={{ flex: 1, padding: '20px' }}>
+        <h2>Список растений:</h2>
+        <div className="plant-list">
+          {filteredPlants.length === 0 ? (
+            <p>Нет доступных растений.</p>
+          ) : (
+            filteredPlants.map((plant) => (
+              <div key={plant.id}>
+                <PlantCard plant={plant} />
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
