@@ -4,6 +4,7 @@ const userSession = async (req, res, next) => {
   try {
     if (req.session?.user_sid) {
       const user = await User.findByPk(req.session.user_sid);
+      
       if (user) {
         res.locals.user = user;  
       } else {
@@ -17,7 +18,7 @@ const userSession = async (req, res, next) => {
     next();
   } catch (error) {
     console.error("Error finding user during session check:", error);
-    res.sendStatus(500);
+    res.status(500).json({message: 'error'});
   }
 };
 

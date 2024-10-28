@@ -19,16 +19,16 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import logo from "../../../public/LOGO circle.png";
 import { useUser } from "../../context/auth";
 import AccountModal from "../pages/Authorization/modal/AccountModal";
-import LoginModal from "../pages/Authorization/modal/LoginModal";
 import SignupModal from "../pages/Authorization/modal/SignUpModal";
+import { useCart } from "../../context/CountCart";
 
 export default function Navbar() {
   const { user } = useUser();
   const [open, setOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null); 
-  const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
+  const { cartCounter } = useCart(); 
 
   const handleClick = () => {
     setOpen(true);
@@ -42,6 +42,12 @@ export default function Navbar() {
     navigate("/plants");
   };
 
+    const handleCartClick = () => {
+    navigate(`/cart/${user.id}`);
+  };
+   const handleAccClick = () => {
+    navigate('/account');
+  };
   const handleOpenMenu = (event: { currentTarget: React.SetStateAction<null>; }) => {
     setAnchorEl(event.currentTarget); 
   };
@@ -52,10 +58,6 @@ export default function Navbar() {
 
   const handleOpenLogin = () => setIsLoginOpen(true);
   const handleCloseLogin = () => setIsLoginOpen(false);
-
-  const handleAddToCart = () => {
-    setCartCount((prevCount) => prevCount + 1);
-  };
 
   return (
     <nav>
@@ -152,9 +154,9 @@ export default function Navbar() {
                 <IconButton>
                   <FavoriteIcon sx={{ color: "gray" }} />
                 </IconButton>
-                <IconButton onClick={handleAddToCart}>
+                <IconButton onClick={handleCartClick}>
                   <Badge
-                    badgeContent={cartCount}
+                    badgeContent={cartCounter}
                     color="primary"
                     showZero
                     sx={{

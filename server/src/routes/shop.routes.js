@@ -5,6 +5,8 @@ const shopRouter = express.Router();
 
 shopRouter.get('/', async (req, res) => {
   try {
+    console.log('------------->',res.locals.user);
+    
     const plants = await Plant.findAll();
     console.log(JSON.stringify(plants));
     

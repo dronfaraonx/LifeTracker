@@ -10,8 +10,11 @@ const ShopList = React.lazy(() => import('./components/pages/ShopList/ShopList')
 const ShopItem = React.lazy(() => import('./components/pages/ShopItem/ShopItem'));
 const Loading = React.lazy(() => import('./components/ui/Loading'));
 const Layout = React.lazy(() => import('./components/Layout')); 
+const Cart = React.lazy(() => import('./components/pages/Cart/Cart'));
+const BuyerPage = React.lazy(() => import('./components/pages/BuyerPage/BuyerPage'));
 
 import { UserProvider } from './context/auth';
+import { CartCounterProvider } from './context/CountCart';
 
 function App() {
   const router = createBrowserRouter([
@@ -58,14 +61,31 @@ function App() {
             </Suspense>
           ),
         },
-       
+        {
+          path: "/cart/:id",
+          element: (
+            <Suspense fallback={<Loading/>}>
+              <Cart />
+            </Suspense>
+          )
+        },
+        {
+          path: "/account",
+          element: (
+            <Suspense fallback={<Loading/>}>
+                <BuyerPage />
+            </Suspense>
+          )
+        }
       ],
     },
   ]);
 
   return (
     <UserProvider>
-      <RouterProvider router={router} /> 
+      <CartCounterProvider>
+              <RouterProvider router={router} /> 
+      </CartCounterProvider>
     </UserProvider>
   );
 }
