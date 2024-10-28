@@ -16,27 +16,7 @@ export default function ShopItem() {
   const [plant, setPlant] = useState<Plant | null>(null);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const {handleAddtoCart} = useCart()   
-
-  // useEffect(() => {
-  // const fetchCartPlant = async () => {
-  //   if (!plant?.id || !user?.id) {
-  //     return;
-  //   }
-  //   const cartItem = {
-  //     plant_id: plant.id,
-  //     user_id: user.id
-  //   };
-  //     try {
-  //       const response = await axios.post(`${API_URL}/api/cart`, cartItem, {withCredentials: true})
-  //       console.log('Растение добавлено:', response.data);
-        
-  //     } catch (error) {
-  //       console.log('Ошибка при добавлении растения в корзину', error);
-  //     }
-  //   }
-  //   fetchCartPlant()
-  // }, [plant, user])
+  const {handleAddtoCartCounter} = useCart()   
 
   useEffect(() => {
     const fetchOnePlant = async () => {
@@ -59,6 +39,25 @@ export default function ShopItem() {
   const handleBack = () => {
     navigate(-1);
   };
+
+ const handleAddToCart = async() => {
+  if (!plant?.id || !user?.id) {
+    return
+  }
+  
+  const cartItem = {
+    plant_id: plant.id,
+    user_id: user.id
+  }
+
+  try {
+    const response = await axios.post(`${API_URL}/api/cart`, cartItem, {withCredentials:true});
+    console.log('Растение добавалено в корзину: ', response.data);
+    handleAddtoCartCounter(plant.name)
+  } catch (error) {
+    console.log('Ошибка при добавлении в корзину', error);
+  }
+ }
 
   if (loading) {
     return <div>Загрузка...</div>; 
@@ -86,7 +85,7 @@ export default function ShopItem() {
           <Button 
             variant="contained" 
             color="primary" 
-            onClick={user ? handleAddtoCart : handleModelRegOpen}
+            onClick={user ? handleAddToCart : handleModelRegOpen}
             disabled={loading}
             sx={{ backgroundColor: 'green', color: 'white' }}
           >

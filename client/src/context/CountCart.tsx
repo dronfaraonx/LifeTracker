@@ -1,28 +1,38 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useUser } from './auth';
-const CartContext = createContext(0);
+
+interface CartContextType {
+  cartCounter: number;
+  handleAddtoCartCounter: (plantName: string) => void;
+}
+const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const useCart = () => {
   return useContext(CartContext);
 };
 
-export const CartCounterProvider = ({ children }) => {
-  const [cartCounter, setCartCounter] = useState(0);
+interface CartCounterProps {
+  children: ReactNode;
+}
+
+export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => {
+  const [cartCounter, setCartCounter] = useState<number>(0);
   const { user } = useUser();
 
   useEffect(() => {
     if (user?.id) {
-      const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`)) || 0;
+      const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`) || '0', 10);
       setCartCounter(currentCount);
     }
   }, [user]);
 
-  const handleAddtoCart = (plantName) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleAddtoCartCounter = (plantName: string) => {
     if (user?.id) {
-      const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`)) || 0;
+      const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`) || '0', 10);
       const newCount = currentCount + 1;
 
-      localStorage.setItem(`cartCount_${user.id}`, newCount); 
+      localStorage.setItem(`cartCount_${user.id}`, newCount.toString()); 
       setCartCounter(newCount);
       console.log(`Новый заказ для юзера ${user.id}:`, newCount);
     } else {
@@ -31,7 +41,7 @@ export const CartCounterProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cartCounter, handleAddtoCart }}>
+    <CartContext.Provider value={{ cartCounter, handleAddtoCartCounter }}>
       {children}
     </CartContext.Provider>
   );
