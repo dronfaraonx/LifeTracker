@@ -57,7 +57,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
     }
   };
 
-  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleTabChange = (event: React.ChangeEvent<object>, newValue: number) => {
     setActiveTab(newValue);
     setErrorMessage(null);
   };
