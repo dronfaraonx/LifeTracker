@@ -43,7 +43,9 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
 
     try {
       const endpoint = activeTab === 0 ? `${API_URL}/api/auth/login` : `${API_URL}/api/auth/signup`;
-      const requestData = activeTab === 0 ? { email: formData.email, password: formData.password } : formData;
+      const requestData = activeTab === 0 
+        ? { email: formData.email, password: formData.password } 
+        : { ...formData, repeatPassword: formData.repeat };
 
       const res = await axios.post(endpoint, requestData, { withCredentials: true });
       setUser(res.data.user);
@@ -74,7 +76,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
         </Tabs>
         <Box
           component="form"
-          onSubmit={submitHandler}
+          // onSubmit={submitHandler}
           sx={{ display: "flex", flexDirection: "column", gap: 1, mb: '10px' }}
         >
           {activeTab === 1 && (
