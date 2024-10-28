@@ -45,7 +45,9 @@ export default function Navbar() {
     const handleCartClick = () => {
     navigate(`/cart/${user.id}`);
   };
-
+   const handleAccClick = () => {
+    navigate('/account');
+  };
   const handleOpenMenu = (event: { currentTarget: React.SetStateAction<null>; }) => {
     setAnchorEl(event.currentTarget); 
   };
