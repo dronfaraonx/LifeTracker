@@ -24,7 +24,6 @@ export default function ShopList() {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/categories`);
-        // Используем Set для удаления дубликатов категорий по name (при необходимости)
         const uniqueCategories = Array.from(
           new Set(response.data.map((category) => category.name))
         ).map((name) =>
