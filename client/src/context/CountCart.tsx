@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useUser } from './auth';
 
-interface CartContextType {
+export interface CartContextType {
   cartCounter: number;
   handleAddtoCartCounter: (plantName: string) => void;
 }

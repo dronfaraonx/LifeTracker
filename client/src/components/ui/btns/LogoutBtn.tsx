@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from '../../../context/auth';
-import { ListItemIcon, ListItemText, MenuItem } from '@mui/material';
+import { ListItemIcon, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Logout from '@mui/icons-material/Logout';
 
