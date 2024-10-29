@@ -37,7 +37,7 @@ export const Footer: FC = (): ReactElement => {
             </Box>
 
             <Typography color="black" variant="h5" fontSize="1rem">
-              Талад - магазин экзотических растений
+              Талад - магазин экзотических растений.
             </Typography>
           </Box>
 
