@@ -16,8 +16,8 @@ const MainPage = () => {
         sx={{
           position: "relative",
           width: "100vw",
-          height: "94vh",
           overflow: "hidden",
+          background: "#f5fff5"
         }}
       >
         <img
@@ -27,6 +27,7 @@ const MainPage = () => {
             width: "100%", 
             height: "100%", 
             objectFit: "cover", 
+            opacity: "0.7"
           }}
         />
 
