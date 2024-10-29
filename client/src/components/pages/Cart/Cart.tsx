@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../../../context/auth";
+import { useCart } from '../../../context/CountCart'; 
 import { Button, CardContent, Typography, CardMedia, Box, IconButton } from "@mui/material";
 import { Card, Stack } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close"; 
@@ -23,10 +24,17 @@ export default function Cart() {
     fetchCart();
   }, [user?.id]);
 
+  const { handleRemoveFromCartCounter } = useCart();
+
   const handleRemove = async (plantId) => {
     try {
-      await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`); 
+      const cartPlant = cart.find((item) => item.id === plantId);
+      if (!cartPlant) return;
+  
+      await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
       setCart((prevCart) => prevCart.filter((cartPlant) => cartPlant.id !== plantId));
+      
+      handleRemoveFromCartCounter(cartPlant.quantity);
     } catch (error) {
       console.log("Ошибка при удалении растения из корзины", error);
     }
