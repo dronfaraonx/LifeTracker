@@ -26,9 +26,9 @@ export default function Navbar() {
   const { user } = useUser();
   const [open, setOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null); 
+  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
-  const { cartCounter } = useCart(); 
+  const { cartCounter } = useCart();
 
   const handleClick = () => {
     setOpen(true);
@@ -39,19 +39,21 @@ export default function Navbar() {
   };
 
   const handleLogoClick = () => {
-    navigate("/plants");
+    navigate("/");
   };
 
-    const handleCartClick = () => {
+  const handleCartClick = () => {
     navigate(`/cart/${user.id}`);
   };
 
-  const handleOpenMenu = (event: { currentTarget: React.SetStateAction<null>; }) => {
-    setAnchorEl(event.currentTarget); 
+  const handleOpenMenu = (event: {
+    currentTarget: React.SetStateAction<null>;
+  }) => {
+    setAnchorEl(event.currentTarget);
   };
 
   const handleCloseMenu = () => {
-    setAnchorEl(null); 
+    setAnchorEl(null);
   };
 
   const handleOpenLogin = () => setIsLoginOpen(true);
@@ -62,13 +64,22 @@ export default function Navbar() {
       <AppBar
         position="static"
         sx={{
-          backgroundColor: 'darkgreen',
+          background: "white",
           boxShadow: "none",
           borderBottom: "2px solid black",
         }}
       >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <Toolbar
+          sx={{ justifyContent: "space-between", background: "#00ab84" }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              color: "black",
+            }}
+          >
             <img
               src={logo}
               alt="Logo"
@@ -77,31 +88,21 @@ export default function Navbar() {
             />
             <Typography
               variant="body1"
+              className="header-link"
               sx={{
-                color: "white",
-                fontFamily: "Roboto, sans-serif",
                 cursor: "pointer",
               }}
               onClick={handleClick}
             >
               Растения
             </Typography>
-            <Typography
-              variant="body1"
-              sx={{ color: "white", fontFamily: "Roboto, sans-serif" }}
-            >
+            <Typography className="header-link" variant="body1">
               Клоны
             </Typography>
-            <Typography
-              variant="body1"
-              sx={{ color: "white", fontFamily: "Roboto, sans-serif" }}
-            >
+            <Typography className="header-link" variant="body1">
               Семена
             </Typography>
-            <Typography
-              variant="body1"
-              sx={{ color: "white", fontFamily: "Roboto, sans-serif" }}
-            >
+            <Typography className="header-link" variant="body1">
               Оплата и доставка
             </Typography>
           </Box>
@@ -120,7 +121,7 @@ export default function Navbar() {
               placeholder="Поиск"
               style={{
                 marginLeft: 10,
-                color: "gray",
+                color: "black",
                 border: "none",
                 background: "transparent",
               }}
@@ -134,7 +135,7 @@ export default function Navbar() {
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <IconButton onClick={user ? handleOpenMenu : handleOpenLogin}>
-              <PersonIcon sx={{ color: "white" }} />
+              <PersonIcon sx={{ color: "black" }} />
             </IconButton>
 
             {user ? (
@@ -150,7 +151,7 @@ export default function Navbar() {
             {user && (
               <>
                 <IconButton>
-                  <FavoriteIcon sx={{ color: "white" }} />
+                  <FavoriteIcon sx={{ color: "black" }} />
                 </IconButton>
                 <IconButton onClick={handleCartClick}>
                   <Badge
@@ -159,12 +160,12 @@ export default function Navbar() {
                     showZero
                     sx={{
                       "& .MuiBadge-badge": {
-                        backgroundColor: "green",
-                        color: "white",
+                        backgroundColor: "#e6f6f3",
+                        color: "black",
                       },
                     }}
                   >
-                    <ShoppingCartIcon sx={{ color: "white" }} />
+                    <ShoppingCartIcon sx={{ color: "black" }} />
                   </Badge>
                 </IconButton>
               </>

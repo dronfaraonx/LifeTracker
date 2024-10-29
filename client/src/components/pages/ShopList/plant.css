@@ -2,7 +2,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #eafbe6;
+  background-color: #f5fff5;
 }
 
 .plant-container {
@@ -37,16 +37,13 @@ body {
 .plant-card {
   margin: 20px;
   width: 300px;
-  border: 2px solid rgba(18, 99, 63, 0.9);
+  border: 1px solid rgba(18, 99, 63, 0.9);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   background: none;
-  box-shadow: none;
   border-radius: 8px;
   transition: border-color 0.3s ease;
 }
 
-.plant-card:hover {
-  border-color: #76c7c0;
-  background: rgb(213, 250, 213);}
 
 .plant-card img {
   width: 100%;

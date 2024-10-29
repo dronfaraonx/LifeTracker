@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
-
+::-webkit-scrollbar {
+  display: none;
+}
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +10,11 @@
 html,
 body {
   height: 100%;
-  font-family: "Open Sans", sans-serif !important;
-  background: rgb(184, 244, 172);
+  min-height: 100vh;
+      font-weight: 400;
+    font-style: normal;
+
+  background: rgb(255, 255, 255);
   overflow-x: hidden;
 }
 

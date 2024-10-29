@@ -17,6 +17,7 @@ const MainPage = () => {
           position: "relative",
           width: "100vw",
           overflow: "hidden",
+          background: "#f5fff5"
         }}
       >
         <img
@@ -26,6 +27,7 @@ const MainPage = () => {
             width: "100%", 
             height: "100%", 
             objectFit: "cover", 
+            opacity: "0.7"
           }}
         />
 
