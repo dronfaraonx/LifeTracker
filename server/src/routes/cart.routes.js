@@ -63,20 +63,29 @@ cartRouter.delete('/:userId/plant/:plantId', async (req, res) => {
   const { userId, plantId } = req.params;
 
   try {
-    const deletedRows = await Cart.destroy({
+    const cartPlant = await Cart.findOne({
       where: { user_id: userId, id: plantId },
     });
 
-    if (deletedRows === 0) {
+    if (!cartPlant) {
       return res.status(404).json({ message: 'Растение не найдено в корзине' });
     }
 
-    res.status(200).json({ message: 'Растение удалено из корзины' });
+    // Получаем текущее количество
+    const quantity = cartPlant.quantity;
+
+    // Удаляем растение из корзины
+    await Cart.destroy({
+      where: { user_id: userId, id: plantId },
+    });
+
+    res.status(200).json({ message: 'Растение удалено из корзины', quantity });
   } catch (error) {
     console.error('Ошибка при удалении растения из корзины', error);
     res.status(500).json({ message: 'Ошибка сервера при удалении растения' });
   }
 });
+
 
 
 module.exports = cartRouter;
