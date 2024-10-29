@@ -3,21 +3,21 @@ import axios from "axios";
 import { useUser } from "../../../context/auth";
 import { Button, CardContent, Typography } from "@mui/material";
 import { Card, CardGroup } from "reactstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUserSession } from "../../../redux/actions/userActions";
+// import { useDispatch, useSelector } from "react-redux";
+// import { fetchUserSession } from "../../../redux/actions/userActions";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Cart() {
-  // const { user } = useUser();
-  const dispatch = useDispatch();
+  const { user } = useUser();
+  // const dispatch = useDispatch();
 
-  const user = useSelector((state: any) => state.user)
+  // const user = useSelector((state: any) => state.user)
   const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    dispatch(fetchUserSession())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchUserSession())
+  // }, [dispatch])
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -42,7 +42,7 @@ export default function Cart() {
   const total = calculateTotal();
 
   return (
-    <div style={{ flex: 1, padding: "20px" }}>
+    <div className="page-container" style={{ flex: 1, }}>
             <h2 style={{ marginTop: "20px", textAlign: "center" }}>Здравствуйте, {user.name}</h2>
 
       <h2 style={{ marginTop: "20px", textAlign: "center" }}>Мои заказы:</h2>

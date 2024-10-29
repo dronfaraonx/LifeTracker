@@ -13,14 +13,11 @@ export const CLEAR_USER = "CLEAR_USER";
 
 interface SetUserAction {
   type: typeof SET_USER;
-  payload: User
+  payload: User | null; 
 }
 
 interface ClearUserAction {
   type: typeof CLEAR_USER;
-  payload: null;
 }
 
-export type UserActionTypes = 
-| SetUserAction
-| ClearUserAction;
+export type UserActionTypes = SetUserAction | ClearUserAction;

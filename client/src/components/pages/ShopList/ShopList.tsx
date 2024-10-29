@@ -64,11 +64,11 @@ export default function ShopList() {
   const uniqueCategories = [...new Set(plants.map(plant => plant.type))];
 
   return (
-    <Box display="flex">
-      <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
-        <Typography variant="h6" gutterBottom>Фильтры</Typography>
+    <Box className="plant-container">
+      <Box className="sidebar">
+        <Typography variant="h6" className="filter-title">Фильтры</Typography>
 
-        <FormControl  sx={{ marginBottom: '20px', width: '200px'}}>
+        <FormControl className="filter-select">
           <InputLabel id="category-select-label">Категория</InputLabel>
           <Select
             labelId="category-select-label"
@@ -87,7 +87,7 @@ export default function ShopList() {
         </FormControl>
 
         {categoryId && (
-          <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
+          <FormControl className="filter-select">
             <InputLabel id="type-select-label">Тип растения</InputLabel>
             <Select
               labelId="type-select-label"
@@ -105,7 +105,6 @@ export default function ShopList() {
           </FormControl>
         )}
 
-
         <Typography gutterBottom>Ценовой диапазон</Typography>
         <Slider
           value={priceRange}
@@ -113,10 +112,10 @@ export default function ShopList() {
           valueLabelDisplay="auto"
           min={0}
           max={maxPrice}
-          sx={{ marginBottom: '20px' }}
+          className="price-slider"
         />
 
-          <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
+        <FormControl className="filter-select">
           <InputLabel id="size-select-label">Размер</InputLabel>
           <Select
             labelId="size-select-label"
@@ -131,7 +130,7 @@ export default function ShopList() {
           </Select>
         </FormControl>
 
-          <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
+        <FormControl className="filter-select">
           <InputLabel id="light-select-label">Освещение</InputLabel>
           <Select
             labelId="light-select-label"
@@ -147,7 +146,7 @@ export default function ShopList() {
         </FormControl>
       </Box>
 
-      <Box className="plant-list" sx={{ padding: '20px' }}>
+      <Box className="plant-list">
         {filteredPlants.map((plant) => (
           <PlantCard key={plant.id} plant={plant} />
         ))}

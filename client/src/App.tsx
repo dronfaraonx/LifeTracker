@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Provider } from 'react-redux';
 
 const MainPage = React.lazy(() => import('./components/pages/MainPage/MainPage'));
 const LoginPage = React.lazy(() => import('./components/pages/Authorization/LoginPage'));
@@ -16,7 +15,6 @@ const BuyerPage = React.lazy(() => import('./components/pages/BuyerPage/BuyerPag
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
-import { store } from './redux/store';
 
 function App() {
   const router = createBrowserRouter([
@@ -84,11 +82,11 @@ function App() {
   ]);
 
   return (
-    <Provider store={store}>
+    <UserProvider>
       <CartCounterProvider>
               <RouterProvider router={router} /> 
       </CartCounterProvider>
-    </Provider>
+    </UserProvider>
   );
 }
 

@@ -40,7 +40,7 @@ export default function ShopItem() {
     navigate(-1);
   };
 
- const handleAddToCart = async() => {
+export  const handleAddToCart = async() => {
   if (!plant?.id || !user?.id) {
     return
   }
@@ -65,7 +65,7 @@ export default function ShopItem() {
   }
 
   return (
-    <Card sx={{ maxWidth: 400, margin: '20px auto' }}>
+    <Card className='page-container' sx={{ maxWidth: 400, margin: '20px auto' }}>
       <CardMedia
         component="img"
         alt={plant.name}

@@ -10,7 +10,6 @@
 html,
 body {
   height: 100%;
-  min-height: 100vh;
       font-weight: 400;
     font-style: normal;
 
@@ -20,13 +19,28 @@ body {
 
 header {
   width: 100%;
-  height: 70px;
+  height: 8vh !important; 
   background: rgba(18, 99, 63, 0.9);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
   backdrop-filter: blur(5px);
+}
+
+
+.page-container {
+  display: flex;
+  background: transparent;
+  flex-direction: column;
+  min-height: 80vh !important
+}
+
+footer {
+  width: 100%;
+  background-color: #00ab84;
+  text-align: center;
+  height: 12vh;
 }
 
 header .row {
@@ -48,10 +62,10 @@ header .logo span {
 }
 
 header button.rounded-circle {
-  min-width: 40px !important;
-  width: 40px !important;
-  height: 40px !important;
-  background: #ffffff !important;
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  background: #ffffff ;
   color: #292929;
   border: 1px solid #ccc;
   transition: all 0.3s ease;
@@ -66,27 +80,16 @@ header button.rounded-circle:hover {
 
 header button.rounded-circle svg {
   color: #292929;
-  font-size: 18px !important;
+  font-size: 18px ;
   transition: all 0.2s ease-in-out;
 }
 
 .myAcc {
-  text-align: left !important;
-  color: #000000 !important;
-  text-transform: capitalize !important;
+  text-align: left;
+  color: #000000 ;
+  text-transform: capitalize ;
 }
-
-.userImg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #3b3c3e;
-  padding: 2px;
-  border-radius: 50%;
-}
+/* 
 
 .userImg .rounded-circle {
   display: flex;
@@ -97,7 +100,7 @@ header button.rounded-circle svg {
   height: 100%;
   cursor: pointer;
   position: relative;
-}
+} */
 
 .userImg .rounded-circle img {
   object-fit: cover;

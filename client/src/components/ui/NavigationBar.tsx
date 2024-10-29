@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./../../index.css"
 import { useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -64,13 +65,13 @@ export default function Navbar() {
       <AppBar
         position="static"
         sx={{
-          background: "white",
+          background: "#00ab84",
           boxShadow: "none",
           borderBottom: "2px solid black",
         }}
       >
         <Toolbar
-          sx={{ justifyContent: "space-between", background: "#00ab84" }}
+          sx={{ justifyContent: "space-between", background: "#00ab84"}}
         >
           <Box
             sx={{
@@ -83,12 +84,14 @@ export default function Navbar() {
             <img
               src={logo}
               alt="Logo"
-              style={{ height: 70, cursor: "pointer" }}
+              style={{ height: 70, cursor: "pointer"}}
               onClick={handleLogoClick}
             />
             <Typography
               variant="body1"
               className="header-link"
+              // style={{fontSize:"20px", cursor: "pointer"}}
+
               sx={{
                 cursor: "pointer",
               }}
