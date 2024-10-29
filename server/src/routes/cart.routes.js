@@ -59,5 +59,24 @@ cartRouter.get('/:id', async (req, res) => {
   }
 });
 
+cartRouter.delete('/:userId/plant/:plantId', async (req, res) => {
+  const { userId, plantId } = req.params;
+
+  try {
+    const deletedRows = await Cart.destroy({
+      where: { user_id: userId, id: plantId },
+    });
+
+    if (deletedRows === 0) {
+      return res.status(404).json({ message: 'Растение не найдено в корзине' });
+    }
+
+    res.status(200).json({ message: 'Растение удалено из корзины' });
+  } catch (error) {
+    console.error('Ошибка при удалении растения из корзины', error);
+    res.status(500).json({ message: 'Ошибка сервера при удалении растения' });
+  }
+});
+
 
 module.exports = cartRouter;
