@@ -1,0 +1,106 @@
+.itemContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20vh);
+  /* padding: 0 10px; */
+}
+
+.plant-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  width: 80vw
+}
+.imageBlock img {
+  width: 80%;
+  height: 60vh;
+  object-fit: cover;
+  /* border-right: 1px solid #ddd; */
+}
+.imageBlock {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plant-card-content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.plant-card-content h5 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.plant-card-content p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 2vh;
+}
+
+.plant-card-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.add-to-cart-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: darkgreen;
+}
+
+.back-button {
+  display: flex;
+  width: 15vh;
+  background-color: transparent;
+  color: black;
+  border: 2px solid #ccc;
+  /* padding: 15px 30px; */
+  font-size: 1.2rem;
+  border-radius: 6px;
+  margin-top: 10vh;
+  margin-left: 25vh;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.back-button:hover {
+  border-color: black;
+  color: green;
+}
+
+.bac
+
+@media (max-width: 768px) {
+  .plant-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .plant-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  .plant-card-content {
+    padding: 15px;
+  }
+}

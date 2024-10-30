@@ -45,6 +45,8 @@ export default function Cart() {
       );
 
       handleRemoveFromCartCounter(cartPlant.quantity);
+      console.log('this is : ', cartPlant.quantity);
+      
     } catch (error) {
       console.log("Ошибка при удалении растения из корзины", error);
     }
@@ -61,7 +63,7 @@ export default function Cart() {
   const total = calculateTotal();
 
   return (
-    <div style={{ display: "flex", minHeight: "calc(100vh - 10vh - 20vh)", padding: "20px" }}>
+    <div style={{ display: "flex", minHeight: "calc(100vh - 10vh - 10vh)", padding: "20px" }}>
       {showOrderForm && (
         <div style={{ flex: 1, marginRight: "20px" }}>
           <CheckoutForm cart={cart} total={total} />

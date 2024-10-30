@@ -8,10 +8,10 @@ export const Footer: FC = (): ReactElement => {
     <Box
       sx={{
          width: "100%",
-        height: "20vh",
+        height: "10vh",
         backgroundColor: "#00ab84",
         border: "1px solid black",
-        paddingTop: "1rem",
+        // paddingTop: "1rem",
         position: "static",
 
       }}
@@ -22,35 +22,20 @@ export const Footer: FC = (): ReactElement => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            justifyContent:"space-around"
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          >
-            <Box>
-              <img src={logo} alt="Logo" style={{ height: 50 }} />
-            </Box>
-
-            <Typography color="black" variant="h5" fontSize="1rem">
-              Талад - магазин экзотических растений
-            </Typography>
-          </Box>
 
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
               alignItems: "center",
-              gap: "1rem",
+              // gap: "rem",
             }}
           >
             <Box
-              sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}
+              sx={{ display: "flex", justifyContent: "center" }}
             >
               <IconButton
                 aria-label="Instagram"
@@ -83,12 +68,28 @@ export const Footer: FC = (): ReactElement => {
                 <Telegram />
               </IconButton>
             </Box>
-          </Box>
-          <Box sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
-            <Typography color="textSecondary" variant="subtitle1">
-              {`${new Date().getFullYear()} `}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              // gap: "1rem",
+            }}
+          >
+            <Box>
+              <img src={logo} alt="Logo" style={{ height: 40 }} />
+            </Box>
+
+            <Typography color="black" variant="h5" fontSize="1rem">
+              Талад - магазин экзотических растений
             </Typography>
           </Box>
+          </Box>
+          {/* <Box sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
+            <Typography color="textSecondary" variant="subtitle1">
+            {`${new Date().getFullYear()} `}
+            </Typography>
+          </Box> */}
         </Box>
       </Container>
     </Box>
