@@ -68,7 +68,7 @@ export default function ShopItem() {
 
   return ( 
 <div className='itemContainer' style={{height: 'calc(100vh - 10vh - 10vh)'}}>
-    <div className="plant-card">
+    <div className="plant-item">
       <div className='imageBlock'>
         <img 
           src={plant.photo} 

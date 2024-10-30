@@ -34,9 +34,9 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
   );
 });
 
-export default function QuantityInput() {
-  const [value, setValue] = React.useState<number>(1)
-  return <NumberInput aria-label="Quantity Input" min={1} max={99} />;
+export default function QuantityInput({value}) {
+
+  return <NumberInput aria-label="Quantity Input" min={1} max={99} value={value=1}/>;
 }
 
 const blue = {
