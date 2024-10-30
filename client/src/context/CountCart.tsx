@@ -3,7 +3,7 @@ import { useUser } from './auth';
 
 export interface CartContextType {
   cartCounter: number;
-  handleAddtoCartCounter: (plantName: string) => void;
+  handleAddtoCartCounter: (quantity: number) => void;
   handleRemoveFromCartCounter: (quantity: number) => void;
 }
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -28,13 +28,18 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
   }, [user]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleAddtoCartCounter = (plantName: string) => {
+  const handleAddtoCartCounter = (quantity: number) => {
+
     if (user?.id) {
       const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`) || '0', 10);
+      
       const newCount = currentCount + 1;
 
       localStorage.setItem(`cartCount_${user.id}`, newCount.toString()); 
       setCartCounter(newCount);
+      console.log(newCount);
+      
+
       console.log(`Новый заказ для юзера ${user.id}:`, newCount);
     } else {
       console.log('Не залогинен');
