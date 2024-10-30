@@ -40,7 +40,7 @@ export default function ShopItem() {
     navigate(-1);
   };
 
-export  const handleAddToCart = async() => {
+  const handleAddToCart = async() => {
   if (!plant?.id || !user?.id) {
     return
   }

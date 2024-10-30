@@ -35,6 +35,7 @@ export default function Cart() {
     return cart.reduce((total, cartPlant) => {
       const price = parseFloat(cartPlant.price) || 0;
       const quantity = cartPlant.quantity || 0;
+      console.log('cartQuantity: ', quantity)
       return total + price * quantity;
     }, 0);
   };
