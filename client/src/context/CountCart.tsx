@@ -33,7 +33,7 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
     if (user?.id) {
       const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`) || '0', 10);
       
-      const newCount = currentCount + (1);
+      const newCount = currentCount + 1;
 
       localStorage.setItem(`cartCount_${user.id}`, newCount.toString()); 
       setCartCounter(newCount);

@@ -42,6 +42,10 @@ export default function Navbar() {
     navigate("/");
   };
 
+  const handlePlantClick = () => {
+    navigate("/plants?type=plant");
+  };
+
   const handleCartClick = () => {
     navigate(`/cart/${user.id}`);
   };
@@ -64,13 +68,19 @@ export default function Navbar() {
       <AppBar
         position="static"
         sx={{
-          background: "white",
+          // background: "white",
           boxShadow: "none",
-          borderBottom: "2px solid black",
+          // borderBottom: "2px solid black",
         }}
       >
         <Toolbar
-          sx={{ justifyContent: "space-between", background: "#00ab84" }}
+          className="header-toolbar"
+          sx={{
+            justifyContent: "space-between",
+            background: "#00ab84",
+            borderBottom: "2px solid black",
+            height: "10vh",
+          }}
         >
           <Box
             sx={{
@@ -92,17 +102,38 @@ export default function Navbar() {
               sx={{
                 cursor: "pointer",
               }}
-              onClick={handleClick}
+              onClick={handlePlantClick}
             >
               Растения
             </Typography>
-            <Typography className="header-link" variant="body1">
+            <Typography
+              className="header-link"
+              variant="body1"
+              sx={{
+                cursor: "pointer",
+              }}
+              onClick={handlePlantClick}
+            >
               Клоны
             </Typography>
-            <Typography className="header-link" variant="body1">
+            <Typography
+              className="header-link"
+              variant="body1"
+              sx={{
+                cursor: "pointer",
+              }}
+              onClick={handlePlantClick}
+            >
               Семена
             </Typography>
-            <Typography className="header-link" variant="body1">
+            <Typography
+              className="header-link"
+              variant="body1"
+              sx={{
+                cursor: "pointer",
+              }}
+              // onClick={handlePlantClick}
+            >
               Оплата и доставка
             </Typography>
           </Box>
@@ -173,7 +204,7 @@ export default function Navbar() {
           </Box>
         </Toolbar>
 
-        <Dialog
+        {/* <Dialog
           open={open}
           onClose={handleClose}
           PaperProps={{
@@ -216,7 +247,7 @@ export default function Navbar() {
               </Link>
             </Box>
           </DialogContent>
-        </Dialog>
+        </Dialog> */}
       </AppBar>
     </nav>
   );

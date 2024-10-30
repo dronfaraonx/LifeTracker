@@ -16,7 +16,8 @@ export default function PlantCard({ plant }) {
     const {user} = useUser() 
     const [quantity, setQuantity] = useState<number>(1)
     const [open, setOpen] = useState<boolean>(false)
-
+  console.log("Quantity: ",quantity);
+  
 
       const handleOpenModal = (event: any) => {
     event.stopPropagation(); 
@@ -35,7 +36,7 @@ export default function PlantCard({ plant }) {
   const cartItem = {
     plant_id: plant.id,
     user_id: user.id,
-    quantity: 1
+    quantity: quantity
   }
 
   try {
@@ -86,8 +87,8 @@ export default function PlantCard({ plant }) {
           <DialogTitle>Выберите количество</DialogTitle>
           <DialogContent>
             <QuantityInput 
-              value={quantity | 1} 
-              onChange={(e) => setQuantity(e.target.value)}  
+              value={quantity} 
+              onChange={(e) => setQuantity(Number(e.target.value))}  
             /> 
           </DialogContent>
           <DialogActions>
