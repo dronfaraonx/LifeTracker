@@ -45,6 +45,8 @@ export default function Cart() {
       );
 
       handleRemoveFromCartCounter(cartPlant.quantity);
+      console.log('this is : ', cartPlant.quantity);
+      
     } catch (error) {
       console.log("Ошибка при удалении растения из корзины", error);
     }

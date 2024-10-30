@@ -18,6 +18,7 @@ export default function ShopItem() {
   const [plant, setPlant] = useState<Plant | null>(null);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
+  const [quantity, setQuantity] = useState(1)
   const {handleAddtoCartCounter} = useCart()   
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export default function ShopItem() {
   try {
     const response = await axios.post(`${API_URL}/api/cart`, cartItem, {withCredentials:true});
     console.log('Растение добавалено в корзину: ', response.data);
-    handleAddtoCartCounter(plant.name)
+    handleAddtoCartCounter(quantity)
   } catch (error) {
     console.log('Ошибка при добавлении в корзину', error);
   }
@@ -82,7 +83,7 @@ export default function ShopItem() {
         <p>Цена: {plant.price ? `${plant.price}р.` : 'Цена не указана'}</p>
         <p>Описание: {plant.description || 'Описание не указано.'}</p>
         <div className="plant-card-actions">
-          <QuantityInput />
+          <QuantityInput quantity={quantity} setQuantity={setQuantity}/>
           <Button 
             className="add-to-cart-button"
             onClick={user ? handleAddToCart : handleModelRegOpen}
