@@ -61,7 +61,7 @@ export default function Cart() {
   const total = calculateTotal();
 
   return (
-    <div style={{ display: "flex", padding: "20px" }}>
+    <div style={{ display: "flex", minHeight: "calc(100vh - 10vh - 20vh)", padding: "20px" }}>
       {showOrderForm && (
         <div style={{ flex: 1, marginRight: "20px" }}>
           <CheckoutForm cart={cart} total={total} />
