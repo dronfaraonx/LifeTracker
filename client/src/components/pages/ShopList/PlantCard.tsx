@@ -87,7 +87,6 @@ export default function PlantCard({ plant }) {
           <DialogTitle>Выберите количество</DialogTitle>
           <DialogContent>
             <QuantityInput 
-              value={quantity} 
               onChange={(e) => setQuantity(Number(e.target.value))}  
             /> 
           </DialogContent>
