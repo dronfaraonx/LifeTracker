@@ -46,6 +46,14 @@ export default function Navbar() {
     navigate(`/cart/${user.id}`);
   };
 
+  const handleClonesClick = () => {
+    navigate(`/clones`);
+  };
+  
+  const handleSeedsClick = () => {
+    navigate(`/seeds`);
+  };
+
   const handleOpenMenu = (event: {
     currentTarget: React.SetStateAction<null>;
   }) => {
@@ -96,10 +104,10 @@ export default function Navbar() {
             >
               Растения
             </Typography>
-            <Typography className="header-link" variant="body1">
+            <Typography className="header-link" variant="body1"  onClick={handleClonesClick} style={{ cursor: "pointer" }}>
               Клоны
             </Typography>
-            <Typography className="header-link" variant="body1">
+            <Typography className="header-link" variant="body1" onClick={handleSeedsClick} style={{ cursor: "pointer" }}>
               Семена
             </Typography>
             <Typography className="header-link" variant="body1">
