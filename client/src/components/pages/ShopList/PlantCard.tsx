@@ -3,15 +3,39 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography, IconButton } 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'; // Import the ShoppingCartIcon
 import './plant.css'; 
 import { Link } from 'react-router-dom';
+import { useCart } from '../../../context/CountCart';
+import axios from 'axios';
+import { useUser } from '../../../context/auth';
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 export default function PlantCard({ plant }) {
-  const handleAddToCart = () => {
-    // Logic to add the plant to the cart
-    console.log(`${plant.name} добавлен в корзину`);
-  };
+    const {handleAddtoCartCounter} = useCart()  
+    const {user} = useUser() 
+
+    const handleAddToCart = async(event) => {
+      event.stopPropagation();  if (!plant?.id || !user?.id) {
+    return
+  }
+  
+  const cartItem = {
+    plant_id: plant.id,
+    user_id: user.id,
+    quantity: 1
+  }
+
+  try {
+    const response = await axios.post(`${API_URL}/api/cart`, cartItem, {withCredentials:true});
+    console.log('Растение добавалено в корзину: ', response.data);
+    handleAddtoCartCounter()
+  } catch (error) {
+    console.log('Ошибка при добавлении в корзину', error);
+  }
+ }
 
   return (
-    <Card className="plant-card">
+    <Card className="plant-card" style={{ position: 'relative' }}>
       <Link to={`/plants/${plant.id}`} style={{ textDecoration: 'none' }}>
         <CardActionArea className="card-link">
           <CardMedia
@@ -30,6 +54,9 @@ export default function PlantCard({ plant }) {
             <Typography variant="body2" color="textSecondary">
               {plant.price ? `${plant.price}р.` : 'Цена не указана'}
             </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
             <IconButton
               color="primary"
               onClick={handleAddToCart}
@@ -38,9 +65,6 @@ export default function PlantCard({ plant }) {
             >
               <ShoppingCartIcon />
             </IconButton>
-          </CardContent>
-        </CardActionArea>
-      </Link>
     </Card>
   );
 }
