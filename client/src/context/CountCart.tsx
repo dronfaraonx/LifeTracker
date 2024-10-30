@@ -28,10 +28,10 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
   }, [user]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleAddtoCartCounter = (plantName: string) => {
+  const handleAddtoCartCounter = (quantity: number) => {
     if (user?.id) {
       const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`) || '0', 10);
-      const newCount = currentCount + 1;
+      const newCount = currentCount + (quantity || 1);
 
       localStorage.setItem(`cartCount_${user.id}`, newCount.toString()); 
       setCartCounter(newCount);

@@ -1,11 +1,12 @@
-import React from 'react';
-import { Card, CardActionArea, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
+import React, { useState } from 'react';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, IconButton, Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'; // Import the ShoppingCartIcon
 import './plant.css'; 
 import { Link } from 'react-router-dom';
 import { useCart } from '../../../context/CountCart';
 import axios from 'axios';
 import { useUser } from '../../../context/auth';
+import QuantityInput from '../../ui/btns/NumberInput';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -13,8 +14,20 @@ const API_URL = import.meta.env.VITE_API_URL;
 export default function PlantCard({ plant }) {
     const {handleAddtoCartCounter} = useCart()  
     const {user} = useUser() 
+    const [quantity, setQuantity] = useState<number>(1)
+    const [open, setOpen] = useState<boolean>(false)
 
-    const handleAddToCart = async(event) => {
+
+      const handleOpenModal = (event: any) => {
+    event.stopPropagation(); 
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
+
+    const handleAddToCart = async(event: { stopPropagation: () => void; }) => {
       event.stopPropagation();  if (!plant?.id || !user?.id) {
     return
   }
@@ -28,7 +41,8 @@ export default function PlantCard({ plant }) {
   try {
     const response = await axios.post(`${API_URL}/api/cart`, cartItem, {withCredentials:true});
     console.log('Растение добавалено в корзину: ', response.data);
-    handleAddtoCartCounter()
+    handleCloseModal()
+    handleAddtoCartCounter(quantity)
   } catch (error) {
     console.log('Ошибка при добавлении в корзину', error);
   }
@@ -57,14 +71,35 @@ export default function PlantCard({ plant }) {
             </CardContent>
           </CardActionArea>
         </Link>
+        <div>
             <IconButton
               color="primary"
-              onClick={handleAddToCart}
+              onClick={handleOpenModal}
               aria-label="добавить в корзину"
               style={{ position: 'absolute', bottom: '15px', right: '10px', border:'1px solid black'}} 
             >
               <ShoppingCartIcon />
             </IconButton>
+
+
+             <Dialog open={open} onClose={handleCloseModal}>
+          <DialogTitle>Выберите количество</DialogTitle>
+          <DialogContent>
+            <QuantityInput 
+              value={quantity | 1} 
+              onChange={(e) => setQuantity(e.target.value)}  
+            /> 
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseModal} color="primary">
+              Отмена
+            </Button>
+            <Button onClick={handleAddToCart} color="primary">
+              Подтвердить
+            </Button>
+          </DialogActions>
+        </Dialog>
+        </div>
     </Card>
   );
 }
