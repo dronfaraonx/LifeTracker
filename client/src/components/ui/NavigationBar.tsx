@@ -42,12 +42,16 @@ export default function Navbar() {
     navigate("/");
   };
 
-  const handlePlantClick = () => {
-    navigate("/plants?type=plant");
-  };
-
   const handleCartClick = () => {
     navigate(`/cart/${user.id}`);
+  };
+
+  const handleClonesClick = () => {
+    navigate(`/clones`);
+  };
+  
+  const handleSeedsClick = () => {
+    navigate(`/seeds`);
   };
 
   const handleOpenMenu = (event: {
@@ -68,19 +72,13 @@ export default function Navbar() {
       <AppBar
         position="static"
         sx={{
-          // background: "white",
+          background: "white",
           boxShadow: "none",
-          // borderBottom: "2px solid black",
+          borderBottom: "2px solid black",
         }}
       >
         <Toolbar
-          className="header-toolbar"
-          sx={{
-            justifyContent: "space-between",
-            background: "#00ab84",
-            borderBottom: "2px solid black",
-            height: "10vh",
-          }}
+          sx={{ justifyContent: "space-between", background: "#00ab84" }}
         >
           <Box
             sx={{
@@ -102,38 +100,17 @@ export default function Navbar() {
               sx={{
                 cursor: "pointer",
               }}
-              onClick={handlePlantClick}
+              onClick={handleClick}
             >
               Растения
             </Typography>
-            <Typography
-              className="header-link"
-              variant="body1"
-              sx={{
-                cursor: "pointer",
-              }}
-              onClick={handlePlantClick}
-            >
+            <Typography className="header-link" variant="body1"  onClick={handleClonesClick} style={{ cursor: "pointer" }}>
               Клоны
             </Typography>
-            <Typography
-              className="header-link"
-              variant="body1"
-              sx={{
-                cursor: "pointer",
-              }}
-              onClick={handlePlantClick}
-            >
+            <Typography className="header-link" variant="body1" onClick={handleSeedsClick} style={{ cursor: "pointer" }}>
               Семена
             </Typography>
-            <Typography
-              className="header-link"
-              variant="body1"
-              sx={{
-                cursor: "pointer",
-              }}
-              // onClick={handlePlantClick}
-            >
+            <Typography className="header-link" variant="body1">
               Оплата и доставка
             </Typography>
           </Box>
@@ -204,7 +181,7 @@ export default function Navbar() {
           </Box>
         </Toolbar>
 
-        {/* <Dialog
+        <Dialog
           open={open}
           onClose={handleClose}
           PaperProps={{
@@ -247,7 +224,7 @@ export default function Navbar() {
               </Link>
             </Box>
           </DialogContent>
-        </Dialog> */}
+        </Dialog>
       </AppBar>
     </nav>
   );
