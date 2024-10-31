@@ -20,29 +20,29 @@ const OrderForm = ({cart, total, onClose }) => {
 
 
 
-const handleOrderSubmit = async () => {
-  try {
-    const order = cart.map(async (cartPlant) => {
-      await axios.post(`${API_URL}/api/orders`, {
-        user_id: user.id,
-        product_id: cartPlant.id,
-        quantity: cartPlant.quantity,
-        pricePurchase: cartPlant.price,
-      });
-    });
+// const handleOrderSubmit = async () => {
+//   try {
+//     const order = cart.map(async (cartPlant) => {
+//       await axios.post(`${API_URL}/api/orders`, {
+//         user_id: user.id,
+//         product_id: cartPlant.id,
+//         quantity: cartPlant.quantity,
+//         pricePurchase: cartPlant.price,
+//       });
+//     });
 
 
-    const deletePromises = cart.map(async (cartPlant) => {
-      await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${cartPlant.id}`);
-    });
+//     const deletePromises = cart.map(async (cartPlant) => {
+//       await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${cartPlant.id}`);
+//     });
 
-    handleRemoveFromCartCounter(cart.reduce((total, item) => total + item.quantity, 0));
+//     handleRemoveFromCartCounter(cart.reduce((total, item) => total + item.quantity, 0));
 
-    onClose(); 
-  } catch (error) {
-    console.log("Ошибка при оформлении заказа", error);
-  }
-};
+//     onClose(); 
+//   } catch (error) {
+//     console.log("Ошибка при оформлении заказа", error);
+//   }
+// };
 
 
   return (
