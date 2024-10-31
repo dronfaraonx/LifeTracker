@@ -14,15 +14,22 @@ import {
 import { Card } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckoutForm from "../OrderForm/OrderForm";
+import { Change, PlantId } from "./CartTypes";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+
+
 export default function Cart() {
   const { user } = useUser();
+<<<<<<< HEAD
   const {handleAddToCartCounter} = useCart()
 
+=======
+>>>>>>> e9b43b9138c9d7263f287593e2996161afd23a18
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
+  const { handleRemoveFromCartCounter } = useCart();
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -36,28 +43,26 @@ export default function Cart() {
     fetchCart();
   }, [user?.id]);
 
-  const { handleRemoveFromCartCounter } = useCart();
 
-  const handleRemove = async (plantId) => {
-    try {
-      const cartPlant = cart.find((item) => item.id === plantId);
-      if (!cartPlant) return;
+const handleRemove = async (plantId: number) => {
+  try {
+    const cartPlant = cart.find((item) => item.id === plantId);
+    if (!cartPlant) return;
 
-      await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
-      const newState = (prevCart) =>
-      prevCart.map((item) =>
-        item.id === plantId ? { ...item, quantity: newQuantity } : item
-      )
-      setCart(newState);
-      handleRemoveFromCartCounter(cartPlant.quantity);
-    } catch (error) {
-      console.log("Ошибка при удалении растения из корзины", error);
-    }
-  };
+    await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
+
+    setCart((prevCart) => prevCart.filter((item) => item.id !== plantId));
+
+    handleRemoveFromCartCounter(cartPlant.quantity);
+  } catch (error) {
+    console.log("Ошибка при удалении растения из корзины", error);
+  }
+};
+
 
   // const handleQuantityMinus = async()
 
-  const handleQuantityChange = async (plantId, change) => {
+  const handleQuantityChange = async (plantId: PlantId, change: Change) => {
     
     try {
       const cartPlant = cart.find((item) => item.id === plantId);
@@ -194,7 +199,7 @@ export default function Cart() {
                   <Button
                     variant="contained"
                     size="small"
-                    onClick={() => handleQuantityChange(cartPlant.id, -1)}
+                    onClick={() => handleQuantityChange(cartPlant.id, Number(-1))}
                     disabled={cartPlant.quantity <= 1} 
                     disableRipple // 
                     sx={{
