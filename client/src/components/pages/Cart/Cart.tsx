@@ -85,6 +85,20 @@ export default function Cart() {
 
   const total = calculateTotal();
 
+  const handleConfirmOrder = async () => {
+    try {
+      await axios.post(`${API_URL}/api/send-order`, {
+        email: user.email,
+        cart,
+        total,
+      });
+      alert('Заказ подтвержден и письмо отправлено!');
+    } catch (error) {
+      console.log('Ошибка при подтверждении заказа:', error);
+      alert('Ошибка при отправке заказа.');
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -270,7 +284,7 @@ export default function Cart() {
                   color: "white",
                   marginBottom: "20px",
                 }}
-                onClick={() => setShowOrderForm(true)}
+                onClick={handleConfirmOrder}
               >
                 Оформить заказ
               </Button>

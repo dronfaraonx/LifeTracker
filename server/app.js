@@ -1,5 +1,6 @@
 // const app = require("./app")
 const express = require('express');
+const nodemailer = require('nodemailer');
 require('dotenv').config()
 
 const authRouter = require('./src/routes/auth.routes')
@@ -30,6 +31,32 @@ app.use('/api/seeds', seedsRouter)
 app.use('/api/clones', clonesRouter)
 app.use('/api/cart', cartRouter)
 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS, 
+  },
+});
+
+app.post('/api/send-order', async (req, res) => {
+  const { email, cart, total } = req.body;
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'Подтверждение заказа',
+    text: `Ваш заказ: ${JSON.stringify(cart)}\nИтого: ${total}р.`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).send('Email отправлен');
+  } catch (error) {
+    console.error('Ошибка при отправке email:', error);
+    res.status(500).send('Ошибка при отправке email');
+  }
+});
 
 
 
