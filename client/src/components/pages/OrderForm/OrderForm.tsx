@@ -195,7 +195,7 @@ const handleOrderSubmit = async () => {
         fullWidth
         onClick={handleOrderSubmit}
       >
-        Подтвердить заказ
+        Подтвердить заказ:
       </Button>
       <Button
         variant="outlined"
