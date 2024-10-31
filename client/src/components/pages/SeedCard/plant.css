@@ -7,8 +7,6 @@ body {
 
 .plant-container {
   display: flex;
-  height: calc(100vh - 10vh - 10vh);
-  min-height: calc(100vh - 10vh - 10vh);
 }
 
 .sidebar {
@@ -46,9 +44,10 @@ body {
   transition: border-color 0.3s ease;
 }
 
+
 .plant-card img {
   width: 100%;
-  /* height: 30vh; */
+  height: 300px;
   object-fit: cover;
   border-radius: 5px;
 }

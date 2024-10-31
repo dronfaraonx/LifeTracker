@@ -8,9 +8,10 @@ authRouter.get("/check-session", (req, res) => {
   
   if (req.session.user_sid) {
     const {user} = res.locals;
+    console.log(user);
 
     res.status(200).json({ user });
-
+    
   } else {
     res.status(401).json({ message: "Not authenticated" });
   }

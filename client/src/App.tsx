@@ -12,9 +12,12 @@ const Loading = React.lazy(() => import('./components/ui/Loading'));
 const Layout = React.lazy(() => import('./components/Layout')); 
 const Cart = React.lazy(() => import('./components/pages/Cart/Cart'));
 const BuyerPage = React.lazy(() => import('./components/pages/BuyerPage/BuyerPage'));
+const ClonesPage = React.lazy(() => import('./components/pages/ClonesPage/ClonesPage'))
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
+import SeedPage from './components/pages/SeedPage/SeedPage';
+
 
 function App() {
   const router = createBrowserRouter([
@@ -50,6 +53,22 @@ function App() {
           element: (
             <Suspense fallback={<Loading />}>
               <ShopList />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/clones",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <ClonesPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/seeds",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <SeedPage />
             </Suspense>
           ),
         },

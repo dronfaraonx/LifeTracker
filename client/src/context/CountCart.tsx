@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useUser } from './auth';
+import axios from 'axios';
 
 export interface CartContextType {
   cartCounter: number;
@@ -15,10 +16,25 @@ export const useCart = () => {
 interface CartCounterProps {
   children: ReactNode;
 }
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => {
   const [cartCounter, setCartCounter] = useState<number>(0);
   const { user } = useUser();
+
+  useEffect(() => {
+    const fetchQuantity = async() => {
+      try {
+        const response = await axios.get(`${API_URL}/api/plants`);
+        const fetchedQuantityData = response.data;
+        // const total = fetchedQuantityData.reduce((acc, plant) => acc + plant.quantity, 0)
+
+      } catch (error) {
+        
+      }
+    }
+  })
 
   useEffect(() => {
     if (user?.id) {
@@ -29,18 +45,18 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleAddtoCartCounter = (quantity: number) => {
-    
-    quantity = 1;
+
     if (user?.id) {
+
       const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`) || '0', 10);
-      console.log(currentCount);
-      console.log(localStorage.getItem(`cartCount_${user.id}`) );
-      console.log('quantity:', quantity)
       
       const newCount = currentCount + quantity;
 
       localStorage.setItem(`cartCount_${user.id}`, newCount.toString()); 
       setCartCounter(newCount);
+      console.log(newCount);
+      
+
       console.log(`Новый заказ для юзера ${user.id}:`, newCount);
     } else {
       console.log('Не залогинен');

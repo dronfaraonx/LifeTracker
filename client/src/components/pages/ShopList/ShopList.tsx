@@ -64,9 +64,11 @@ export default function ShopList() {
   const uniqueCategories = [...new Set(plants.map(plant => plant.type))];
 
   return (
-    <Box className="plant-container">
-      <Box className="sidebar">
-        <Typography variant="h6" className="filter-title">Фильтры</Typography>
+    
+    <div className='shopListContainer' style={{minHeight: "calc(100vh-10vh-10vh"}}>
+    <Box sx={{ display:"flex" }}>
+      <Box sx={{ width: '30vh', padding: '20px', borderRight: '2px solid black' }}>
+        <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl className="filter-select">
           <InputLabel id="category-select-label">Категория</InputLabel>
@@ -86,8 +88,8 @@ export default function ShopList() {
           </Select>
         </FormControl>
 
-        {categoryId && (
-          <FormControl className="filter-select">
+        {/* {categoryId && ( */}
+          <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
             <InputLabel id="type-select-label">Тип растения</InputLabel>
             <Select
               labelId="type-select-label"
@@ -103,7 +105,8 @@ export default function ShopList() {
                 ))}
             </Select>
           </FormControl>
-        )}
+        {/* )} */}
+
 
         <Typography gutterBottom>Ценовой диапазон</Typography>
         <Slider
@@ -152,5 +155,6 @@ export default function ShopList() {
         ))}
       </Box>
     </Box>
+    </div>
   );
 }

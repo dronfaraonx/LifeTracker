@@ -6,6 +6,8 @@ import { useUser } from '../../../context/auth';
 import SignupModal from '../Authorization/modal/SignUpModal';
 import { useCart } from '../../../context/CountCart';
 import Plant from '../ShopList/Plant';
+import './ShopItem.style.css'
+import QuantityInput from '../../ui/btns/NumberInput';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -16,6 +18,7 @@ export default function ShopItem() {
   const [plant, setPlant] = useState<Plant | null>(null);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
+  const [quantity, setQuantity] = useState(1)
   const {handleAddtoCartCounter} = useCart()   
 
   useEffect(() => {
@@ -37,7 +40,7 @@ export default function ShopItem() {
   const handleModelRegClose = () => setOpen(false);
 
   const handleBack = () => {
-    navigate(-1);
+    navigate('/plants');
   };
 
   const handleAddToCart = async() => {
@@ -54,7 +57,7 @@ export default function ShopItem() {
   try {
     const response = await axios.post(`${API_URL}/api/cart`, cartItem, {withCredentials:true});
     console.log('Растение добавалено в корзину: ', response.data);
-    handleAddtoCartCounter(plant.name)
+    handleAddtoCartCounter(quantity)
   } catch (error) {
     console.log('Ошибка при добавлении в корзину', error);
   }
@@ -64,6 +67,7 @@ export default function ShopItem() {
     return <div>Загрузка...</div>; 
   }
 
+<<<<<<< HEAD
   return (
     <Card className='page-container' sx={{ maxWidth: 400, margin: '20px auto' }}>
       <CardMedia
@@ -83,25 +87,48 @@ export default function ShopItem() {
           Описание: {plant.description || 'Описание не указано.'}
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+=======
+  return ( 
+<div className='itemContainer' style={{height: 'calc(100vh - 10vh - 10vh)'}}>
+    <div className="plant-item">
+      <div className='imageBlock'>
+        <img 
+          src={plant.photo} 
+          alt={plant.name} 
+          className="plant-card-media" 
+        />
+      </div>
+      
+      <div className="plant-card-content">
+        <h5>{plant.type} {plant.name}</h5>
+        <p>Цена: {plant.price ? `${plant.price}р.` : 'Цена не указана'}</p>
+        <p>Описание: {plant.description || 'Описание не указано.'}</p>
+        <div className="plant-card-actions">
+          <QuantityInput quantity={quantity} setQuantity={setQuantity}/>
+>>>>>>> d900f633994ea4f85a603a9caa9edc705fae34de
           <Button 
-            variant="contained" 
-            color="primary" 
+            className="add-to-cart-button"
             onClick={user ? handleAddToCart : handleModelRegOpen}
             disabled={loading}
-            sx={{ backgroundColor: 'green', color: 'white' }}
+            sx={{ backgroundColor: "green", color: "white", size: ""}}
+
           >
             В корзину
           </Button>
           <SignupModal open={open} onClose={handleModelRegClose} />
+        </div>
+        <div className='backBtn'>
           <Button 
-            variant="outlined" 
-            onClick={handleBack}
-            sx={{ marginLeft: '10px' }}
+          className="back-button" 
+          onClick={handleBack}
           >
             Назад
           </Button>
-        </Box>
-      </CardContent>
-    </Card>
+        </div>
+      </div>
+</div>
+
+  </div>
+
   );
 }
