@@ -19,6 +19,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Cart() {
   const { user } = useUser();
+  const {handleAddToCartCounter} = useCart()
 
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
@@ -61,7 +62,7 @@ export default function Cart() {
     try {
       const cartPlant = cart.find((item) => item.id === plantId);
       if (!cartPlant) return;
-
+      
 
       const newQuantity = Number(cartPlant.quantity) + Number(change);
       if (newQuantity < 1) return; 
@@ -70,12 +71,12 @@ export default function Cart() {
       await axios.put(`${API_URL}/api/cart/${user.id}/plant/${plantId}`, {
         quantity: newQuantity,
       });
-
-      setCart((prevCart) =>
+      const updateQuantity = (prevCart) =>
         prevCart.map((item) =>
           item.id === plantId ? { ...item, quantity: newQuantity } : item
-        )
-      );
+    )
+    setCart( updateQuantity);
+    handleAddToCartCounter(change);
     } catch (error) {
       console.log("Ошибка при обновлении количества растения в корзине", error);
     }

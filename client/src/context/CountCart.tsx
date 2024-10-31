@@ -51,10 +51,14 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
       const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`) || '0', 10);
       
       const newCount = currentCount + quantity;
+      console.log("neqcount", newCount);
+      console.log("activeQuantity: ",quantity);
+      console.log("current ",currentCount);
+      
+      
 
       localStorage.setItem(`cartCount_${user.id}`, newCount.toString()); 
       setCartCounter(newCount);
-      console.log(newCount);
       
 
       console.log(`Новый заказ для юзера ${user.id}:`, newCount);
