@@ -80,7 +80,7 @@ export const Footer: FC = (): ReactElement => {
               <img src={logo} alt="Logo" style={{ height: 40 }} />
             </Box>
 
-            <Typography color="black" variant="h5" fontSize="1rem">
+            <Typography color="black" variant="h5" fontSize="1.2rem">
               Талад - магазин экзотических растений
             </Typography>
           </Box>

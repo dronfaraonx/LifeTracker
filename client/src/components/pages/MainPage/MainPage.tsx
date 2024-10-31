@@ -43,9 +43,19 @@ const MainPage = () => {
             padding: "20px",
           }}
         >
-          <Typography variant="h5" sx={{ fontFamily: "Roboto, sans-serif" }}>
-            Лучшие цветы для современной жизни
-          </Typography>
+        <Typography
+  variant="h5"
+  sx={{
+    fontFamily: "Roboto, sans-serif",
+    backgroundColor: "rgba(10,100, 100, 0.3)",
+    padding: "20px 30px",
+    marginBottom: "20px",
+    borderRadius: "10px"
+  }}
+>
+  Лучшие цветы для современной жизни
+</Typography>
+
           <Link
             component={RouterLink}
             to="/"
@@ -57,7 +67,7 @@ const MainPage = () => {
               variant="contained"
               sx={{
                 marginTop: "10px",
-                backgroundColor: "green",
+                backgroundColor: "#00ab84",
                 color: "white",
               }}
             >
