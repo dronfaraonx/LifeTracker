@@ -51,7 +51,7 @@ export default function ShopItem() {
   const cartItem = {
     plant_id: plant.id,
     user_id: user.id,
-    quantity: 1
+    quantity: quantity
   }
 
   try {
@@ -67,27 +67,6 @@ export default function ShopItem() {
     return <div>Загрузка...</div>; 
   }
 
-<<<<<<< HEAD
-  return (
-    <Card className='page-container' sx={{ maxWidth: 400, margin: '20px auto' }}>
-      <CardMedia
-        component="img"
-        alt={plant.name}
-        height="400"
-        image={plant.photo}
-      />
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {plant.type} {plant.name}
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Цена: {plant.price ? `${plant.price}р.` : 'Цена не указана'}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Описание: {plant.description || 'Описание не указано.'}
-        </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-=======
   return ( 
 <div className='itemContainer' style={{height: 'calc(100vh - 10vh - 10vh)'}}>
     <div className="plant-item">
@@ -105,7 +84,6 @@ export default function ShopItem() {
         <p>Описание: {plant.description || 'Описание не указано.'}</p>
         <div className="plant-card-actions">
           <QuantityInput quantity={quantity} setQuantity={setQuantity}/>
->>>>>>> d900f633994ea4f85a603a9caa9edc705fae34de
           <Button 
             className="add-to-cart-button"
             onClick={user ? handleAddToCart : handleModelRegOpen}
