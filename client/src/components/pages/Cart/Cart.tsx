@@ -85,7 +85,7 @@ export default function Cart() {
   const total = calculateTotal();
 
   return (
-    <div style={{ minHeight: `calc(100vh - 10vh - 10vh)` }}>
+    <div style={{ minHeight: `calc(100vh - 10vh - 7vh)` }}>
       <Box
         sx={{
           position: "relative",
