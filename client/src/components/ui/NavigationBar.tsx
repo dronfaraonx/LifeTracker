@@ -69,17 +69,19 @@ export default function Navbar() {
   const handleCloseLogin = () => setIsLoginOpen(false);
 
   return (
-    <nav className="head">
+<nav className="head">
       <AppBar
         position="static"
         sx={{
           background: "#00ab84",
           boxShadow: "none",
           borderBottom: "2px solid black",
+         
         }}
       >
+
         <Toolbar
-          sx={{ justifyContent: "space-between", background: "#00ab84"}}
+          sx={{ justifyContent: "space-between", background: "#00ab84", fontSize: "1rem" }}
         >
           <Box
             sx={{
@@ -98,7 +100,7 @@ export default function Navbar() {
             <Typography
               variant="body1"
               className="header-link"
-              // style={{fontSize:"20px", cursor: "pointer"}}
+              style={{ cursor: "pointer",  fontSize:'1.3rem'}}
 
               sx={{
                 cursor: "pointer",
@@ -107,13 +109,13 @@ export default function Navbar() {
             >
               Растения
             </Typography>
-            <Typography className="header-link" variant="body1"  onClick={handleClonesClick} style={{ cursor: "pointer" }}>
+            <Typography className="header-link" variant="body1"  onClick={handleClonesClick} style={{ cursor: "pointer" ,fontSize:'1.3rem'}}>
               Клоны
             </Typography>
-            <Typography className="header-link" variant="body1" onClick={handleSeedsClick} style={{ cursor: "pointer" }}>
+            <Typography className="header-link" variant="body1" onClick={handleSeedsClick} style={{ cursor: "pointer", fontSize:'1.3rem' }}>
               Семена
             </Typography>
-            <Typography className="header-link" variant="body1">
+            <Typography className="header-link" variant="body1" style={{ cursor: "pointer", fontSize:'1.3rem' }}>
               Оплата и доставка
             </Typography>
           </Box>

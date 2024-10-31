@@ -50,7 +50,7 @@ export default function PlantCard({ plant }) {
  }
 
   return (
-    <Card className="plant-card" style={{ position: 'relative' }}>
+    <Card className="plant-card" style={{ position: 'relative' , fontSize:'1rem' }}>
       <Link to={`/plants/${plant.id}`} style={{ textDecoration: 'none' }}>
         <CardActionArea className="card-link">
           <CardMedia

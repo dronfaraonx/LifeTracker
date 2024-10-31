@@ -65,7 +65,7 @@ export default function ShopList() {
 
   return (
     
-    <div className='shopListContainer' style={{minHeight: "calc(100vh-10vh-10vh"}}>
+    <div className='shopListContainer' style={{position:"relative",minHeight: "calc(100vh-10vh-10vh"}}>
     <Box sx={{ display:"flex" }}>
       <Box sx={{ width: '30vh', padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
