@@ -14,22 +14,14 @@ import {
 import { Card } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckoutForm from "../OrderForm/OrderForm";
-import { Change, PlantId } from "./CartTypes";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-
-
 export default function Cart() {
   const { user } = useUser();
-<<<<<<< HEAD
   const {handleAddToCartCounter} = useCart()
-
-=======
->>>>>>> e9b43b9138c9d7263f287593e2996161afd23a18
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
-  const { handleRemoveFromCartCounter } = useCart();
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -43,6 +35,7 @@ export default function Cart() {
     fetchCart();
   }, [user?.id]);
 
+  const { handleRemoveFromCartCounter } = useCart();
 
 const handleRemove = async (plantId: number) => {
   try {
@@ -50,7 +43,6 @@ const handleRemove = async (plantId: number) => {
     if (!cartPlant) return;
 
     await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
-
     setCart((prevCart) => prevCart.filter((item) => item.id !== plantId));
 
     handleRemoveFromCartCounter(cartPlant.quantity);
@@ -60,9 +52,8 @@ const handleRemove = async (plantId: number) => {
 };
 
 
-  // const handleQuantityMinus = async()
 
-  const handleQuantityChange = async (plantId: PlantId, change: Change) => {
+  const handleQuantityChange = async (plantId, change) => {
     
     try {
       const cartPlant = cart.find((item) => item.id === plantId);
@@ -199,7 +190,7 @@ const handleRemove = async (plantId: number) => {
                   <Button
                     variant="contained"
                     size="small"
-                    onClick={() => handleQuantityChange(cartPlant.id, Number(-1))}
+                    onClick={() => handleQuantityChange(cartPlant.id, -1)}
                     disabled={cartPlant.quantity <= 1} 
                     disableRipple // 
                     sx={{
