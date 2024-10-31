@@ -71,10 +71,8 @@ cartRouter.delete('/:userId/plant/:plantId', async (req, res) => {
       return res.status(404).json({ message: 'Растение не найдено в корзине' });
     }
 
-    // Получаем текущее количество
     const quantity = cartPlant.quantity;
 
-    // Удаляем растение из корзины
     await Cart.destroy({
       where: { user_id: userId, id: plantId },
     });
@@ -83,6 +81,28 @@ cartRouter.delete('/:userId/plant/:plantId', async (req, res) => {
   } catch (error) {
     console.error('Ошибка при удалении растения из корзины', error);
     res.status(500).json({ message: 'Ошибка сервера при удалении растения' });
+  }
+});
+
+cartRouter.put('/:userId/plant/:plantId', async (req, res) => {
+  const { userId, plantId } = req.params;
+  const { quantity } = req.body; 
+
+  try {
+    const cartPlant = await Cart.findOne({
+      where: { user_id: userId, id: plantId },
+    });
+
+    if (!cartPlant) {
+      return res.status(404).json({ message: 'Растение не найдено в корзине' });
+    }
+
+    await Cart.update({ quantity }, { where: { user_id: userId, id: plantId } });
+
+    res.status(200).json({ message: 'Растение обновлено в корзине', quantity });
+  } catch (error) {
+    console.error('Ошибка при обновлении растения в корзине', error);
+    res.status(500).json({ message: 'Ошибка сервера при обновлении растения' });
   }
 });
 

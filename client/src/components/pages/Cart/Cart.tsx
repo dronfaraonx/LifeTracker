@@ -19,9 +19,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Cart() {
   const { user } = useUser();
-  // const dispatch = useDispatch();
 
-  // const user = useSelector((state: any) => state.user)
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
 
@@ -45,22 +43,27 @@ export default function Cart() {
       if (!cartPlant) return;
 
       await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
-      setCart((prevCart) =>
-        prevCart.filter((cartPlant) => cartPlant.id !== plantId)
-      );
-
+      const newState = (prevCart) =>
+      prevCart.map((item) =>
+        item.id === plantId ? { ...item, quantity: newQuantity } : item
+      )
+      setCart(newState);
       handleRemoveFromCartCounter(cartPlant.quantity);
     } catch (error) {
       console.log("Ошибка при удалении растения из корзины", error);
     }
   };
 
+  // const handleQuantityMinus = async()
+
   const handleQuantityChange = async (plantId, change) => {
+    
     try {
       const cartPlant = cart.find((item) => item.id === plantId);
       if (!cartPlant) return;
 
-      const newQuantity = cartPlant.quantity + change;
+
+      const newQuantity = Number(cartPlant.quantity) + Number(change);
       if (newQuantity < 1) return; 
 
      
@@ -90,12 +93,16 @@ export default function Cart() {
   const total = calculateTotal();
 
   return (
+<div style={{ minHeight: `calc(100vh - 10vh - 10vh)`}}>
     <Box
       sx={{
+        position: "relative",
+        display: "flex",
+        flexDirection: 'column',
+        background: "transparent",
         padding: "20px",
-        maxWidth: 800,
+        maxWidth: "80vh",
         margin: "0 auto",
-        backgroundColor: "#f5f5f5",
         borderRadius: "8px",
       }}
     >
@@ -130,7 +137,7 @@ export default function Cart() {
             <Card
               key={cartPlant.id}
               sx={{
-                maxWidth: 600,
+                maxWidth: "60vh",
                 width: "100%",
                 display: "flex",
                 alignItems: "center",
@@ -146,9 +153,9 @@ export default function Cart() {
                 <CardMedia
                   component="img"
                   sx={{
-                    width: 80, 
+                    width: 100, 
                     height: 80,
-                    objectFit: "cover",
+                    objectFit: "fit",
                     borderRadius: "8px",
                     marginRight: "10px", 
                   }}
@@ -156,11 +163,12 @@ export default function Cart() {
                   alt={cartPlant.name}
                 />
               )}
-              <CardContent sx={{ flex: 1, padding: "5px" }}>
+              <CardContent sx={{ flex: 1, padding: "5px", width: "20vh"}}>
                 <Typography
+                 
                   variant="h6"
                   component="div"
-                  sx={{ fontSize: "1rem" }}
+                  sx={{ fontSize: "1rem", width: "100"}}
                 >
                   {cartPlant.type} {cartPlant.name}
                 </Typography>
@@ -176,7 +184,7 @@ export default function Cart() {
                     display: "flex",
                     alignItems: "center",
                     marginTop: 1,
-                    backgroundColor: "green",
+                    backgroundColor: "white",
                     borderRadius: "5px",
                     padding: "2px", 
                     width: "120px", 
@@ -209,12 +217,12 @@ export default function Cart() {
                     sx={{
                       margin: "0 5px", 
                       fontSize: "0.875rem", 
-                      color: "white",
+                      color: "black",
                       width: "30px", 
                       textAlign: "center", 
                     }}
                   >
-                    {cartPlant.quantity}
+          {cart.find((item) => item.id === cartPlant.id)?.quantity || 0}
                   </Typography>
 
                   <Button
@@ -297,5 +305,6 @@ export default function Cart() {
         </Box>
       )}
     </Box>
+    </div>
   );
 }
