@@ -17,7 +17,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import logo from "../../../public/LOGO circle.png";
+// import logo from "../../../public/LOGO circle.png";
 import { useUser } from "../../context/auth";
 import AccountModal from "../pages/Authorization/modal/AccountModal";
 import SignupModal from "../pages/Authorization/modal/SignUpModal";
@@ -92,7 +92,7 @@ export default function Navbar() {
             }}
           >
             <img
-              src={logo}
+              src="/LOGO circle.png"
               alt="Logo"
               style={{ height: 70, cursor: "pointer"}}
               onClick={handleLogoClick}

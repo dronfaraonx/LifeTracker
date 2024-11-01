@@ -67,7 +67,7 @@ export default function ShopItem() {
     return <div>Загрузка...</div>; 
   }
   return ( 
-<div className='itemContainer' style={{height: 'calc(100vh - 10vh - 10vh)'}}>
+<div className='itemContainer' style={{height: 'calc(100vh - 10vh - 9vh)'}}>
     <div className="plant-item">
       <div className='imageBlock'>
         <img 

@@ -5,11 +5,11 @@ const OrderForm = ({ onClose }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
 
   const handleOrderSubmit = () => {
-    console.log("Данные заказа:", { name, phone, email, country, address });
+    console.log("Данные заказа:", { name, phone, email, city, address });
     onClose();
   };
 
@@ -93,15 +93,15 @@ const OrderForm = ({ onClose }) => {
 
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={4}>
-          <Typography>Страна</Typography>
+          <Typography>Город</Typography>
         </Grid>
         <Grid item xs={8}>
           <TextField
             variant="outlined"
             fullWidth
             margin="dense"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "8px",
@@ -115,7 +115,7 @@ const OrderForm = ({ onClose }) => {
         </Grid>
 
         <Grid item xs={4}>
-          <Typography>Населенный пункт</Typography>
+          <Typography>Адрес</Typography>
         </Grid>
         <Grid item xs={8}>
           <TextField
