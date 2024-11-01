@@ -9,13 +9,15 @@ const API_URL = import.meta.env.VITE_API_URL;
 const OrderForm = ({ cart, onClose }) => {
   const {user} =useUser()
   const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("")
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
 
 const handleOrderSubmit = async () => {
-  const uuid_order = uuidv4();
+  const uuid_order = uuidv4().slice(0, 8);
+  const userInfo = {
+    id: user.id, name: user.name, firstName: name, lastName, phone, city, address}
   
   const cartItems = cart.map((cartItem) => ({
     user_id: user.id,
@@ -27,13 +29,13 @@ const handleOrderSubmit = async () => {
 
   try {
   await axios.post(`${API_URL}/api/orders`,  {cartItems}, { withCredentials: true });
+  await axios.post(`${API_URL}/api/userInfo`, userInfo, { withCredentials: true })
     onClose();
+
   } catch (error) {
     console.error("Ошибка создания заказа", error);
   }
 };
-
-
 
   return (
     <Box sx={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
@@ -43,7 +45,7 @@ const handleOrderSubmit = async () => {
 
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={4}>
-          <Typography>Покупатель (ФИО)</Typography>
+          <Typography>Имя</Typography>
         </Grid>
         <Grid item xs={8}>
           <TextField
@@ -52,6 +54,27 @@ const handleOrderSubmit = async () => {
             margin="dense"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "8px",
+                height: "40px", 
+              },
+              "& .MuiInputBase-input": {
+                padding: "10px",
+              },
+            }}
+          />
+        </Grid>
+         <Grid item xs={4}>
+          <Typography>Фамилия</Typography>
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            variant="outlined"
+            fullWidth
+            margin="dense"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "8px",
@@ -74,28 +97,6 @@ const handleOrderSubmit = async () => {
             margin="dense"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "8px",
-                height: "40px",
-              },
-              "& .MuiInputBase-input": {
-                padding: "10px",
-              },
-            }}
-          />
-        </Grid>
-
-        <Grid item xs={4}>
-          <Typography>Email</Typography>
-        </Grid>
-        <Grid item xs={8}>
-          <TextField
-            variant="outlined"
-            fullWidth
-            margin="dense"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "8px",

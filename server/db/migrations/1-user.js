@@ -22,6 +22,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
+      alreadyBought: {
+        type: Sequelize.BOOLEAN,
+          defaultValue: false
+      },
       firstName: {
         type: Sequelize.STRING
       },
@@ -31,7 +35,10 @@ module.exports = {
       phone: {
         type: Sequelize.INTEGER
       },
-      birth: {
+      city: {
+        type: Sequelize.STRING
+      },
+      address: {
         type: Sequelize.STRING
       },
       wishList_id: {
