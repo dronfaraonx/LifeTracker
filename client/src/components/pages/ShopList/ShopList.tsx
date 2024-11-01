@@ -65,12 +65,12 @@ export default function ShopList() {
 
   return (
     
-    <div className='shopListContainer' style={{position:"relative",minHeight: "calc(100vh-10vh-10vh"}}>
+    <div className='shopListContainer' style={{position:"relative",height: "calc(100vh-10vh-10vh"}}>
     <Box sx={{ display:"flex" }}>
-      <Box sx={{ width: '30vh', padding: '20px', borderRight: '2px solid black' }}>
+      <Box sx={{ width: '50vh', padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
-        <FormControl className="filter-select">
+        <FormControl  sx={{ width: '30vh'}} className="filter-select">
           <InputLabel id="category-select-label">Категория</InputLabel>
           <Select
             labelId="category-select-label"
@@ -89,7 +89,7 @@ export default function ShopList() {
         </FormControl>
 
         {/* {categoryId && ( */}
-          <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
+          <FormControl fullWidth sx={{ marginBottom: '20px', width: '30vh'}}>
             <InputLabel id="type-select-label">Тип растения</InputLabel>
             <Select
               labelId="type-select-label"
@@ -118,7 +118,7 @@ export default function ShopList() {
           className="price-slider"
         />
 
-        <FormControl className="filter-select">
+        <FormControl className="filter-select" sx={{ width: '30vh'}}>
           <InputLabel id="size-select-label">Размер</InputLabel>
           <Select
             labelId="size-select-label"
@@ -133,7 +133,7 @@ export default function ShopList() {
           </Select>
         </FormControl>
 
-        <FormControl className="filter-select">
+        <FormControl className="filter-select" sx={{ width: '30vh'}}>
           <InputLabel id="light-select-label">Освещение</InputLabel>
           <Select
             labelId="light-select-label"

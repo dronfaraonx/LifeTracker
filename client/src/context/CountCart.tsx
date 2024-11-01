@@ -6,6 +6,7 @@ export interface CartContextType {
   cartCounter: number;
   handleAddtoCartCounter: (quantity: number) => void;
   handleRemoveFromCartCounter: (quantity: number) => void;
+  eraseCartCounter: () => void
 }
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -76,8 +77,16 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
     }
   };
 
+  const eraseCartCounter = () => {
+    if (user?.id) {
+      localStorage.removeItem(`cartCount_${user.id}`);
+      setCartCounter(0);
+      console.log(`Корзина пользователя ${user.id} была очищена.`);
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ cartCounter, handleAddtoCartCounter, handleRemoveFromCartCounter }}>
+    <CartContext.Provider value={{ cartCounter, handleAddtoCartCounter, handleRemoveFromCartCounter, eraseCartCounter }}>
       {children}
     </CartContext.Provider>
   );

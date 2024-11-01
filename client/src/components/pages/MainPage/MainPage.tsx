@@ -14,7 +14,7 @@ const MainPage = () => {
   return (
      <Box
         sx={{
-          height: "calc(100vh - 10vh - 7vh)",
+          height: "calc(100vh - 10vh - 9vh)",
           position: "relative",
           width: "100vw",
           overflow: "hidden",
@@ -57,8 +57,8 @@ const MainPage = () => {
               variant="contained"
               sx={{
                 marginTop: "10px",
-                backgroundColor: "green",
-                color: "white",
+                backgroundColor: "#00ab84",
+                color: "black",
               }}
             >
               Перейти в магазин

@@ -1,7 +1,7 @@
 import { FC, ReactElement } from "react";
 import { Box, Container, Typography, IconButton, Link } from "@mui/material";
 import { Instagram, Telegram, WhatsApp } from "@mui/icons-material";
-import logo from "./../../../public/LOGO circle.png";
+// import logo from "./LOGO circle.png";
 
 export const Footer: FC = (): ReactElement => {
   return (
@@ -77,7 +77,7 @@ export const Footer: FC = (): ReactElement => {
             }}
           >
             <Box>
-              <img src={logo} alt="Logo" style={{ height: 40 }} />
+              <img src="/LOGO circle.png" alt="Logo" style={{ height: 40 }} />
             </Box>
 
             <Typography color="black" variant="h5" fontSize="1rem">
