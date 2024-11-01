@@ -13,6 +13,7 @@ const Layout = React.lazy(() => import('./components/Layout'));
 const Cart = React.lazy(() => import('./components/pages/Cart/Cart'));
 const BuyerPage = React.lazy(() => import('./components/pages/BuyerPage/BuyerPage'));
 const ClonesPage = React.lazy(() => import('./components/pages/ClonesPage/ClonesPage'))
+const OrderDashboard = React.lazy(() => import('./components/pages/BuyerPage/OrderDashboard'))
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
@@ -92,7 +93,8 @@ function App() {
           path: "/account",
           element: (
             <Suspense fallback={<Loading/>}>
-                <BuyerPage />
+              <OrderDashboard/>
+                {/* <BuyerPage /> */}
             </Suspense>
           )
         }

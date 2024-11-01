@@ -35,6 +35,26 @@ orderRouter.post('/', async (req, res) => {
   }
 });
 
+
+
+// orderRouter.get("/user/all", async (req, res) => {
+//   const user_id = req.session.user_sid
+  
+//   try {
+//     const orders = await Order.findAll({
+//       where: { user_id },
+//       attributes: ['uuid_order', 'createdAt'],
+//     });
+//     console.log('my user order', orders);
+//     res.json(orders);
+//     console.log('my user order',orders);
+//     res.json(orders);
+//   } catch (error) {
+//     res.status(500).json({ error: "Ошибка получения списка" });
+//   }
+// });
+
+
 orderRouter.get("/user/", async (req, res) => {
   const user_id = req.session.user_sid
   
