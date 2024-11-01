@@ -38,11 +38,11 @@ app.use('/api/userInfo', userInfoRouter)
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.mail.ru',
-  port: 465, // Порт для SSL
-  secure: true, // true для порта 465, false для других портов
+  port: 465, 
+  secure: true, 
   auth: {
-    user: process.env.EMAIL_USER, // ваш email на Mail.ru
-    pass: process.env.EMAIL_PASS, // ваш пароль
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS, 
   },
 });
 
@@ -51,14 +51,14 @@ app.post('/api/send-order', (req, res) => {
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER, // Замените на адрес клиента, если он доступен
+    to: process.env.EMAIL_USER, 
     subject: 'Order Confirmation',
     text: `New Order Details:\n\nUser: ${user.firstName} ${user.lastName}\nPhone: ${user.phone}\nCity: ${user.city}\nAddress: ${user.address}\n\nOrder Items:\n${JSON.stringify(cart, null, 2)}\nTotal: ${total} р.`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error("Error sending email:", error); // Добавьте логирование ошибки
+      console.error("Error sending email:", error); 
       return res.status(500).send(error.toString());
     }
     res.status(200).send('Email sent: ' + info.response);
