@@ -19,14 +19,12 @@
     
     html,
     body {
-      height: 100vh;
-      /* font-size: 1.1rem; */
-  min-height: 100vh;
+
   background: rgb(255, 255, 255);
   font-style: normal;
   font-weight: 400;
   overflow-x: hidden;
 }
 .buyerContainer {
-  min-height: 80vh;
+  /* min-height: 80vh; */
 }

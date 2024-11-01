@@ -18,7 +18,7 @@ export default function ShopItem() {
   const [plant, setPlant] = useState<Plant | null>(null);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const [quantity, setQuantity] = useState(0)
+  const [quantity, setQuantity] = useState(1)
   const {handleAddtoCartCounter} = useCart()   
 
   useEffect(() => {

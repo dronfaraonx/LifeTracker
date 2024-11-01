@@ -14,7 +14,7 @@ const MainPage = () => {
   return (
      <Box
         sx={{
-          height: "calc(100vh - 10vh - 9vh)",
+          // height: "calc(100vh - 10vh - 10vh)",
           position: "relative",
           width: "100vw",
           overflow: "hidden",
@@ -40,7 +40,7 @@ const MainPage = () => {
             transform: "translate(-50%, -50%)",
             textAlign: "center",
             color: "white",
-            padding: "20px",
+            // padding: "20px",
           }}
         >
           <Typography variant="h5" sx={{ fontFamily: "Roboto, sans-serif" }}>

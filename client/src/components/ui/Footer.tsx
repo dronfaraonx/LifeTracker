@@ -8,7 +8,7 @@ export const Footer: FC = (): ReactElement => {
     <Box
       sx={{
          width: "100%",
-        height: "10vh",
+        // height: "10vh",
         backgroundColor: "#00ab84",
         border: "1px solid black",
         // paddingTop: "1rem",

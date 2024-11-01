@@ -22,7 +22,7 @@ body {
 
 .sidebar .filter-select,
 .sidebar .price-slider {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   width: 200px;
 }
 
