@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TextField, Typography, Box, Grid } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "../../../context/auth";
@@ -7,35 +7,61 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const OrderForm = ({ cart, onClose }) => {
-  const {user} =useUser()
+  const { user } = useUser();
   const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("")
+  const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
 
-const handleOrderSubmit = async () => {
-  const uuid_order = uuidv4().slice(0, 8);
-  const userInfo = {
-    id: user.id, name: user.name, firstName: name, lastName, phone, city, address}
-  
-  const cartItems = cart.map((cartItem) => ({
-    user_id: user.id,
-    plant_id: cartItem.id,
-    uuid_order: uuid_order,
-    quantity: cartItem.quantity,
-    pricePurchanse: cartItem.price,
-  }));
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/userInfo/${user.id}`, {
+          withCredentials: true,
+        });
+        if (response.data) {
+          setName(response.data.firstName);
+          setLastName(response.data.lastName);
+          setPhone(response.data.phone);
+          setCity(response.data.city);
+          setAddress(response.data.address);
+        }
+      } catch (error) {
+        console.error("Ошибка при получении информации о пользователе:", error);
+      }
+    };
 
-  try {
-  await axios.post(`${API_URL}/api/orders`,  {cartItems}, { withCredentials: true });
-  await axios.post(`${API_URL}/api/userInfo`, userInfo, { withCredentials: true })
-    onClose();
+    fetchUserInfo();
+  }, [user.id]);
 
-  } catch (error) {
-    console.error("Ошибка создания заказа", error);
-  }
-};
+  const handleOrderSubmit = async () => {
+    const uuid_order = uuidv4().slice(0, 8);
+    const userInfo = {
+      id: user.id,
+      firstName: name,
+      lastName,
+      phone,
+      city,
+      address,
+    };
+
+    const cartItems = cart.map((cartItem) => ({
+      user_id: user.id,
+      plant_id: cartItem.id,
+      uuid_order: uuid_order,
+      quantity: cartItem.quantity,
+      pricePurchanse: cartItem.price,
+    }));
+
+    try {
+      await axios.post(`${API_URL}/api/orders`, { cartItems }, { withCredentials: true });
+      await axios.post(`${API_URL}/api/userInfo`, userInfo, { withCredentials: true });
+      onClose();
+    } catch (error) {
+      console.error("Ошибка создания заказа", error);
+    }
+  };
 
   return (
     <Box sx={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
@@ -57,7 +83,7 @@ const handleOrderSubmit = async () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "8px",
-                height: "40px", 
+                height: "40px",
               },
               "& .MuiInputBase-input": {
                 padding: "10px",
@@ -65,7 +91,7 @@ const handleOrderSubmit = async () => {
             }}
           />
         </Grid>
-         <Grid item xs={4}>
+        <Grid item xs={4}>
           <Typography>Фамилия</Typography>
         </Grid>
         <Grid item xs={8}>
@@ -78,7 +104,7 @@ const handleOrderSubmit = async () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "8px",
-                height: "40px", 
+                height: "40px",
               },
               "& .MuiInputBase-input": {
                 padding: "10px",
@@ -86,7 +112,6 @@ const handleOrderSubmit = async () => {
             }}
           />
         </Grid>
-
         <Grid item xs={4}>
           <Typography>Контактный телефон</Typography>
         </Grid>
@@ -136,7 +161,6 @@ const handleOrderSubmit = async () => {
             }}
           />
         </Grid>
-
         <Grid item xs={4}>
           <Typography>Адрес</Typography>
         </Grid>
