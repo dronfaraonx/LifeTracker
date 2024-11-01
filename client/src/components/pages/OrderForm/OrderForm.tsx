@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ThankYouModal from "./ThankyouModal/ThankYouModal"; 
 
 import { Button, TextField, Typography, Box, Grid } from "@mui/material";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { useUser } from "../../../context/auth";
 import axios from "axios";
 import { useCart } from "../../../context/CountCart";
@@ -43,7 +43,6 @@ const OrderForm = ({ cart, onClose }) => {
   }, [user.id]);
 
   const handleOrderSubmit = async () => {
-    const uuid_order = uuidv4().slice(0, 8);
     const userInfo = {
       id: user.id,
       firstName: name,
@@ -56,7 +55,6 @@ const OrderForm = ({ cart, onClose }) => {
     const cartItems = cart.map((cartItem) => ({
       user_id: user.id,
       plant_id: cartItem.id,
-      uuid_order: uuid_order,
       quantity: cartItem.quantity,
       pricePurchanse: cartItem.price,
     }));
