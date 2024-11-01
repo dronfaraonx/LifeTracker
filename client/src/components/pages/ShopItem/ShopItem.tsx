@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';
+import { Button} from '@mui/material';
 import { useUser } from '../../../context/auth';
 import SignupModal from '../Authorization/modal/SignUpModal';
 import { useCart } from '../../../context/CountCart';
@@ -18,7 +18,7 @@ export default function ShopItem() {
   const [plant, setPlant] = useState<Plant | null>(null);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(0)
   const {handleAddtoCartCounter} = useCart()   
 
   useEffect(() => {

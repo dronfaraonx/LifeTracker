@@ -1,17 +1,39 @@
 import React, { useState } from "react";
 import { Button, TextField, Typography, Box, Grid } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
+import { useUser } from "../../../context/auth";
+import axios from "axios";
 
-const OrderForm = ({ onClose }) => {
+const API_URL = import.meta.env.VITE_API_URL;
+
+const OrderForm = ({ cart, onClose }) => {
+  const {user} =useUser()
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
 
-  const handleOrderSubmit = () => {
-    console.log("Данные заказа:", { name, phone, email, city, address });
+const handleOrderSubmit = async () => {
+  const uuid_order = uuidv4();
+  
+  const cartItems = cart.map((cartItem) => ({
+    user_id: user.id,
+    plant_id: cartItem.id,
+    uuid_order: uuid_order,
+    quantity: cartItem.quantity,
+    pricePurchanse: cartItem.price,
+  }));
+
+  try {
+  await axios.post(`${API_URL}/api/orders`,  {cartItems}, { withCredentials: true });
     onClose();
-  };
+  } catch (error) {
+    console.error("Ошибка создания заказа", error);
+  }
+};
+
+
 
   return (
     <Box sx={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
