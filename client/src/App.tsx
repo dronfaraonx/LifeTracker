@@ -94,7 +94,14 @@ function App() {
           element: (
             <Suspense fallback={<Loading/>}>
               <OrderDashboard/>
-                {/* <BuyerPage /> */}
+            </Suspense>
+          )
+        },
+         {
+          path: "/order-details/:uuid_order",
+          element: (
+            <Suspense fallback={<Loading/>}>
+                <BuyerPage />
             </Suspense>
           )
         }

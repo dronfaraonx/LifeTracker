@@ -8,7 +8,7 @@ authRouter.get("/check-session", (req, res) => {
   
   if (req.session.user_sid) {
     const {user} = res.locals;
-    console.log(user);
+    // console.log(user);
 
     res.status(200).json({ user });
     
@@ -24,7 +24,8 @@ authRouter.post("/signup", async (req, res) => {
       return res.status(400).json({ message: "Passwords do not match." });
     }
     if (!name || !email || !password) {
-      return res.status(400).json({ message: "Please fill out all fields." });
+      console.log('not a user');
+      return res.json({ message: "Please fill out all fields." });
     }
 
     const hashpass = await bcrypt.hash(password, 10);
