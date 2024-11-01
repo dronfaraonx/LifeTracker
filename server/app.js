@@ -1,6 +1,8 @@
 // const app = require("./app")
 const express = require('express');
+const nodemailer = require('nodemailer');
 require('dotenv').config()
+const { db } = require('../server/db/models/order');
 
 const authRouter = require('./src/routes/auth.routes')
 const shopRouter = require('./src/routes/shop.routes')
@@ -34,6 +36,34 @@ app.use('/api/cart', cartRouter)
 app.use('/api/orders', orderRouter)
 app.use('/api/userInfo', userInfoRouter)
 
+const transporter = nodemailer.createTransport({
+  host: 'smtp.mail.ru',
+  port: 465, // Порт для SSL
+  secure: true, // true для порта 465, false для других портов
+  auth: {
+    user: process.env.EMAIL_USER, // ваш email на Mail.ru
+    pass: process.env.EMAIL_PASS, // ваш пароль
+  },
+});
+
+app.post('/api/send-order', (req, res) => {
+  const { cart, total, user } = req.body;
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER, // Замените на адрес клиента, если он доступен
+    subject: 'Order Confirmation',
+    text: `New Order Details:\n\nUser: ${user.firstName} ${user.lastName}\nPhone: ${user.phone}\nCity: ${user.city}\nAddress: ${user.address}\n\nOrder Items:\n${JSON.stringify(cart, null, 2)}\nTotal: ${total} р.`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error sending email:", error); // Добавьте логирование ошибки
+      return res.status(500).send(error.toString());
+    }
+    res.status(200).send('Email sent: ' + info.response);
+  });
+});
 
 
 
