@@ -57,8 +57,8 @@ const MainPage = () => {
               variant="contained"
               sx={{
                 marginTop: "10px",
-                backgroundColor: "green",
-                color: "white",
+                backgroundColor: "#00ab84",
+                color: "black",
               }}
             >
               Перейти в магазин

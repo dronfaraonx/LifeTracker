@@ -87,8 +87,7 @@ export default function ShopItem() {
             className="add-to-cart-button"
             onClick={user ? handleAddToCart : handleModelRegOpen}
             disabled={loading}
-            sx={{ backgroundColor: "green", color: "white", size: ""}}
-
+            sx={{ backgroundColor: "#00ab84", color: "black"}}
           >
             В корзину
           </Button>

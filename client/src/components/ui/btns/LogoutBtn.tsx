@@ -3,17 +3,21 @@ import { useUser } from '../../../context/auth';
 import { ListItemIcon, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Logout from '@mui/icons-material/Logout';
+import { useCart } from '../../../context/CountCart';
 
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const LogoutButton: React.FC = () => {
   const { setUser } = useUser();
+  const {eraseCartCounter} = useCart()
+
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate(); 
 
   const handleLogout = async (): Promise<void> => {
     setIsLoading(true);
+    eraseCartCounter()
 
     try {
       const response = await fetch(`${API_URL}/api/auth/logout`, {

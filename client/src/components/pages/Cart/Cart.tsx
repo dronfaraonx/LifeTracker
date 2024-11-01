@@ -196,9 +196,9 @@ const handleRemove = async (plantId: number) => {
                     sx={{
                       borderRadius: "5px 0 0 5px",
                       padding: "0 5px", 
-                      color: "white",
+                      color: "black",
                       minWidth: "30px", 
-                      backgroundColor: "green", 
+                      backgroundColor: "#00ab84", 
                       "&:hover": {
                         backgroundColor: "darkgreen", 
                       },
@@ -230,9 +230,9 @@ const handleRemove = async (plantId: number) => {
                     sx={{
                       borderRadius: "0 5px 5px 0",
                       padding: "0 5px", 
-                      color: "white",
+                      color: "black",
                       minWidth: "30px", 
-                      backgroundColor: "green", 
+                      backgroundColor: "#00ab84", 
                       "&:hover": {
                         backgroundColor: "darkgreen", 
                       },
@@ -252,7 +252,7 @@ const handleRemove = async (plantId: number) => {
                   position: "absolute",
                   top: 8,
                   right: 8,
-                  color: "#ff4d4d",
+                  color: "black",
                 }}
               >
                 <CloseIcon />
@@ -275,9 +275,12 @@ const handleRemove = async (plantId: number) => {
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: "green",
-                  color: "white",
+                  backgroundColor: "#00ab84",
+                  color: "black",
                   marginBottom: "20px",
+                  "&:hover": {
+                        backgroundColor: "darkgreen", 
+                      },
                 }}
                 onClick={() => setShowOrderForm(true)}
               >

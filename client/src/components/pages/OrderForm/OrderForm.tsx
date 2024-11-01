@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
+import ThankYouModal from "./ThankyouModal/ThankYouModal"; 
+
 import { Button, TextField, Typography, Box, Grid } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "../../../context/auth";
 import axios from "axios";
+import { useCart } from "../../../context/CountCart";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const OrderForm = ({ cart, onClose }) => {
   const { user } = useUser();
+  const {eraseCartCounter} = useCart()
+
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
-
+  
+  const [thankyou, setThankYou] = useState(false);
+  
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -57,7 +64,8 @@ const OrderForm = ({ cart, onClose }) => {
     try {
       await axios.post(`${API_URL}/api/orders`, { cartItems }, { withCredentials: true });
       await axios.post(`${API_URL}/api/userInfo`, userInfo, { withCredentials: true });
-      onClose();
+      eraseCartCounter()
+      setThankYou(true)
     } catch (error) {
       console.error("Ошибка создания заказа", error);
     }
@@ -186,12 +194,18 @@ const OrderForm = ({ cart, onClose }) => {
 
       <Button
         variant="contained"
-        sx={{ backgroundColor: "green", color: "white", marginTop: "20px" }}
+        sx={{ backgroundColor: "#00ab84", color: "white", marginTop: "20px" }}
         fullWidth
         onClick={handleOrderSubmit}
       >
         Подтвердить заказ
       </Button>
+
+       <ThankYouModal
+        open={thankyou}
+        onClose={() => setThankYou(false)}
+      />
+        
       <Button
         variant="outlined"
         sx={{ color: "black", marginTop: "10px" }}
