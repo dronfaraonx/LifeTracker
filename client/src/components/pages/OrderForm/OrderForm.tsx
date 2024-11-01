@@ -60,14 +60,35 @@ const OrderForm = ({ cart, onClose }) => {
     }));
 
     try {
-      await axios.post(`${API_URL}/api/orders`, { cartItems }, { withCredentials: true });
-      await axios.post(`${API_URL}/api/userInfo`, userInfo, { withCredentials: true });
-      eraseCartCounter()
-      setThankYou(true)
+
+      await axios.post(`${API_URL}/api/orders`, { cartItems }, { withCredentials: true })
+        .catch(error => console.error("Ошибка отправки заказа:", error));
+
+   
+      await axios.post(`${API_URL}/api/userInfo`, userInfo, { withCredentials: true })
+        .catch(error => console.error("Ошибка обновления информации о пользователе:", error));
+
+ 
+      await axios.post(`${API_URL}/api/send-order`, {
+        cart: cartItems,
+        total: calculateTotal(cartItems),
+        user: userInfo,
+      }).then(() => {
+        eraseCartCounter();
+        setThankYou(true);
+      }).catch(error => console.error("Ошибка отправки подтверждения заказа:", error));
+      
     } catch (error) {
-      console.error("Ошибка создания заказа", error);
+      console.error("Ошибка создания заказа:", error);
     }
   };
+
+  const calculateTotal = (cartItems) => {
+    return cartItems.reduce((total, item) => {
+      return total + (item.pricePurchanse * item.quantity);
+    }, 0);
+  };
+
 
   return (
     <Box sx={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
