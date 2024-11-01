@@ -35,18 +35,17 @@ orderRouter.post('/', async (req, res) => {
   }
 });
 
+
+
+
+
 orderRouter.get("/user/", async (req, res) => {
   const user_id = req.session.user_sid
   
   try {
     const orders = await Order.findAll({
       where: { user_id },
-      include: [
-        {
-          model: Plant,
-          attributes: ['name', 'photo'],
-        },
-      ],
+      attributes: ['uuid_order', 'createdAt'],
     });
     console.log('my user order',orders);
     res.json(orders);
@@ -55,4 +54,27 @@ orderRouter.get("/user/", async (req, res) => {
   }
 });
 
+orderRouter.get("/order-details/:uuid_order", async (req, res) => {
+  // const user_id = req.session.user_sid
+  const {uuid_order} = req.params
+  console.log('this is my uuid_order', uuid_order);
+  
+  try {
+    const orders = await Order.findAll({
+       where: { uuid_order },
+      include: [
+        {
+          model: Plant,
+          attributes: ['name', 'photo', 'type'],
+        },
+      ],
+    });
+     if (orders.length === 0) {
+      return res.status(404).json({ error: "Заказ не найден." });
+    }
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: "Ошибка получения списка" });
+  }
+});
 module.exports = orderRouter;
