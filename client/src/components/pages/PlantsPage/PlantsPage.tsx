@@ -1,19 +1,19 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import CloneCard from '../CloneCard/CloneCard';
-import '../SeedCard/plant.css';
+import '../ShopList/plant.css';
 import { Select, MenuItem, Typography, Box, InputLabel, FormControl } from '@mui/material';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export default function SeedPage() {
+export default function ShopList() {
   const [plants, setPlants] = useState([]);
   const [plantType, setPlantType] = useState('');
 
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/seeds`);
+        const response = await axios.get(`${API_URL}/api/allplants`);
         setPlants(response.data);
       } catch (error) {
         console.error('Ошибка при загрузке растений:', error);
@@ -31,15 +31,15 @@ export default function SeedPage() {
 
   return (
     <Box display="flex">
-      <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black', minHeight: "calc(100vh - 10vh - 7vh)"}}>
+      <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
-          <InputLabel id="type-select-label">Тип семян</InputLabel>
+          <InputLabel id="type-select-label">Тип растений</InputLabel>
           <Select
             labelId="type-select-label"
             value={plantType}
-            label="Тип семян"
+            label="Тип растения"
             onChange={(e) => setPlantType(e.target.value)}
           >
             <MenuItem value="">Все типы</MenuItem>
