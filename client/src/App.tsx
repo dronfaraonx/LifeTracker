@@ -14,10 +14,12 @@ const Cart = React.lazy(() => import('./components/pages/Cart/Cart'));
 const BuyerPage = React.lazy(() => import('./components/pages/BuyerPage/BuyerPage'));
 const ClonesPage = React.lazy(() => import('./components/pages/ClonesPage/ClonesPage'))
 const OrderDashboard = React.lazy(() => import('./components/pages/BuyerPage/OrderDashboard'))
+const PlantsPage = React.lazy(() => import('./components/pages/PlantsPage/PlantsPage'))
+const SeedPage = React.lazy(() => import('./components/pages/SeedPage/SeedPage'))
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
-import SeedPage from './components/pages/SeedPage/SeedPage';
+
 
 
 function App() {
@@ -70,6 +72,14 @@ function App() {
           element: (
             <Suspense fallback={<Loading />}>
               <SeedPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/allplants",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <PlantsPage />
             </Suspense>
           ),
         },

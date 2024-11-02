@@ -31,13 +31,13 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { cartCounter } = useCart();
 
-  const handleClick = () => {
-    setOpen(true);
-  };
+  // const handleClick = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   const handleLogoClick = () => {
     navigate("/");
@@ -45,6 +45,10 @@ export default function Navbar() {
 
   const handleCartClick = () => {
     navigate(`/cart/${user.id}`);
+  };
+
+  const handlePlantsClick = () => {
+    navigate(`/allplants`);
   };
 
   const handleClonesClick = () => {
@@ -105,7 +109,7 @@ export default function Navbar() {
                 }}
                 onClick={
                   index === 0
-                    ? handleClick
+                    ? handlePlantsClick 
                     : index === 1
                     ? handleClonesClick
                     : index === 2
@@ -184,7 +188,7 @@ export default function Navbar() {
           </Box>
         </Toolbar>
 
-        <Dialog
+        {/* <Dialog
           open={open}
           onClose={handleClose}
           PaperProps={{
@@ -227,7 +231,7 @@ export default function Navbar() {
               </Link>
             </Box>
           </DialogContent>
-        </Dialog>
+        </Dialog> */}
       </AppBar>
     </nav>
   );

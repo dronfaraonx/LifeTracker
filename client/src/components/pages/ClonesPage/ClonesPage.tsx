@@ -39,7 +39,7 @@ export default function ShopList() {
           <Select
             labelId="type-select-label"
             value={plantType}
-            label="Тип растения"
+            label="Тип клонов"
             onChange={(e) => setPlantType(e.target.value)}
           >
             <MenuItem value="">Все типы</MenuItem>
