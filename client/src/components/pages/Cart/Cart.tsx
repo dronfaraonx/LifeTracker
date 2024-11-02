@@ -37,28 +37,33 @@ export default function Cart() {
   }, [user?.id]);
 
 
-  const handleRemove = async (plantId: number) => {
-    try {
-      const cartPlant = cart.find((item) => item.id === plantId);
-      if (!cartPlant) return;
+const handleRemove = async (plantId: number) => {
+  try {
+    const cartPlant = cart.find((item) => item.id === plantId);
+    if (!cartPlant) return;
 
-      await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
-      setCart((prevCart) => prevCart.filter((item) => item.id !== plantId));
+    await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
+    setCart((prevCart) => prevCart.filter((item) => item.id !== plantId));
 
-      handleRemoveFromCartCounter(cartPlant.quantity);
-    } catch (error) {
-      console.log("Ошибка при удалении растения из корзины", error);
-    }
-  };
+    handleRemoveFromCartCounter(cartPlant.quantity);
+  } catch (error) {
+    console.log("Ошибка при удалении растения из корзины", error);
+  }
+};
+
+
 
   const handleQuantityChange = async (plantId, change) => {
+    
     try {
       const cartPlant = cart.find((item) => item.id === plantId);
       if (!cartPlant) return;
+      
 
       const newQuantity = Number(cartPlant.quantity) + Number(change);
-      if (newQuantity < 1) return;
+      if (newQuantity < 1) return; 
 
+     
       await axios.put(`${API_URL}/api/cart/${user.id}/plant/${plantId}`, {
         quantity: newQuantity,
       });
@@ -77,7 +82,7 @@ export default function Cart() {
     return cart.reduce((total, cartPlant) => {
       const price = parseFloat(cartPlant.price) || 0;
       const quantity = cartPlant.quantity || 0;
-      console.log("cartQuantity: ", quantity);
+      console.log('cartQuantity: ', quantity)
       return total + price * quantity;
     }, 0);
   };
@@ -105,38 +110,23 @@ export default function Cart() {
         Корзина
       </Typography>
 
-        <Box sx={{ display: "flex", gap: "10px" }}>
-          {showOrderForm && cart.length > 0 && (
-            <Box
-              sx={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                gap: "5px",
-              }}
-            >
-              <Typography
-                variant="body1"
-                color="text.secondary"
-                align="center"
-                sx={{
-                  marginBottom: "20px",
-                  backgroundColor: "#f9f9f9",
-                  padding: "10px",
-                  borderRadius: "5px",
-                  border: "1px solid #e0e0e0",
-                }}
-              >
-                Проверка заказа. Проверьте, пожалуйста, еще раз комплектацию
-                Вашего заказа. При необходимости измените ваш заказ.
-              </Typography>
-              <CheckoutForm
-                cart={cart}
-                total={total}
-                onClose={() => setShowOrderForm(false)}
-              />
-            </Box>
-          )}
+      {showOrderForm && cart.length > 0 && (
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          align="center"
+          sx={{
+            marginBottom: "20px",
+            backgroundColor: "#f9f9f9",
+            padding: "10px",
+            borderRadius: "5px",
+            border: "1px solid #e0e0e0",
+          }}
+        >
+          Проверка заказа. Проверьте, пожалуйста, еще раз комплектацию Вашего
+          заказа. При необходимости измените ваш заказ.
+        </Typography>
+      )}
 
       <Box sx={{ marginBottom: "20px" }}>
         <Stack spacing={2} alignItems="center">
@@ -220,18 +210,17 @@ export default function Cart() {
                     -
                   </Button>
 
-                      <Typography
-                        sx={{
-                          margin: "0 5px",
-                          fontSize: "0.875rem",
-                          color: "black",
-                          width: "30px",
-                          textAlign: "center",
-                        }}
-                      >
-                        {cart.find((item) => item.id === cartPlant.id)
-                          ?.quantity || 0}
-                      </Typography>
+                  <Typography
+                    sx={{
+                      margin: "0 5px", 
+                      fontSize: "0.875rem", 
+                      color: "black",
+                      width: "30px", 
+                      textAlign: "center", 
+                    }}
+                  >
+          {cart.find((item) => item.id === cartPlant.id)?.quantity || 0}
+                  </Typography>
 
                   <Button
                     variant="contained"
