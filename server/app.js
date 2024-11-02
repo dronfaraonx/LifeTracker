@@ -13,6 +13,7 @@ const clonesRouter = require('./src/routes/clones.routes');
 const cartRouter = require('./src/routes/cart.routes')
 const orderRouter = require('./src/routes/order.routes');
 const userInfoRouter = require('./src/routes/userInfo.routes');
+const passwordRouter = require('./src/routes/password.routes');
 // const userSession = require('./src/middleware/getUser');
 
 const app = express();
@@ -35,6 +36,7 @@ app.use('/api/allclones', clonesRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/orders', orderRouter)
 app.use('/api/userInfo', userInfoRouter)
+app.use('/api/passwordUpdate', passwordRouter)
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.mail.ru',

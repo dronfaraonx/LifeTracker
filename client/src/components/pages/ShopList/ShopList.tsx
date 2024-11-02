@@ -59,7 +59,8 @@ export default function ShopList() {
     const matchesLight = lightRequirement ? plant.light === lightRequirement : true;
 
     return matchesType && matchesCategory && matchesPrice && matchesSize && matchesLight;
-  });useEffect(() => {
+  });
+  useEffect(() => {
   const fetchPlants = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/plants`);
