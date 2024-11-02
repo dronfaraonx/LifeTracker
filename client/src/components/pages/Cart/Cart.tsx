@@ -260,12 +260,13 @@ const handleRemove = async (plantId: number) => {
             </Card>
           ))}
         </Stack>
-
+{cart.length > 0 ? (
         <Box sx={{ textAlign: "center", marginTop: "20px" }}>
           <Typography variant="h6">
             Итого к оплате: {total ? `${total.toFixed(2)}р.` : "0р."}
           </Typography>
-        </Box>
+        </Box>) :
+         null}
       </Box>
 
       {cart.length > 0 ? (

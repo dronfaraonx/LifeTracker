@@ -78,7 +78,7 @@ cartRouter.get('/:id', async (req, res) => {
       photo: item.Plant.photo,
       type: item.Plant.type
     }));
-    console.log(formatedCartData);
+    // console.log(formatedCartData);
     res.status(200).json(formatedCartData);
   } catch (error) {
     console.error(error);

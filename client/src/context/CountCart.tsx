@@ -33,9 +33,9 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
           const totalQuantity = response.data.reduce((total, oneItem) => total + oneItem.quantity, 0);
           
           setCartCounter(totalQuantity);
+          
           localStorage.setItem(`cartCount_${user.id}`, totalQuantity.toString());
 
-          console.log('Fetched cart quantities: ', response.data);
         } catch (error) {
           console.error("Ошибка при получении корзины:", error);
         }

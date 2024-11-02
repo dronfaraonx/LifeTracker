@@ -83,41 +83,39 @@ export default function Navbar() {
         <Toolbar
           sx={{ justifyContent: "space-between", background: "#00ab84", fontSize: "1rem" }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-              color: "black",
-            }}
-          >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2, color: "black" }}>
             <img
               src="/LOGO circle.png"
               alt="Logo"
-              style={{ height: 70, cursor: "pointer"}}
+              style={{ height: 70, cursor: "pointer" }}
               onClick={handleLogoClick}
             />
-            <Typography
-              variant="body1"
-              className="header-link"
-              style={{ cursor: "pointer",  fontSize:'1.3rem'}}
-
-              sx={{
-                cursor: "pointer",
-              }}
-              onClick={handleClick}
-            >
-              Растения
-            </Typography>
-            <Typography className="header-link" variant="body1"  onClick={handleClonesClick} style={{ cursor: "pointer" ,fontSize:'1.3rem'}}>
-              Клоны
-            </Typography>
-            <Typography className="header-link" variant="body1" onClick={handleSeedsClick} style={{ cursor: "pointer", fontSize:'1.3rem' }}>
-              Семена
-            </Typography>
-            <Typography className="header-link" variant="body1" style={{ cursor: "pointer", fontSize:'1.3rem' }}>
-              Оплата и доставка
-            </Typography>
+            {["Растения", "Клоны", "Семена", "Оплата и доставка"].map((text, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                className="header-link"
+                style={{
+                  cursor: "pointer",
+                  fontSize: "1.3rem",
+                  transition: "color 0.3s",
+                }}
+                sx={{
+                  "&:hover": { color: "#ffffff" },
+                }}
+                onClick={
+                  index === 0
+                    ? handleClick
+                    : index === 1
+                    ? handleClonesClick
+                    : index === 2
+                    ? handleSeedsClick
+                    : null
+                }
+              >
+                {text}
+              </Typography>
+            ))}
           </Box>
 
           <Box
