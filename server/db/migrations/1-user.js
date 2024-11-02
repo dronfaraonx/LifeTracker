@@ -41,6 +41,15 @@ module.exports = {
       address: {
         type: Sequelize.STRING
       },
+      house: {
+        type: Sequelize.STRING
+      },
+      apartment: {
+        type: Sequelize.STRING
+      },
+      zip: {
+        type: Sequelize.STRING
+      },
       wishList_id: {
         type: Sequelize.INTEGER
       },

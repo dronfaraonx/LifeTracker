@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Plant.init({
     name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    photo: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    photo: DataTypes.TEXT,
     price: DataTypes.INTEGER,
     seller_id: DataTypes.INTEGER,
     category_id: DataTypes.INTEGER,
