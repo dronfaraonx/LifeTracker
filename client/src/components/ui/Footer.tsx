@@ -5,10 +5,11 @@ import { Instagram, Telegram, WhatsApp } from "@mui/icons-material";
 
 export const Footer: FC = (): ReactElement => {
   return (
+    <div className="footer">
     <Box
       sx={{
          width: "100%",
-        height: "10vh",
+        // height: "10vh",
         backgroundColor: "#00ab84",
         border: "1px solid black",
         // paddingTop: "1rem",
@@ -93,6 +94,7 @@ export const Footer: FC = (): ReactElement => {
         </Box>
       </Container>
     </Box>
+    </div>
   );
 };
 

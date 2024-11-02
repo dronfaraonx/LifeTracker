@@ -58,26 +58,14 @@ const OrderForm = ({ cart, onClose }) => {
       quantity: cartItem.quantity,
       pricePurchanse: cartItem.price,
     }));
-
+    console.log(cartItems);
+    
     try {
-
-      await axios.post(`${API_URL}/api/orders`, { cartItems }, { withCredentials: true })
-        .catch(error => console.error("Ошибка отправки заказа:", error));
-
-   
-      await axios.post(`${API_URL}/api/userInfo`, userInfo, { withCredentials: true })
-        .catch(error => console.error("Ошибка обновления информации о пользователе:", error));
-
- 
-      await axios.post(`${API_URL}/api/send-order`, {
-        cart: cartItems,
-        total: calculateTotal(cartItems),
-        user: userInfo,
-      }).then(() => {
-        eraseCartCounter();
-        setThankYou(true);
-      }).catch(error => console.error("Ошибка отправки подтверждения заказа:", error));
-      
+        const orderResponse = await axios.post(`${API_URL}/api/orders`,  {cartItems}, { withCredentials: true });
+          console.log('Order created successfully:', orderResponse.data);
+         await axios.post(`${API_URL}/api/userInfo`, userInfo, { withCredentials: true });
+         eraseCartCounter()
+      setThankYou(true)
     } catch (error) {
       console.error("Ошибка создания заказа:", error);
     }

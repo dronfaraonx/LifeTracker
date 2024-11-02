@@ -19,9 +19,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Cart() {
   const { user } = useUser();
-  const { handleAddToCartCounter } = useCart();
+  const { handleAddtoCartCounter, handleRemoveFromCartCounter} = useCart()
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
+
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -35,7 +36,6 @@ export default function Cart() {
     fetchCart();
   }, [user?.id]);
 
-  const { handleRemoveFromCartCounter } = useCart();
 
   const handleRemove = async (plantId: number) => {
     try {
@@ -65,9 +65,9 @@ export default function Cart() {
       const updateQuantity = (prevCart) =>
         prevCart.map((item) =>
           item.id === plantId ? { ...item, quantity: newQuantity } : item
-        );
-      setCart(updateQuantity);
-      handleAddToCartCounter(change);
+    )
+    setCart( updateQuantity);
+    handleAddtoCartCounter(change);
     } catch (error) {
       console.log("Ошибка при обновлении количества растения в корзине", error);
     }
@@ -85,25 +85,25 @@ export default function Cart() {
   const total = calculateTotal();
 
   return (
-    <div style={{ minHeight: `calc(100vh - 10vh - 9vh)` }}>
-      <Box
-        sx={{
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          background: "transparent",
-          padding: "20px",
-          // maxWidth: "80vh",
-          margin: "0 auto",
-          borderRadius: "8px",
-        }}
+<div style={{ minHeight: `calc(100vh - 10vh - 7vh)`}}>
+    <Box
+      sx={{
+        position: "relative",
+        display: "flex",
+        flexDirection: 'column',
+        background: "transparent",
+        padding: "20px",
+        maxWidth: "80vh",
+        margin: "0 auto",
+        borderRadius: "8px",
+      }}
+    >
+      <Typography
+        variant="h4"
+        sx={{ textAlign: "center", marginBottom: "20px" }}
       >
-        <Typography
-          variant="h4"
-          sx={{ textAlign: "center", marginBottom: "20px" }}
-        >
-          Корзина
-        </Typography>
+        Корзина
+      </Typography>
 
         <Box sx={{ display: "flex", gap: "10px" }}>
           {showOrderForm && cart.length > 0 && (
@@ -138,86 +138,87 @@ export default function Cart() {
             </Box>
           )}
 
-    
-          <Box sx={{ flex: 2 }}>
-            <Stack spacing={2} alignItems="center">
-              {cart.map((cartPlant) => (
-                <Card
-                  key={cartPlant.id}
+      <Box sx={{ marginBottom: "20px" }}>
+        <Stack spacing={2} alignItems="center">
+          {cart.map((cartPlant) => (
+            <Card
+              key={cartPlant.id}
+              sx={{
+                maxWidth: "60vh",
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                padding: "5px", 
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                position: "relative",
+                height: "100px", 
+              }}
+            >
+              {cartPlant.photo && (
+                <CardMedia
+                  component="img"
                   sx={{
-                    maxWidth: "60vh",
-                    width: "100%",
+                    width: 100, 
+                    height: 80,
+                    objectFit: "fit",
+                    borderRadius: "8px",
+                    marginRight: "10px", 
+                  }}
+                  image={cartPlant.photo}
+                  alt={cartPlant.name}
+                />
+              )}
+              <CardContent sx={{ flex: 1, padding: "5px", width: "20vh"}}>
+                <Typography
+                 
+                  variant="h6"
+                  component="div"
+                  sx={{ fontSize: "1rem", width: "100"}}
+                >
+                  {cartPlant.type} {cartPlant.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Цена:{" "}
+                  {cartPlant.price ? `${cartPlant.price}р.` : "Цена не указана"}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Количество: {cartPlant.quantity || "0"}
+                </Typography>
+                <Box
+                  sx={{
                     display: "flex",
                     alignItems: "center",
-                    padding: "5px",
-                    backgroundColor: "#fff",
-                    borderRadius: "8px",
-                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                    position: "relative",
-                    height: "100px",
+                    marginTop: 1,
+                    backgroundColor: "white",
+                    borderRadius: "5px",
+                    padding: "2px", 
+                    width: "120px", 
                   }}
                 >
-                  {cartPlant.photo && (
-                    <CardMedia
-                      component="img"
-                      sx={{
-                        width: 100,
-                        height: 80,
-                        objectFit: "fit",
-                        borderRadius: "8px",
-                        marginRight: "10px",
-                      }}
-                      image={cartPlant.photo}
-                      alt={cartPlant.name}
-                    />
-                  )}
-                  <CardContent sx={{ flex: 1, padding: "5px", width: "20vh" }}>
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{ fontSize: "1rem", width: "100" }}
-                    >
-                      {cartPlant.type} {cartPlant.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Цена:{" "}
-                      {cartPlant.price
-                        ? `${cartPlant.price}р.`
-                        : "Цена не указана"}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Количество: {cartPlant.quantity || "0"}
-                    </Typography>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginTop: 1,
-                        backgroundColor: "white",
-                        borderRadius: "5px",
-                        padding: "2px",
-                        width: "120px",
-                      }}
-                    >
-                      <Button
-                        variant="contained"
-                        size="small"
-                        onClick={() => handleQuantityChange(cartPlant.id, -1)}
-                        disabled={cartPlant.quantity <= 1}
-                        disableRipple
-                        sx={{
-                          borderRadius: "5px 0 0 5px",
-                          padding: "0 5px",
-                          color: "black",
-                          minWidth: "30px",
-                          backgroundColor: "#00ab84",
-                          "&:hover": {
-                            backgroundColor: "darkgreen",
-                          },
-                        }}
-                      >
-                        -
-                      </Button>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => handleQuantityChange(cartPlant.id, -1)}
+                    disabled={cartPlant.quantity <= 1} 
+                    disableRipple // 
+                    sx={{
+                      borderRadius: "5px 0 0 5px",
+                      padding: "0 5px", 
+                      color: "white",
+                      minWidth: "30px", 
+                      backgroundColor: "green", 
+                      "&:hover": {
+                        backgroundColor: "darkgreen", 
+                      },
+                      "&:active": {
+                        backgroundColor: "darkgreen", 
+                      },
+                    }}
+                  >
+                    -
+                  </Button>
 
                       <Typography
                         sx={{
@@ -232,68 +233,87 @@ export default function Cart() {
                           ?.quantity || 0}
                       </Typography>
 
-                      <Button
-                        variant="contained"
-                        size="small"
-                        onClick={() => handleQuantityChange(cartPlant.id, 1)}
-                        disableRipple
-                        sx={{
-                          borderRadius: "0 5px 5px 0",
-                          padding: "0 5px",
-                          color: "black",
-                          minWidth: "30px",
-                          backgroundColor: "#00ab84",
-                          "&:hover": {
-                            backgroundColor: "darkgreen",
-                          },
-                        }}
-                      >
-                        +
-                      </Button>
-                    </Box>
-                  </CardContent>
-                  <IconButton
-                    onClick={() => handleRemove(cartPlant.id)}
+                  <Button
+                    variant="contained"
                     size="small"
+                    onClick={() => handleQuantityChange(cartPlant.id, 1)}
+                    disableRipple 
                     sx={{
-                      position: "absolute",
-                      top: 8,
-                      right: 8,
-                      color: "black",
+                      borderRadius: "0 5px 5px 0",
+                      padding: "0 5px", 
+                      color: "white",
+                      minWidth: "30px", 
+                      backgroundColor: "green", 
+                      "&:hover": {
+                        backgroundColor: "darkgreen", 
+                      },
+                      "&:active": {
+                        backgroundColor: "darkgreen", 
+                      },
                     }}
                   >
-                    <CloseIcon />
-                  </IconButton>
-                </Card>
-              ))}
-            </Stack>
-
-            <Box sx={{ textAlign: "center", marginTop: "20px" }}>
-              <Typography variant="h6">
-                Итого к оплате: {total ? `${total.toFixed(2)}р.` : "0р."}
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-
-        {!showOrderForm && cart.length > 0 && (
-          <Box sx={{ textAlign: "center", marginTop: "20px" }}>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#00ab84",
-                color: "black",
-                "&:hover": {
-                  backgroundColor: "darkgreen",
-                },
-              }}
-              onClick={() => setShowOrderForm(true)}
-            >
-              Оформить заказ
-            </Button>
-          </Box>
-        )}
+                    +
+                  </Button>
+                </Box>
+              </CardContent>
+              <IconButton
+                onClick={() => handleRemove(cartPlant.id)}
+                size="small"
+                sx={{
+                  position: "absolute",
+                  top: 8,
+                  right: 8,
+                  color: "#ff4d4d",
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </Card>
+          ))}
+        </Stack>
+{cart.length > 0 ? (
+        <Box sx={{ textAlign: "center", marginTop: "20px" }}>
+          <Typography variant="h6">
+            Итого к оплате: {total ? `${total.toFixed(2)}р.` : "0р."}
+          </Typography>
+        </Box>) :
+         null}
       </Box>
+
+      {cart.length > 0 ? (
+        <>
+          {!showOrderForm ? (
+            <Box sx={{ textAlign: "center" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "green",
+                  color: "white",
+                  marginBottom: "20px",
+                }}
+                onClick={() => setShowOrderForm(true)}
+              >
+                Оформить заказ
+              </Button>
+            </Box>
+          ) : (
+            <Box sx={{ marginTop: "20px" }}>
+              <CheckoutForm
+                cart={cart}
+                total={total}
+                onClose={() => setShowOrderForm(false)}
+              />
+            </Box>
+          )}
+        </>
+      ) : (
+        <Box sx={{ textAlign: "center", marginTop: "20px" }}>
+          <Typography variant="body1" color="text.secondary">
+            Корзина пуста. Пожалуйста, добавьте товары для оформления заказа.
+          </Typography>
+        </Box>
+      )}
+    </Box>
     </div>
   );
 }

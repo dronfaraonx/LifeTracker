@@ -1,4 +1,5 @@
 const express = require('express');
+const { Op } = require('sequelize');
 const {Plant, Cart} = require('../../db/models')
 
 const cartRouter = express.Router()
@@ -23,6 +24,32 @@ cartRouter.post('/', async (req, res) => {
   }
 })
 
+cartRouter.get('/check/:id', async (req, res) => {
+  const user_id = req.params.id;
+
+  if (!user_id) {
+    return res.status(401).json({ message: 'Пользователь не авторизован' });
+  }
+
+  try {
+    const cartItems = await Cart.findAll({
+      where: {
+        user_id: user_id 
+      },
+      attributes: ['quantity'],
+    });
+
+    if (cartItems.length === 0) {
+      return res.status(404).json({ message: 'Корзина пуста' });
+    }
+    return res.status(200).json(cartItems);
+  } catch (error) {
+    console.error('Ошибка при получении корзины:', error);
+    return res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
+
 cartRouter.get('/:id', async (req, res) => {
   const user_id = req.params.id;
   // console.log('this is my user_id', user_id);
@@ -39,12 +66,12 @@ cartRouter.get('/:id', async (req, res) => {
       include: [
         {
           model: Plant,
-          attributes: ['name', 'price', 'photo', 'type'],
+          attributes: ['id','name', 'price', 'photo', 'type'],
         },
       ],
     });
     const formatedCartData = cartItems.map(item => ({
-      id: item.id,
+      id: item.Plant.id,
       name: item.Plant.name,
       price: item.Plant.price,
       quantity: item.quantity,
@@ -58,6 +85,23 @@ cartRouter.get('/:id', async (req, res) => {
     res.status(500).json({ message: 'Ошибка получении корзины' });
   }
 });
+
+// cartRouter.get('/quantity', async (req, res) => {
+//   const user_id = req.session.user_sid;
+
+//      try {
+//     const cartQuantity = await Cart.findAll({
+//       where: { user_id },
+//       attributes: ['item_id', 'quantity'] 
+//     });
+
+//     console.log(" Quantity:", cartQuantity);
+//     res.status(200).json({ cartQuantity });
+//   } catch (error) {
+//     console.error("Error fetching cart quantity:", error);
+//     res.status(500).json({ error: "Failed to retrieve cart quantity" });
+//   }
+// });
 
 cartRouter.delete('/:userId/plant/:plantId', async (req, res) => {
   const { userId, plantId } = req.params;

@@ -16,7 +16,7 @@ orderRouter.post('/', async (req, res) => {
   try {
     const orderPromises = cartItems.map((item) =>
       Order.create({
-        user_id: item.user_id,
+        user_id: req.session.user_sid,
         plant_id: item.plant_id,
         uuid_order: uuid_order,
         quantity: item.quantity,
@@ -45,7 +45,7 @@ orderRouter.get("/user/", async (req, res) => {
   try {
     const orders = await Order.findAll({
       where: { user_id },
-      attributes: ['uuid_order', 'createdAt'],
+      attributes: ['user_id','uuid_order', 'createdAt'],
     });
     console.log('my user order',orders);
     res.json(orders);
@@ -55,11 +55,15 @@ orderRouter.get("/user/", async (req, res) => {
 });
 
 orderRouter.get("/order-details/:uuid_order", async (req, res) => {
-  // const user_id = req.session.user_sid
+  const user_id = req.session.user_sid
   const {uuid_order} = req.params
-  console.log('this is my uuid_order', uuid_order);
+
+ if (!user_id) {
+    return res.status(401).json({ error: 'Доступ запрещен' });
+  }
   
   try {
+    
     const orders = await Order.findAll({
        where: { uuid_order },
       include: [
