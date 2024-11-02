@@ -4,8 +4,20 @@ import { useNavigate } from "react-router-dom";
 export default function NavOrder() {
   const navigate = useNavigate();
 
+  const handleDashClick = () => {
+    navigate(`/dashboard`);
+  };
+  
   const handleAccClick = () => {
-    navigate(`/account`);
+    navigate(`/myaccount`);
+  };
+
+  const handleInfoClick = () => {
+    navigate(`/info`);
+  };
+
+  const handleDiscountClick = () => {
+    navigate(`/discounts`);
   };
 
   return (
@@ -19,12 +31,30 @@ export default function NavOrder() {
       }}
     >
       <List>
-        <ListItem button>Мои данные</ListItem>
-        <ListItem button selected onClick={handleAccClick}>
+        <ListItem 
+          button 
+          onClick={handleAccClick}
+        >
+          Мои данные
+        </ListItem>
+        <ListItem 
+          button 
+          onClick={handleDashClick}
+        >
           Мои заказы
         </ListItem>
-        <ListItem button>Полезная информация</ListItem>
-        <ListItem button>Скидки</ListItem>
+        <ListItem 
+          button 
+          onClick={handleInfoClick}
+        >
+          Полезная информация
+        </ListItem>
+        <ListItem 
+          button 
+          onClick={handleDiscountClick}
+        >
+          Скидки
+        </ListItem>
       </List>
     </Box>
   );

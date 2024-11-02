@@ -14,6 +14,7 @@ import axios from "axios";
 import { useUser } from "../../../context/auth";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../ui/Loading";
+import NavOrder from "./NavOrder";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -68,29 +69,12 @@ const OrderDashboard = () => {
 
 
   return (
-    <Box sx={{ display: "flex", minHeight: "80vh", backgroundColor:'#f3fff3', justifyContent: "center",
+    <Box sx={{ display: "flex", minHeight: "84.3vh", backgroundColor:'#f3fff3', justifyContent: "center",
     fontSize: "1.2rem",
     "& .MuiTableCell-root": {
       fontSize: "1.2rem", 
     }}}>
-      <Box
-        sx={{
-          width: 240,
-          bgcolor: "#fff",
-          p: 2,
-          borderRight: "1px solid #ddd",
-          cursor: "pointer",
-        }}
-      >
-        <List>
-          <ListItem button>Мои данные</ListItem>
-          <ListItem button selected>
-            Мои заказы
-          </ListItem>
-          <ListItem button>Полезная информация</ListItem>
-          <ListItem button>Скидки</ListItem>
-        </List>
-      </Box>
+      <NavOrder/> 
 
       {error ? (
         <Typography variant="body1" sx={{ mt: 2, color: "red" }}>

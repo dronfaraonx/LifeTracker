@@ -49,23 +49,12 @@ const BuyerPage = () => {
   }, 0);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        minHeight: "80vh",
-        backgroundColor: "#f3fff3",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          width: "20%",
-          minWidth: "200px",
-          padding: "10px",
-        }}
-      >
-        <NavOrder />
-      </Box>
+   <Box sx={{ display: "flex", minHeight: "84.3vh", backgroundColor:'#f3fff3', justifyContent: "center",
+    fontSize: "1.2rem",
+    "& .MuiTableCell-root": {
+      fontSize: "1.2rem", 
+    }}}>
+      <NavOrder/>
 
       <Box
         sx={{

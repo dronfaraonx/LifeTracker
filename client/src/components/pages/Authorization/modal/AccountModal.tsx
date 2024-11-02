@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function AccountModal({ anchorEl, open, onClose }) {
   const navigate = useNavigate();
   const handleAccClick = () => {
-    navigate('/account');
+    navigate('/dashboard');
   };
   
   return (

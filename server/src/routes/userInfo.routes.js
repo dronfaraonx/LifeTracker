@@ -7,7 +7,7 @@ userInfoRouter.get("/:id", async (req, res) => {
   try {
     const userInfo = await User.findOne({
       where: { id: req.params.id },
-      attributes: ["firstName", "lastName", "phone", "city", "address"],
+      attributes: ["firstName", "email", "lastName", "phone", "city", "address"],
     });
     if (userInfo) {
       res.json(userInfo);
