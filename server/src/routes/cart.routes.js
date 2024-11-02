@@ -59,6 +59,17 @@ cartRouter.get('/:id', async (req, res) => {
   }
 });
 
+cartRouter.get('/quantity', async (req, res) => {
+  const user_id = req.session.user_sid;
+  console.log('my ID: ', user_id);
+  
+  try {
+    const getNumbers = await Cart.findAll({where: user_id})
+  } catch (error) {
+    
+  }
+})
+
 cartRouter.delete('/:userId/plant/:plantId', async (req, res) => {
   const { userId, plantId } = req.params;
 

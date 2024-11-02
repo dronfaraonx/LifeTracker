@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button} from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';
 import { useUser } from '../../../context/auth';
 import SignupModal from '../Authorization/modal/SignUpModal';
 import { useCart } from '../../../context/CountCart';
@@ -67,7 +67,7 @@ export default function ShopItem() {
     return <div>Загрузка...</div>; 
   }
   return ( 
-<div className='itemContainer' style={{height: 'calc(100vh - 10vh - 9vh)'}}>
+<div className='itemContainer' style={{height: 'calc(100vh - 10vh - 10vh)'}}>
     <div className="plant-item">
       <div className='imageBlock'>
         <img 
@@ -87,7 +87,8 @@ export default function ShopItem() {
             className="add-to-cart-button"
             onClick={user ? handleAddToCart : handleModelRegOpen}
             disabled={loading}
-            sx={{ backgroundColor: "#00ab84", color: "black"}}
+            sx={{ backgroundColor: "green", color: "white", size: ""}}
+
           >
             В корзину
           </Button>

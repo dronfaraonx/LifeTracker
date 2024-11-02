@@ -25,17 +25,27 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
   const { user } = useUser();
 
   useEffect(() => {
-    const fetchQuantity = async() => {
-      try {
-        const response = await axios.get(`${API_URL}/api/plants`);
-        const fetchedQuantityData = response.data;
-        // const total = fetchedQuantityData.reduce((acc, plant) => acc + plant.quantity, 0)
-
-      } catch (error) {
-        
+    const fetchQuantity = async () => {
+      if (user?.id) {
+        try {
+          const response = await axios.get(`${API_URL}/api/cart/quantity`, {
+            params: { userId: user.id },
+            withCredentials: true,
+          });
+          const totalQuantity = response.data.totalQuantity;
+          console.log("total Quantity",totalQuantity);
+          
+          // setCartCounter(totalQuantity);
+          // localStorage.setItem(`cartCount_${user.id}`, totalQuantity.toString());
+        } catch (error) {
+          console.error("Ошибка при получении количества товаров в корзине:", error);
+        }
       }
-    }
-  })
+    };
+
+    fetchQuantity();
+  }, [user]);
+
 
   useEffect(() => {
     if (user?.id) {

@@ -19,7 +19,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Cart() {
   const { user } = useUser();
-  const {handleAddToCartCounter} = useCart()
+  const {handleAddtoCartCounter, handleRemoveFromCartCounter} = useCart()
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
 
@@ -35,7 +35,29 @@ export default function Cart() {
     fetchCart();
   }, [user?.id]);
 
-  const { handleRemoveFromCartCounter } = useCart();
+
+    useEffect(() => {
+    const fetchQuantity = async () => {
+      if (user?.id) {
+        try {
+          const response = await axios.get(`${API_URL}/api/cart/quantity`, {
+            params: { userId: user.id },
+            withCredentials: true,
+          });
+          const totalQuantity = response.data.totalQuantity;
+          console.log("total Quantity",totalQuantity);
+          
+          // setCartCounter(totalQuantity);
+          // localStorage.setItem(`cartCount_${user.id}`, totalQuantity.toString());
+        } catch (error) {
+          console.error("Ошибка при получении количества товаров в корзине:", error);
+        }
+      }
+    };
+
+    fetchQuantity();
+  }, [user]);
+
 
 const handleRemove = async (plantId: number) => {
   try {
@@ -72,7 +94,7 @@ const handleRemove = async (plantId: number) => {
           item.id === plantId ? { ...item, quantity: newQuantity } : item
     )
     setCart( updateQuantity);
-    handleAddToCartCounter(change);
+    handleAddtoCartCounter(change);
     } catch (error) {
       console.log("Ошибка при обновлении количества растения в корзине", error);
     }
@@ -90,7 +112,7 @@ const handleRemove = async (plantId: number) => {
   const total = calculateTotal();
 
   return (
-<div style={{ minHeight: `calc(100vh - 10vh - 9vh)`}}>
+<div style={{ minHeight: `calc(100vh - 10vh - 7vh)`}}>
     <Box
       sx={{
         position: "relative",
@@ -196,9 +218,9 @@ const handleRemove = async (plantId: number) => {
                     sx={{
                       borderRadius: "5px 0 0 5px",
                       padding: "0 5px", 
-                      color: "black",
+                      color: "white",
                       minWidth: "30px", 
-                      backgroundColor: "#00ab84", 
+                      backgroundColor: "green", 
                       "&:hover": {
                         backgroundColor: "darkgreen", 
                       },
@@ -230,9 +252,9 @@ const handleRemove = async (plantId: number) => {
                     sx={{
                       borderRadius: "0 5px 5px 0",
                       padding: "0 5px", 
-                      color: "black",
+                      color: "white",
                       minWidth: "30px", 
-                      backgroundColor: "#00ab84", 
+                      backgroundColor: "green", 
                       "&:hover": {
                         backgroundColor: "darkgreen", 
                       },
@@ -252,7 +274,7 @@ const handleRemove = async (plantId: number) => {
                   position: "absolute",
                   top: 8,
                   right: 8,
-                  color: "black",
+                  color: "#ff4d4d",
                 }}
               >
                 <CloseIcon />
@@ -275,12 +297,9 @@ const handleRemove = async (plantId: number) => {
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: "#00ab84",
-                  color: "black",
+                  backgroundColor: "green",
+                  color: "white",
                   marginBottom: "20px",
-                  "&:hover": {
-                        backgroundColor: "darkgreen", 
-                      },
                 }}
                 onClick={() => setShowOrderForm(true)}
               >
