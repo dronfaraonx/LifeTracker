@@ -117,7 +117,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
               type="password"
               required
               error={formData.repeat.length > 0 && formData.repeat !== formData.password}
-              helperText={formData.repeat.length > 0 && formData.repeat !== formData.password ? "Пароли должны совпадать" : ""}
+              helperText={formData.repeat.length > 3 && formData.repeat !== formData.password ? "Пароли должны совпадать" : ""}
             />
           )}
 
