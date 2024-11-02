@@ -31,7 +31,7 @@ export default function ShopList() {
 
   return (
     <Box display="flex">
-      <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
+      <Box sx={{ width: '250px', minHeight:"84.5vh", padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>

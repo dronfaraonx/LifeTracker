@@ -67,7 +67,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle sx={{ margin: '16px' }}>
-        {activeTab === 0 ? "Вход" : "Регистрация"}
+       Чтобы купить растения, надо быть зарегистрированным пользователем
       </DialogTitle>
       <DialogContent>
         <Tabs value={activeTab} onChange={handleTabChange} centered>

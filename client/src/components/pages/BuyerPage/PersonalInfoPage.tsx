@@ -77,16 +77,19 @@ const PersonalInfoPage = () => {
         newPassword,
       }, { withCredentials: true });
       alert("Password updated successfully");
-      setShowPasswordFields(false); // Hide password fields after successful update
+      setShowPasswordFields(false); 
     } catch (error) {
       console.log("Error updating password", error);
     }
   };
 
   return (
-    <Box sx={{ display: "flex", minHeight: "80vh", justifyContent: "center" }}>
+    <Box sx={{ display: "flex", minHeight: "84.4vh", justifyContent: "center", fontSize: "1.2rem",
+    "& .MuiTableCell-root": {
+      fontSize: "1.2rem", 
+    } }}>
       <NavOrder />
-      <Box sx={{ maxWidth: '600px', margin: 'auto', minHeight: '84.3vh', backgroundColor: 'white', padding: '20px' }}>
+      <Box sx={{ maxWidth: '600px', margin: 'auto', border: "1px solid grey", borderRadius: '10px', padding: '20px' }}>
         <Typography variant="h4" component="h1" sx={{ textAlign: 'center', marginBottom: '20px' }}>
           Адрес доставки:
         </Typography>
@@ -117,21 +120,38 @@ const PersonalInfoPage = () => {
             <TextField label="Индекс" variant="outlined" fullWidth value={zip} onChange={(e) => setZip(e.target.value)} />
           </Box>
         </Box>
-
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: '#4caf50', color: 'white', marginTop: '20px', '&:hover': { backgroundColor: '#45a049' } }}
-          onClick={() => setShowPasswordFields(!showPasswordFields)}
-        >
-          Изменить Пароль
-        </Button>
+<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+  <Button
+    variant="contained"
+    sx={{
+      backgroundColor: '#4caf50',
+      color: 'white',
+      padding: '10px 20px',
+      '&:hover': { backgroundColor: '#45a049' },
+      transition: 'background-color 0.3s ease',
+    }}
+    onClick={() => setShowPasswordFields(!showPasswordFields)}
+  >
+    {showPasswordFields ? "Отмена" : "Изменить Пароль"}
+  </Button>
+</Box>
 
         {showPasswordFields && (
           <Box sx={{ marginTop: '20px' }}>
             <TextField label="Старый пароль" variant="outlined" type="password" fullWidth margin="normal" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
             <TextField label="Новый пароль" variant="outlined" type="password" fullWidth margin="normal" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
             <TextField label="Подтвердите новый пароль" variant="outlined" type="password" fullWidth margin="normal" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-            <Button variant="contained" fullWidth sx={{ backgroundColor: '#f44336', color: 'white', marginTop: '10px', '&:hover': { backgroundColor: '#d32f2f' } }} onClick={handlePasswordChange}>
+            <Button variant="contained" fullWidth 
+             sx={{
+      backgroundColor: '#4caf50',
+      color: 'white',
+      padding: '10px 20px',
+      '&:hover': { backgroundColor: '#45a049' },
+      transition: 'background-color 0.3s ease',
+    }}
+            sx={{ backgroundColor: '#f44336', color: 'white', marginTop: '10px',  '&:hover': { backgroundColor: '#45a049' },
+      transition: 'background-color 0.3s ease'}} 
+      onClick={handlePasswordChange}>
               Сохранить новый пароль
             </Button>
           </Box>
@@ -140,7 +160,12 @@ const PersonalInfoPage = () => {
         <Button
           variant="contained"
           fullWidth
-          sx={{ backgroundColor: "#00ab84", color: 'white', marginTop: '20px', transition: "background-color 0.3s, transform 0.3s", "&:hover": { transform: "scale(1.05)", color: 'white' } }}
+          sx={{marginTop: '20px',
+            backgroundColor: "#00ab84",
+                color: "white",
+              borderRadius: "8px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+              }}
           onClick={handleUpdateUserInfo}
         >
           Сохранить изменения

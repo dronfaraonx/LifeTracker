@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./../../index.css";
 import { useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -7,70 +6,47 @@ import {
   Typography,
   IconButton,
   Box,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Link,
   Badge,
+  useMediaQuery,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-// import logo from "../../../public/LOGO circle.png";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useTheme } from "@mui/material/styles";
 import { useUser } from "../../context/auth";
 import AccountModal from "../pages/Authorization/modal/AccountModal";
 import SignupModal from "../pages/Authorization/modal/SignUpModal";
 import { useCart } from "../../context/CountCart";
+import LogoutButton from "./btns/LogoutBtn";
 
 export default function Navbar() {
   const { user } = useUser();
-  const [open, setOpen] = useState(false);
+  const { cartCounter } = useCart();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
-  const { cartCounter } = useCart();
 
-  // const handleClick = () => {
-  //   setOpen(true);
-  // };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  const handleLogoClick = () => {
-    navigate("/");
-  };
-
-  const handleCartClick = () => {
-    navigate(`/cart/${user.id}`);
-  };
-
-  const handlePlantsClick = () => {
-    navigate(`/allplants`);
-  };
-
-  const handleClonesClick = () => {
-    navigate(`/allclones`);
-  };
-
-  const handleSeedsClick = () => {
-    navigate(`/allseeds`);
-  };
-
-  const handleOpenMenu = (event: {
-    currentTarget: React.SetStateAction<null>;
-  }) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
-
+  const handleLogoClick = () => navigate("/");
+  const handleCartClick = () => navigate(`/cart/${user.id}`);
+  const handlePlantsClick = () => navigate(`/allplants`);
+  const handleClonesClick = () => navigate(`/allclones`);
+  const handleSeedsClick = () => navigate(`/allseeds`);
   const handleOpenLogin = () => setIsLoginOpen(true);
   const handleCloseLogin = () => setIsLoginOpen(false);
+
+  const handleDrawerToggle = () => setDrawerOpen(!drawerOpen);
+    const handleAccClick = () => {navigate('/dashboard');
+  };
 
   return (
     <nav className="head">
@@ -82,54 +58,61 @@ export default function Navbar() {
           borderBottom: "2px solid black",
         }}
       >
-        <Toolbar
-          sx={{
-            justifyContent: "space-between",
-            background: "#00ab84",
-            fontSize: "1rem",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-              color: "black",
-            }}
-          >
+        <Toolbar sx={{ justifyContent: "space-between", fontSize: "1rem" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <img
               src="/LOGO circle.png"
               alt="Logo"
-              style={{ height: 70, cursor: "pointer" }}
+              style={{
+                height: isMobile ? 50 : 70,
+                cursor: "pointer",
+              }}
               onClick={handleLogoClick}
             />
-            {["Растения", "Клоны", "Семена", "Оплата и доставка"].map(
-              (text, index) => (
+
+            {!isMobile ? (
+              <>
                 <Typography
-                  key={index}
                   variant="body1"
-                  className="header-link"
-                  style={{
+                  sx={{
                     cursor: "pointer",
                     fontSize: "1.3rem",
                     transition: "color 0.3s",
-                  }}
-                  sx={{
                     "&:hover": { color: "#ffffff" },
                   }}
-                  onClick={
-                    index === 0
-                      ? handlePlantsClick
-                      : index === 1
-                      ? handleClonesClick
-                      : index === 2
-                      ? handleSeedsClick
-                      : null
-                  }
+                  onClick={handlePlantsClick}
                 >
-                  {text}
+                  Растения
                 </Typography>
-              )
+                <Typography
+                  variant="body1"
+                  sx={{
+                    cursor: "pointer",
+                    fontSize: "1.3rem",
+                    transition: "color 0.3s",
+                    "&:hover": { color: "#ffffff" },
+                  }}
+                  onClick={handleClonesClick}
+                >
+                  Клоны
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    cursor: "pointer",
+                    fontSize: "1.3rem",
+                    transition: "color 0.3s",
+                    "&:hover": { color: "#ffffff" },
+                  }}
+                  onClick={handleSeedsClick}
+                >
+                  Семена
+                </Typography>
+              </>
+            ) : (
+              <IconButton onClick={handleDrawerToggle}>
+                <MenuIcon sx={{ color: "black" }} />
+              </IconButton>
             )}
           </Box>
 
@@ -137,30 +120,39 @@ export default function Navbar() {
             sx={{
               display: "flex",
               alignItems: "center",
-              backgroundColor: "#f5f5f5",
-              borderRadius: "5px",
-              padding: "5px 10px",
+              gap: 2,
+              flexGrow: isMobile ? 1 : 0,
             }}
           >
-            <SearchIcon sx={{ color: "black" }} />
-            <input
-              placeholder="Поиск"
-              style={{
-                marginLeft: 10,
-                color: "black",
-                border: "none",
-                background: "transparent",
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  console.log("Search:", e.currentTarget.value);
-                }
-              }}
-            />
-          </Box>
-
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <IconButton onClick={user ? handleOpenMenu : handleOpenLogin}>
+            {!isMobile && (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#f5f5f5",
+                  borderRadius: "5px",
+                  padding: "5px 10px",
+                }}
+              >
+                <SearchIcon sx={{ color: "black" }} />
+                <input
+                  placeholder="Поиск"
+                  style={{
+                    marginLeft: 10,
+                    color: "black",
+                    border: "none",
+                    background: "transparent",
+                    width: isMobile ? "80px" : "150px",
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      console.log("Search:", e.currentTarget.value);
+                    }
+                  }}
+                />
+              </Box>
+            )}
+            <IconButton onClick={user ? handleAccClick : handleOpenLogin}>
               <PersonIcon sx={{ color: "black" }} />
             </IconButton>
 
@@ -168,7 +160,7 @@ export default function Navbar() {
               <AccountModal
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
-                onClose={handleCloseMenu}
+                onClose={() => setAnchorEl(null)}
               />
             ) : (
               <SignupModal open={isLoginOpen} onClose={handleCloseLogin} />
@@ -194,11 +186,38 @@ export default function Navbar() {
                     <ShoppingCartIcon sx={{ color: "black" }} />
                   </Badge>
                 </IconButton>
+                <LogoutButton></LogoutButton>
               </>
             )}
           </Box>
         </Toolbar>
       </AppBar>
+
+      <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerToggle}>
+        <Box sx={{ width: 250 }}>
+          <List>
+            {["Растения", "Клоны", "Семена", "Оплата и доставка"].map(
+              (text, index) => (
+                <ListItem
+                  button
+                  key={index}
+                  onClick={
+                    index === 0
+                      ? handlePlantsClick
+                      : index === 1
+                      ? handleClonesClick
+                      : index === 2
+                      ? handleSeedsClick
+                      : null
+                  }
+                >
+                  <ListItemText primary={text} />
+                </ListItem>
+              )
+            )}
+          </List>
+        </Box>
+      </Drawer>
     </nav>
   );
 }

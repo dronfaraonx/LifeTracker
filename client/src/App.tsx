@@ -19,6 +19,7 @@ const SeedPage = React.lazy(() => import('./components/pages/SeedPage/SeedPage')
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
+import PersonalInfoPage from './components/pages/BuyerPage/PersonalInfoPage';
 
 
 
@@ -107,14 +108,14 @@ function App() {
             </Suspense>
           )
         },
-        // {
-        //   path: "/myaccount",
-        //   element: (
-        //     <Suspense fallback={<Loading/>}>
-        //       <PersonalInfoPage/>
-        //     </Suspense>
-        //   )
-        // },
+        {
+          path: "/myaccount",
+          element: (
+            <Suspense fallback={<Loading/>}>
+              <PersonalInfoPage/>
+            </Suspense>
+          )
+        },
 
          {
           path: "/order-details/:uuid_order",

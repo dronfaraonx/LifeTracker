@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, Box, Link, Button } from "@mui/material";
-
 import { Link as RouterLink } from "react-router-dom";
 import { useUser } from "../../../context/auth";
 
@@ -23,7 +22,7 @@ const MainPage = () => {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          opacity: "0.7",
+          opacity: "0.75",
         }}
       />
 
@@ -34,8 +33,9 @@ const MainPage = () => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           textAlign: "center",
-          // color: "white",
-          // padding: "20px",
+          width: "90%",
+          maxWidth: "500px",
+          padding: "10px",
         }}
       >
         <Typography
@@ -44,42 +44,35 @@ const MainPage = () => {
             fontFamily: "Roboto, sans-serif",
             fontWeight: "bold",
             color: "#2E7D32",
-            textAlign: "center",
-            mt: 3,
-            mb: 2,
             letterSpacing: 1.5,
             textTransform: "uppercase",
             textShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)",
+            mb: 2,
+            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" }, // Responsive font size
           }}
         >
           Лучшие растения для современной жизни
         </Typography>
 
-        <Link component={RouterLink} to="/" style={{ textDecoration: "none" }}>
+        <Link component={RouterLink} to="/plants" style={{ textDecoration: "none" }}>
           <Button
-  component={RouterLink}
-  to="/plants"
-  variant="contained"
-  sx={{
-    mt: 2, 
-    px: 4, 
-    py: 1.5,
-    fontSize: "1.2rem",
-    fontWeight: "bold",
-    backgroundColor: "#00ab84",
-    color: "black",
-    borderRadius: "8px", 
-    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", 
-    transition: "background-color 0.3s, transform 0.3s", 
-    "&:hover": {
-      transform: "scale(1.05)",
-      color: 'white'
-    },
-  }}
->
-  Перейти в магазин
-</Button>
-
+            component={RouterLink}
+            to="/plants"
+            variant="contained"
+            sx={{
+              mt: 2,
+              px: { xs: 3, sm: 4 },
+              py: { xs: 1, sm: 1.5 },
+              fontSize: { xs: "1rem", sm: "1.2rem" },
+              fontWeight: "bold",
+              backgroundColor: "#00ab84",
+                color: "white",
+              borderRadius: "8px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            Перейти в магазин
+          </Button>
         </Link>
       </Box>
     </Box>

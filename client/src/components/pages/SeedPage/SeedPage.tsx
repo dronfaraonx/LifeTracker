@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import CloneCard from '../CloneCard/CloneCard';
 import '../SeedCard/plant.css';
 import { Select, MenuItem, Typography, Box, InputLabel, FormControl } from '@mui/material';
+import Filters from '../../ui/Fiters';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -31,7 +32,7 @@ export default function SeedPage() {
 
   return (
     <Box display="flex">
-      <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black', minHeight: "calc(100vh - 10vh - 7vh)"}}>
+      <Box sx={{ width: '250px', padding: '20px', minHeight:"84.5vh", borderRight: '2px solid black', minHeight: "calc(100vh - 10vh - 7vh)"}}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
@@ -48,6 +49,7 @@ export default function SeedPage() {
             ))}
           </Select>
         </FormControl>
+        <Filters/>
       </Box>
 
       <Box className="plant-list" sx={{ padding: '20px' }}>

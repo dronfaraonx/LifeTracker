@@ -77,7 +77,7 @@ export default function PlantCard({ plant }) {
               color="primary"
               onClick={handleOpenModal}
               aria-label="добавить в корзину"
-              style={{ position: 'absolute', bottom: '15px', right: '10px', border:'1px solid black'}} 
+              style={{ position: 'absolute', bottom: '15px', right: '10px', border:'1px solid black', color: '#00ab84'}} 
             >
               <ShoppingCartIcon />
             </IconButton>

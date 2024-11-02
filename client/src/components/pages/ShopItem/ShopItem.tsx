@@ -83,15 +83,26 @@ export default function ShopItem() {
         <p>Описание: {plant.description || 'Описание не указано.'}</p>
         <div className="plant-card-actions">
           <QuantityInput quantity={quantity} setQuantity={setQuantity}/>
-          <Button 
-            className="add-to-cart-button"
-            onClick={user ? handleAddToCart : handleModelRegOpen}
-            disabled={loading}
-            sx={{ backgroundColor: "green", color: "white", size: ""}}
+          <Button
+  className="add-to-cart-button"
+  onClick={user ? handleAddToCart : handleModelRegOpen}
+  disabled={loading}
+  sx={{
+    backgroundColor: "green",
+    color: "white",
+    padding: "10px 20px", 
+    fontSize: "1rem", 
+    borderRadius: "5px", 
+    transition: "background-color 0.3s, transform 0.2s", 
+    "&:hover": {
+      backgroundColor: "darkgreen", 
+      transform: "scale(1.05)", 
+    },
+  }}
+>
+  В корзину
+</Button>
 
-          >
-            В корзину
-          </Button>
           <SignupModal open={open} onClose={handleModelRegClose} />
         </div>
         <div className='backBtn'>

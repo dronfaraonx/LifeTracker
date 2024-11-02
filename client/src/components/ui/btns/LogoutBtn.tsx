@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from '../../../context/auth';
-import { ListItemIcon, MenuItem } from '@mui/material';
+import { IconButton, ListItemIcon, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Logout from '@mui/icons-material/Logout';
 import { useCart } from '../../../context/CountCart';
@@ -41,12 +41,11 @@ const LogoutButton: React.FC = () => {
 
   return (
     <>
-    <MenuItem onClick={handleLogout}>
-      <ListItemIcon >
+      <IconButton onClick={handleLogout}
+      
+        sx={{ color: "black" }}>
           <Logout fontSize="small"/>
-      </ListItemIcon>
-      {isLoading ? 'Выхожу...' : 'Выйти'}
-    </MenuItem>
+      </IconButton>
     </>
   );
 };
