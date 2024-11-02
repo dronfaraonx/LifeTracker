@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -32,6 +32,7 @@ export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation()
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -77,6 +78,7 @@ export default function Navbar() {
                   sx={{
                     cursor: "pointer",
                     fontSize: "1.3rem",
+                    textDecoration: location.pathname === '/allplants' ? "underline" : "none",
                     transition: "color 0.3s",
                     "&:hover": { color: "#ffffff" },
                   }}
@@ -89,6 +91,8 @@ export default function Navbar() {
                   sx={{
                     cursor: "pointer",
                     fontSize: "1.3rem",
+                                        textDecoration: location.pathname === '/allclones' ? "underline" : "none",
+
                     transition: "color 0.3s",
                     "&:hover": { color: "#ffffff" },
                   }}
@@ -102,6 +106,8 @@ export default function Navbar() {
                     cursor: "pointer",
                     fontSize: "1.3rem",
                     transition: "color 0.3s",
+                                        textDecoration: location.pathname === '/allseeds' ? "underline" : "none",
+
                     "&:hover": { color: "#ffffff" },
                   }}
                   onClick={handleSeedsClick}
