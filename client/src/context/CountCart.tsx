@@ -24,27 +24,27 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
   const [cartCounter, setCartCounter] = useState<number>(0);
   const { user } = useUser();
 
+
   useEffect(() => {
-    const fetchQuantity = async () => {
+    const fetchCart = async () => {
       if (user?.id) {
         try {
-          const response = await axios.get(`${API_URL}/api/cart/quantity`, {
-            params: { userId: user.id },
-            withCredentials: true,
-          });
-          const totalQuantity = response.data.totalQuantity;
-          console.log("total Quantity",totalQuantity);
+          const response = await axios.get(`${API_URL}/api/cart/check/${user.id}`);
+          const totalQuantity = response.data.reduce((total, oneItem) => total + oneItem.quantity, 0);
           
-          // setCartCounter(totalQuantity);
-          // localStorage.setItem(`cartCount_${user.id}`, totalQuantity.toString());
+          setCartCounter(totalQuantity);
+          localStorage.setItem(`cartCount_${user.id}`, totalQuantity.toString());
+
+          console.log('Fetched cart quantities: ', response.data);
         } catch (error) {
-          console.error("Ошибка при получении количества товаров в корзине:", error);
+          console.error("Ошибка при получении корзины:", error);
         }
       }
     };
 
-    fetchQuantity();
+    fetchCart();
   }, [user]);
+
 
 
   useEffect(() => {
@@ -62,16 +62,10 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
       const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`) || '0', 10);
       
       const newCount = currentCount + quantity;
-      console.log("neqcount", newCount);
-      console.log("activeQuantity: ",quantity);
-      console.log("current ",currentCount);
-      
-      
-
+    
       localStorage.setItem(`cartCount_${user.id}`, newCount.toString()); 
       setCartCounter(newCount);
       
-
       console.log(`Новый заказ для юзера ${user.id}:`, newCount);
     } else {
       console.log('Не залогинен');

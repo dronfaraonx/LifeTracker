@@ -19,9 +19,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Cart() {
   const { user } = useUser();
-  const {handleAddtoCartCounter, handleRemoveFromCartCounter} = useCart()
+  const { handleAddtoCartCounter, handleRemoveFromCartCounter} = useCart()
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
+
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -34,29 +35,6 @@ export default function Cart() {
     };
     fetchCart();
   }, [user?.id]);
-
-
-    useEffect(() => {
-    const fetchQuantity = async () => {
-      if (user?.id) {
-        try {
-          const response = await axios.get(`${API_URL}/api/cart/quantity`, {
-            params: { userId: user.id },
-            withCredentials: true,
-          });
-          const totalQuantity = response.data.totalQuantity;
-          console.log("total Quantity",totalQuantity);
-          
-          // setCartCounter(totalQuantity);
-          // localStorage.setItem(`cartCount_${user.id}`, totalQuantity.toString());
-        } catch (error) {
-          console.error("Ошибка при получении количества товаров в корзине:", error);
-        }
-      }
-    };
-
-    fetchQuantity();
-  }, [user]);
 
 
 const handleRemove = async (plantId: number) => {
