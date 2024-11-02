@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./../../index.css"
+import "./../../index.css";
 import { useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -31,13 +31,13 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { cartCounter } = useCart();
 
-  const handleClick = () => {
-    setOpen(true);
-  };
+  // const handleClick = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   const handleLogoClick = () => {
     navigate("/");
@@ -47,12 +47,16 @@ export default function Navbar() {
     navigate(`/cart/${user.id}`);
   };
 
-  const handleClonesClick = () => {
-    navigate(`/clones`);
+  const handlePlantsClick = () => {
+    navigate(`/allplants`);
   };
-  
+
+  const handleClonesClick = () => {
+    navigate(`/allclones`);
+  };
+
   const handleSeedsClick = () => {
-    navigate(`/seeds`);
+    navigate(`/allseeds`);
   };
 
   const handleOpenMenu = (event: {
@@ -69,53 +73,64 @@ export default function Navbar() {
   const handleCloseLogin = () => setIsLoginOpen(false);
 
   return (
-<nav className="head">
+    <nav className="head">
       <AppBar
         position="static"
         sx={{
           background: "#00ab84",
           boxShadow: "none",
           borderBottom: "2px solid black",
-         
         }}
       >
-
         <Toolbar
-          sx={{ justifyContent: "space-between", background: "#00ab84", fontSize: "1rem" }}
+          sx={{
+            justifyContent: "space-between",
+            background: "#00ab84",
+            fontSize: "1rem",
+          }}
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2, color: "black" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              color: "black",
+            }}
+          >
             <img
               src="/LOGO circle.png"
               alt="Logo"
               style={{ height: 70, cursor: "pointer" }}
               onClick={handleLogoClick}
             />
-            {["Растения", "Клоны", "Семена", "Оплата и доставка"].map((text, index) => (
-              <Typography
-                key={index}
-                variant="body1"
-                className="header-link"
-                style={{
-                  cursor: "pointer",
-                  fontSize: "1.3rem",
-                  transition: "color 0.3s",
-                }}
-                sx={{
-                  "&:hover": { color: "#ffffff" },
-                }}
-                onClick={
-                  index === 0
-                    ? handleClick
-                    : index === 1
-                    ? handleClonesClick
-                    : index === 2
-                    ? handleSeedsClick
-                    : null
-                }
-              >
-                {text}
-              </Typography>
-            ))}
+            {["Растения", "Клоны", "Семена", "Оплата и доставка"].map(
+              (text, index) => (
+                <Typography
+                  key={index}
+                  variant="body1"
+                  className="header-link"
+                  style={{
+                    cursor: "pointer",
+                    fontSize: "1.3rem",
+                    transition: "color 0.3s",
+                  }}
+                  sx={{
+                    "&:hover": { color: "#ffffff" },
+                  }}
+                  onClick={
+                    index === 0
+                      ? handlePlantsClick
+                      : index === 1
+                      ? handleClonesClick
+                      : index === 2
+                      ? handleSeedsClick
+                      : null
+                  }
+                >
+                  {text}
+                </Typography>
+              )
+            )}
           </Box>
 
           <Box
@@ -183,51 +198,6 @@ export default function Navbar() {
             )}
           </Box>
         </Toolbar>
-
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          PaperProps={{
-            sx: {
-              position: "fixed",
-              top: "180px",
-              width: "100%",
-              height: "calc(100vh - 180px)",
-              margin: "0",
-              borderRadius: 0,
-              backgroundColor: "#f5f5f5",
-            },
-          }}
-        >
-          <DialogTitle>Каталог растений</DialogTitle>
-          <DialogContent>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                padding: 2,
-              }}
-            >
-              <Link
-                href="#"
-                underline="hover"
-                color="inherit"
-                sx={{ fontSize: "1.2rem" }}
-              >
-                Монстера
-              </Link>
-              <Link
-                href="#"
-                underline="hover"
-                color="inherit"
-                sx={{ fontSize: "1.2rem" }}
-              >
-                Алоказия
-              </Link>
-            </Box>
-          </DialogContent>
-        </Dialog>
       </AppBar>
     </nav>
   );

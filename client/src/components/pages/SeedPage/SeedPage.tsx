@@ -13,7 +13,7 @@ export default function SeedPage() {
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/seeds`);
+        const response = await axios.get(`${API_URL}/api/allseeds`);
         setPlants(response.data);
       } catch (error) {
         console.error('Ошибка при загрузке растений:', error);
@@ -35,11 +35,11 @@ export default function SeedPage() {
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
-          <InputLabel id="type-select-label">Тип растения</InputLabel>
+          <InputLabel id="type-select-label">Тип семян</InputLabel>
           <Select
             labelId="type-select-label"
             value={plantType}
-            label="Тип растения"
+            label="Тип семян"
             onChange={(e) => setPlantType(e.target.value)}
           >
             <MenuItem value="">Все типы</MenuItem>

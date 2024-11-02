@@ -13,10 +13,10 @@ export default function ShopList() {
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/allclones`);
+        const response = await axios.get(`${API_URL}/api/allplants`);
         setPlants(response.data);
       } catch (error) {
-        console.error('Ошибка при загрузке клонов:', error);
+        console.error('Ошибка при загрузке растений:', error);
       }
     };
 
@@ -35,11 +35,11 @@ export default function ShopList() {
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
-          <InputLabel id="type-select-label">Тип клонов</InputLabel>
+          <InputLabel id="type-select-label">Тип растений</InputLabel>
           <Select
             labelId="type-select-label"
             value={plantType}
-            label="Тип клонов"
+            label="Тип растения"
             onChange={(e) => setPlantType(e.target.value)}
           >
             <MenuItem value="">Все типы</MenuItem>
