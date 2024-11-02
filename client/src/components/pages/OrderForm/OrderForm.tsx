@@ -91,7 +91,7 @@ const OrderForm = ({ cart, onClose }) => {
 
 
   return (
-    <Box sx={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
+    <Box sx={{ padding: "20px", maxWidth: "80vh", margin: "0 auto", backgroundColor: "#f9f9f9", borderRadius: "8px" }}>
       <Typography variant="h5" component="h2" sx={{ marginBottom: "20px", textAlign: "center" }}>
         Контактные данные
       </Typography>
