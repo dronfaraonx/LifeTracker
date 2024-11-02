@@ -16,7 +16,7 @@ orderRouter.post('/', async (req, res) => {
   try {
     const orderPromises = cartItems.map((item) =>
       Order.create({
-        user_id: item.user_id,
+        user_id: req.session.user_sid,
         plant_id: item.plant_id,
         uuid_order: uuid_order,
         quantity: item.quantity,

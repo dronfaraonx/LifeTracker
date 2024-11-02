@@ -66,19 +66,19 @@ cartRouter.get('/:id', async (req, res) => {
       include: [
         {
           model: Plant,
-          attributes: ['name', 'price', 'photo', 'type'],
+          attributes: ['id','name', 'price', 'photo', 'type'],
         },
       ],
     });
     const formatedCartData = cartItems.map(item => ({
-      id: item.id,
+      id: item.Plant.id,
       name: item.Plant.name,
       price: item.Plant.price,
       quantity: item.quantity,
       photo: item.Plant.photo,
       type: item.Plant.type
     }));
-    // console.log(formatedCartData);
+    console.log(formatedCartData);
     res.status(200).json(formatedCartData);
   } catch (error) {
     console.error(error);
