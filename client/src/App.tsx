@@ -107,14 +107,14 @@ function App() {
             </Suspense>
           )
         },
-        {
-          path: "/myaccount",
-          element: (
-            <Suspense fallback={<Loading/>}>
-              <PersonalInfoPage/>
-            </Suspense>
-          )
-        },
+        // {
+        //   path: "/myaccount",
+        //   element: (
+        //     <Suspense fallback={<Loading/>}>
+        //       <PersonalInfoPage/>
+        //     </Suspense>
+        //   )
+        // },
 
          {
           path: "/order-details/:uuid_order",
