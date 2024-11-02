@@ -71,7 +71,8 @@ cartRouter.get('/:id', async (req, res) => {
       ],
     });
     const formatedCartData = cartItems.map(item => ({
-      id: item.Plant.id,
+      id: item.id,
+      plant_id: item.Plant.id,
       name: item.Plant.name,
       price: item.Plant.price,
       quantity: item.quantity,

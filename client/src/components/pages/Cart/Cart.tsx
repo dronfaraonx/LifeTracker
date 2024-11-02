@@ -22,6 +22,7 @@ export default function Cart() {
   const { handleAddtoCartCounter, handleRemoveFromCartCounter} = useCart()
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
+console.log('cart: ',cart);
 
 
   useEffect(() => {
@@ -260,13 +261,12 @@ const handleRemove = async (plantId: number) => {
             </Card>
           ))}
         </Stack>
-{cart.length > 0 ? (
+
         <Box sx={{ textAlign: "center", marginTop: "20px" }}>
           <Typography variant="h6">
             Итого к оплате: {total ? `${total.toFixed(2)}р.` : "0р."}
           </Typography>
-        </Box>) :
-         null}
+        </Box>
       </Box>
 
       {cart.length > 0 ? (
