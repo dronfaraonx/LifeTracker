@@ -13,7 +13,7 @@ export default function SeedPage() {
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/seeds`);
+        const response = await axios.get(`${API_URL}/api/allseeds`);
         setPlants(response.data);
       } catch (error) {
         console.error('Ошибка при загрузке растений:', error);
