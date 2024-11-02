@@ -35,7 +35,7 @@ export default function SeedPage() {
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
-          <InputLabel id="type-select-label">Тип растения</InputLabel>
+          <InputLabel id="type-select-label">Тип семян</InputLabel>
           <Select
             labelId="type-select-label"
             value={plantType}
