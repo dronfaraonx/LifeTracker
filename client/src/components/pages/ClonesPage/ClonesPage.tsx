@@ -13,7 +13,7 @@ export default function ShopList() {
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/clones`);
+        const response = await axios.get(`${API_URL}/api/allclones`);
         setPlants(response.data);
       } catch (error) {
         console.error('Ошибка при загрузке клонов:', error);

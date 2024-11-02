@@ -60,7 +60,7 @@ function App() {
           ),
         },
         {
-          path: "/clones",
+          path: "/allclones",
           element: (
             <Suspense fallback={<Loading />}>
               <ClonesPage />
@@ -68,7 +68,7 @@ function App() {
           ),
         },
         {
-          path: "/seeds",
+          path: "/allseeds",
           element: (
             <Suspense fallback={<Loading />}>
               <SeedPage />
