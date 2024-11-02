@@ -54,11 +54,11 @@ const OrderForm = ({ cart, onClose }) => {
 
     const cartItems = cart.map((cartItem) => ({
       user_id: user.id,
-      plant_id: cartItem.id,
+      plant_id: cartItem.plant_id,
       quantity: cartItem.quantity,
       pricePurchanse: cartItem.price,
     }));
-    console.log(cartItems);
+    // console.log('plant_id', plant_id);
     
     try {
         const orderResponse = await axios.post(`${API_URL}/api/orders`,  {cartItems}, { withCredentials: true });

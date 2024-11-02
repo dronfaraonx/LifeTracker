@@ -22,6 +22,7 @@ export default function Cart() {
   const { handleAddtoCartCounter, handleRemoveFromCartCounter} = useCart()
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
+console.log('cart: ',cart);
 
 
   useEffect(() => {
