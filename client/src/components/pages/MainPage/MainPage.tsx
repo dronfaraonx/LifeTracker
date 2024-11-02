@@ -72,8 +72,8 @@ const MainPage = () => {
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", 
     transition: "background-color 0.3s, transform 0.3s", 
     "&:hover": {
-      backgroundColor: "#007b5e",
       transform: "scale(1.05)",
+      color: 'white'
     },
   }}
 >
