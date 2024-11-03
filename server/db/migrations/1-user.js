@@ -50,6 +50,12 @@ module.exports = {
       zip: {
         type: Sequelize.STRING
       },
+      contactMethod: {
+        type: Sequelize.STRING
+      },
+      contactValue: {
+        type: Sequelize.STRING
+      },
       wishList_id: {
         type: Sequelize.INTEGER
       },

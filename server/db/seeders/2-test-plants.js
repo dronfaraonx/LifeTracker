@@ -77,7 +77,7 @@ module.exports = {
        {
         name: 'Дипсис желтоватый',
         description: 'Растение предпочитает яркий рассеянный свет и регулярный полив.',
-        photo: 'https://1.downloader.disk.yandex.ru/preview/54b6108c5dfcd15299e475d1c393ffa4057755a125ef3ad3465bc50787c6166c/inf/h4otgYfQijqln48fNGi7stvYUXUKFKHr2QyZ7a61Vz1vHzrB0vvhLTb7iYZdUDcSGNxfbheycecu9U5Q07x_vQ%3D%3D?uid=2043300011&filename=11.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: 'https://thumb.cloud.mail.ru/thumb/xw1/3.webp',
         price: 80,
         category_id: 3,
         type: 'Пальма',

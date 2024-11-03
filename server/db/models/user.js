@@ -27,6 +27,8 @@ module.exports = (sequelize, DataTypes) => {
       house: DataTypes.STRING,
       apartment: DataTypes.STRING,
       zip: DataTypes.STRING,
+            contactMethod: DataTypes.STRING,
+      contactValue: DataTypes.STRING,
       wishList_id: DataTypes.INTEGER,
       shoppingCartItem: DataTypes.INTEGER,
     },
