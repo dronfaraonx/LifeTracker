@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       phone: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       city: {
         type: Sequelize.STRING
@@ -48,6 +48,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       zip: {
+        type: Sequelize.STRING
+      },
+      contactMethod: {
+        type: Sequelize.STRING
+      },
+      contactValue: {
         type: Sequelize.STRING
       },
       wishList_id: {

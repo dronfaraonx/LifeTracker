@@ -106,6 +106,11 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
             variant="outlined"
             type="password"
             required
+  helperText={
+    formData.password.length < 6 && formData.password.length > 0
+      ? "Пароль должен быть минимум 6 символов"
+      : ""
+  }
           />
           {activeTab === 1 && (
             <TextField
@@ -116,8 +121,16 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
               variant="outlined"
               type="password"
               required
-              error={formData.repeat.length > 0 && formData.repeat !== formData.password}
-              helperText={formData.repeat.length > 3 && formData.repeat !== formData.password ? "Пароли должны совпадать" : ""}
+  //             error={
+  //   formData.repeat.length > 3 && (
+  //     formData.repeat !== formData.password || formData.repeat.length < 6
+  //   )
+  // }
+  helperText={
+    formData.repeat.length > 5 && formData.repeat !== formData.password
+      ? "Пароли должны совпадать"
+      : ""
+  }
             />
           )}
 

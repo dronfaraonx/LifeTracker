@@ -34,7 +34,7 @@ const ThankYouModal = ({ open, onClose }) => {
           Спасибо за покупку!
         </Typography>
         <Typography variant="body1" sx={{ mb: 4 }}>
-          Ваш заказ успешно оформлен.
+          Ваш заказ успешно оформлен. Мы с Вами свяжемся в ближайшее время.
         </Typography>
           <Box
           sx={{
