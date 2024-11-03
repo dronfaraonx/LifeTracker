@@ -8,7 +8,7 @@ const Loading: React.FC= () => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      // height="80vh"
+      minHeight="80vh"
     >
       <CircularProgress />
       <Typography variant="h6" marginTop={2}>
