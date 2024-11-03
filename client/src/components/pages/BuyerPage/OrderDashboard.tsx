@@ -69,7 +69,7 @@ const OrderDashboard = () => {
 
 
   return (
-    <Box sx={{ display: "flex", minHeight: "84.3vh", backgroundColor:'#f3fff3', justifyContent: "center",
+    <Box sx={{ display: "flex", minHeight: "82.7vh", backgroundColor:'#f3fff3', justifyContent: "center",
     fontSize: "1.2rem",
     "& .MuiTableCell-root": {
       fontSize: "1.2rem", 

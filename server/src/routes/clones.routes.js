@@ -6,7 +6,8 @@ const clonesRouter = express.Router();
 clonesRouter.get('/', async (req, res) => {
   try {
     const clones = await Plant.findAll({ where: { category_id: 2 } });
-    console.log(JSON.stringify(clones));
+
+    console.log('clones: ', clones);
     
     res.json(clones);
   } catch (error) {

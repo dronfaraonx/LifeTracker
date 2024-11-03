@@ -5,10 +5,10 @@ body {
   background-color: #f5fff5;
 }
 
-.plant-container {
+/* .plant-container {
   display: flex;
   height: calc(100vh - 10vh - 10vh);
-}
+} */
 
 .sidebar {
   width: 250px;
@@ -61,6 +61,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 13px;
 }
 
 .plant-card .price {

@@ -34,7 +34,7 @@ export default function CloneCard({ plant }) {
               color="primary"
               onClick={handleAddToCart}
               aria-label="добавить в корзину"
-              style={{ position: 'absolute', bottom: '15px', right: '10px', border:'1px solid black'}} 
+              style={{ position: 'absolute', bottom: '65px', right: '10px', border:'1px solid black', color: '#00ab84'}} 
             >
               <ShoppingCartIcon />
             </IconButton>
