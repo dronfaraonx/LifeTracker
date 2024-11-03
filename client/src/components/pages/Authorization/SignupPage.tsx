@@ -83,26 +83,45 @@ const SignupPage = () => {
           type="email"
           required
         />
-        <TextField
-          label="Password"
-          name="password"
-          value={formData.password}
-          onChange={changeHandler}
-          variant="outlined"
-          type="password"
-          required
-        />
-        <TextField
-          label="Repeat Password"
-          name="repeat"
-          value={formData.repeat}
-          onChange={changeHandler}
-          variant="outlined"
-          type="password"
-          required
-          error={formData.repeat.length > 0 && formData.repeat !== formData.password}
-          helperText={formData.repeat.length > 0 && formData.repeat !== formData.password ? "Passwords should match" : ""}
-        />
+  <TextField
+  label="Password"
+  name="password"
+  value={formData.password}
+  onChange={changeHandler}
+  variant="outlined"
+  type="password"
+  required
+  error={formData.password.length < 6 && formData.password.length > 0}
+  helperText={
+    formData.password.length < 6 && formData.password.length > 0
+      ? "Password must be at least 6 characters long"
+      : ""
+  }
+/>
+
+<TextField
+  label="Repeat Password"
+  name="repeat"
+  value={formData.repeat}
+  onChange={changeHandler}
+  variant="outlined"
+  type="password"
+  required
+  error={
+    formData.repeat.length > 0 && (
+      formData.repeat !== formData.password || formData.repeat.length < 6
+    )
+  }
+  helperText={
+    formData.repeat.length > 0 && formData.repeat !== formData.password
+      ? "Passwords should match"
+      : formData.repeat.length < 6 && formData.repeat.length > 0
+      ? "Password must be at least 6 characters long"
+      : ""
+  }
+/>
+
+
 
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
 
