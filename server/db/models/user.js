@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       alreadyBought: DataTypes.BOOLEAN,
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
-      phone: DataTypes.INTEGER,
+      phone: DataTypes.STRING,
       city: DataTypes.STRING,
       address: DataTypes.STRING,
       house: DataTypes.STRING,

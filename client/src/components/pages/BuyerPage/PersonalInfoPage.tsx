@@ -64,7 +64,7 @@ const PersonalInfoPage = () => {
           setContactValue(response.data.contactValue);
         }
       } catch (error) {
-        console.error("User info error:", error);
+        console.error("Ошибка при получении информации о пользователе:", error);
       }
     };
 
@@ -82,15 +82,17 @@ const PersonalInfoPage = () => {
           phone,
           city,
           address,
-          // house,
-          // apartment,
-          // zip,
+          house,
+          apartment,
+          zip,
+          contactMethod,
+          contactValue
         },
         { withCredentials: true }
       );
       alert("Информация изменена");
     } catch (error) {
-      console.log("Personal Page Error: ", error);
+      console.log("Ошибка страницы данных пользователя: ", error);
     }
   };
 
@@ -113,7 +115,7 @@ const PersonalInfoPage = () => {
       alert("Пароль успешно обновлен");
       setShowPasswordFields(false);
     } catch (error) {
-      console.log("Error updating password", error);
+      console.log("Ошибка изменения пароля пользователя", error);
     }
   };
 
@@ -149,7 +151,7 @@ const PersonalInfoPage = () => {
           component="h1"
           sx={{ textAlign: "center", marginBottom: "20px" }}
         >
-          Адрес доставки:
+          Информация для доставки:
         </Typography>
 
         <Box
@@ -346,39 +348,42 @@ const PersonalInfoPage = () => {
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
             />
-          <TextField
-  label="Новый пароль"
-  variant="outlined"
-  type="password"
-  fullWidth
-  margin="normal"
-  value={newPassword}
-  onChange={(e) => setNewPassword(e.target.value)}
-  error={newPassword.length < 6 && newPassword.length > 0} 
-  helperText={
-    newPassword.length < 6 && newPassword.length > 0
-      ? "Пароль должен содержать минимум 6 символов"
-      : ""
-  }
-/>
+            <TextField
+              label="Новый пароль"
+              variant="outlined"
+              type="password"
+              fullWidth
+              margin="normal"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              error={newPassword.length < 6 && newPassword.length > 0}
+              helperText={
+                newPassword.length < 6 && newPassword.length > 0
+                  ? "Пароль должен содержать минимум 6 символов"
+                  : ""
+              }
+            />
 
-<TextField
-  label="Подтвердите новый пароль"
-  variant="outlined"
-  type="password"
-  fullWidth
-  margin="normal"
-  value={confirmPassword}
-  onChange={(e) => setConfirmPassword(e.target.value)}
-  error={confirmPassword !== newPassword || (confirmPassword.length < 6 && confirmPassword.length > 0)} 
-  helperText={
-    confirmPassword !== newPassword
-      ? "Пароли не совпадают"
-      : confirmPassword.length < 6 && confirmPassword.length > 0
-      ? "Пароль должен содержать минимум 6 символов"
-      : ""
-  }
-/>
+            <TextField
+              label="Подтвердите новый пароль"
+              variant="outlined"
+              type="password"
+              fullWidth
+              margin="normal"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              error={
+                confirmPassword !== newPassword ||
+                (confirmPassword.length < 6 && confirmPassword.length > 0)
+              }
+              helperText={
+                confirmPassword !== newPassword
+                  ? "Пароли не совпадают"
+                  : confirmPassword.length < 6 && confirmPassword.length > 0
+                  ? "Пароль должен содержать минимум 6 символов"
+                  : ""
+              }
+            />
 
             <Button
               variant="contained"
