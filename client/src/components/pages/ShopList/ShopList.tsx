@@ -60,37 +60,18 @@ export default function ShopList() {
 
     return matchesType && matchesCategory && matchesPrice && matchesSize && matchesLight;
   });
-  useEffect(() => {
-  const fetchPlants = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/api/plants`);
-      const plantsData = response.data;
-
-      setPlants(plantsData);
-
-      const highestPrice = Math.max(...plantsData.map(plant => plant.price));
-      setMaxPrice(highestPrice);
-      setPriceRange([0, highestPrice]);
-    } catch (error) {
-      console.error('Ошибка при загрузке растений:', error);
-    }
-  };
-
-  fetchPlants();
-}, []);
-
 
   const uniqueCategories = [...new Set(plants.map(plant => plant.type))];
 
   return (
     
-    <div className='shopListContainer' style={{position:"relative", minHeight:"80vh"}}>
+    // <div className='shopListContainer' style={{position:"relative"}}>
     <Box sx={{ display:"flex", minHeight:"80vh"}}>
      <Box sx={{ display: "flex" }}>
-  <Box sx={{ width: '300px', padding: '20px', borderRight: '2px solid black' }}>
+  <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
     <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
-    <FormControl sx={{ width: '100%'}} className="filter-select">
+    <FormControl sx={{ width: '100%', marginBottom: '20px'}} className="filter-select">
       <InputLabel id="category-select-label">Категория</InputLabel>
       <Select
         labelId="category-select-label"
@@ -175,6 +156,6 @@ export default function ShopList() {
         ))}
       </Box>
     </Box>
-    </div>
+    // </div>
   );
 }

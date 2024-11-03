@@ -16,6 +16,7 @@ const ClonesPage = React.lazy(() => import('./components/pages/ClonesPage/Clones
 const OrderDashboard = React.lazy(() => import('./components/pages/BuyerPage/OrderDashboard'))
 const PlantsPage = React.lazy(() => import('./components/pages/PlantsPage/PlantsPage'))
 const SeedPage = React.lazy(() => import('./components/pages/SeedPage/SeedPage'))
+const FAQPage = React.lazy(() => import('./components/pages/BuyerPage/FaqPage'))
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
@@ -113,6 +114,14 @@ function App() {
           element: (
             <Suspense fallback={<Loading/>}>
               <PersonalInfoPage/>
+            </Suspense>
+          )
+        },
+         {
+          path: "/info",
+          element: (
+            <Suspense fallback={<Loading/>}>
+              <FAQPage/>
             </Suspense>
           )
         },

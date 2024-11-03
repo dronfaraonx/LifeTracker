@@ -1,19 +1,21 @@
 import { FC, ReactElement } from "react";
-import { Box, Container, Typography, IconButton, Link } from "@mui/material";
-import { Instagram, Telegram, WhatsApp } from "@mui/icons-material";
-// import logo from "./LOGO circle.png";
+import { Box, Container, Typography, IconButton, Link, useTheme, useMediaQuery, SvgIcon } from "@mui/material";
+import { Email, Telegram, WhatsApp } from "@mui/icons-material";
+import { FaVk } from 'react-icons/fa';
 
 export const Footer: FC = (): ReactElement => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Box
       sx={{
-         width: "100%",
-        // height: "10vh",
+        width: "100%",
+        height: "10vh",
         backgroundColor: "#00ab84",
-        border: "1px solid black",
-        // paddingTop: "1rem",
+        borderTop: "1px solid black",
+        padding: "1rem 0",
         position: "static",
-
       }}
     >
       <Container>
@@ -22,74 +24,58 @@ export const Footer: FC = (): ReactElement => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent:"space-around"
+            justifyContent: "space-around",
           }}
         >
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              // gap: "rem",
-            }}
-          >
-            <Box
-              sx={{ display: "flex", justifyContent: "center" }}
+          <Box sx={{ display: "flex", justifyContent: "center", gap: 3 }}>
+                <IconButton
+      aria-label="VKontakte"
+      component={Link}
+      href="https://vk.com/talad_plants"
+      target="_blank"
+      rel="noopener noreferrer"
+      color="inherit"
+    >
+      <FaVk size={24} />
+    </IconButton>
+            <IconButton
+              aria-label="WhatsApp"
+              component={Link}
+              href="mailto:talad_plants@mail.ru"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="inherit"
             >
-              <IconButton
-                aria-label="Instagram"
-                component={Link}
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                color="inherit"
-              >
-                <Instagram />
-              </IconButton>
-              <IconButton
-                aria-label="Twitter"
-                component={Link}
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                color="inherit"
-              >
-                <WhatsApp />
-              </IconButton>
-              <IconButton
-                aria-label="YouTube"
-                component={Link}
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                color="inherit"
-              >
-                <Telegram />
-              </IconButton>
-            </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              // gap: "1rem",
-            }}
-          >
-            <Box>
-              <img src="/LOGO circle.png" alt="Logo" style={{ height: 40 }} />
-            </Box>
+              <Email />
+            </IconButton>
+            <IconButton
+              aria-label="Telegram"
+              component={Link}
+              href="https://t.me/talad_plants"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="inherit"
+            >
+              <Telegram />
+            </IconButton>
+          </Box>
 
-            <Typography color="black" variant="h5" fontSize="1rem">
-              Талад - магазин экзотических растений
-            </Typography>
-          </Box>
-          </Box>
-          {/* <Box sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
-            <Typography color="textSecondary" variant="subtitle1">
-            {`${new Date().getFullYear()} `}
-            </Typography>
-          </Box> */}
+          {!isMobile && (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Box>
+                <img src="/LOGO circle.png" alt="Logo" style={{ height: 40 }} />
+              </Box>
+              <Typography color="black" variant="h5" fontSize="1rem" ml={2}>
+                Талад - магазин экзотических растений
+              </Typography>
+            </Box>
+          )}
         </Box>
       </Container>
     </Box>

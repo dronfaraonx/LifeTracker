@@ -10,7 +10,7 @@ const ThankYouModal = ({ open, onClose }) => {
     onClose();
   };
   const handleGoAcc = () => {
-    navigate("/account"); 
+    navigate("/dashboard"); 
     onClose();
   };
 
