@@ -55,7 +55,9 @@ const OrderForm = ({ cart, onClose }) => {
     const cartItems = cart.map((cartItem) => ({
       user_id: user.id,
       plant_id: cartItem.plant_id,
+      name: cartItem.name,
       quantity: cartItem.quantity,
+      photo: cartItem.photo,
       pricePurchanse: cartItem.price,
     }));
     // console.log('plant_id', plant_id);
