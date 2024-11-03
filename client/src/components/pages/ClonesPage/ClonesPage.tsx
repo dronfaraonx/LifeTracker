@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import CloneCard from "../CloneCard/CloneCard";
+// import CloneCard from "../CloneCard/CloneCard";
 import "../ShopList/plant.css";
 import {
   Select,
@@ -11,6 +11,7 @@ import {
   FormControl,
   Slider,
 } from "@mui/material";
+import PlantCard from "../ShopList/PlantCard";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -56,7 +57,7 @@ export default function ClonesPage() {
       <Box sx={{ display: "flex" }}>
         <Box
           sx={{
-            width: "300px",
+            width: "250px",
             padding: "20px",
             borderRight: "2px solid black",
           }}
@@ -125,7 +126,7 @@ export default function ClonesPage() {
 
         <Box className="plant-list" sx={{ padding: "20px" }}>
           {filteredPlants.map((plant) => (
-            <CloneCard key={plant.id} plant={plant} />
+            <PlantCard key={plant.id} plant={plant} />
           ))}
         </Box>
       </Box>

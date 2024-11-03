@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import CloneCard from '../CloneCard/CloneCard';
+// import CloneCard from '../CloneCard/CloneCard';
 import '../ShopList/plant.css';
 import { Select, MenuItem, Typography, Box, InputLabel, FormControl, Slider } from '@mui/material';
 import Plant from '../ShopList/Plant';
+import PlantCard from '../ShopList/PlantCard';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -45,11 +46,11 @@ const filteredPlants = plants.filter(plant => {
   return (
     <Box sx={{ display:"flex", minHeight:"80vh"}}>
      <Box sx={{ display: "flex" }}>
-  <Box sx={{ width: '300px', padding: '20px', borderRight: '2px solid black' }}>
+  <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
-          <InputLabel id="type-select-label">Тип семян</InputLabel>
+          <InputLabel id="type-select-label">Тип растений</InputLabel>
           <Select
             labelId="type-select-label"
             value={plantType}
@@ -107,7 +108,7 @@ const filteredPlants = plants.filter(plant => {
 
       <Box className="plant-list" sx={{ padding: '20px' }}>
         {filteredPlants.map((plant) => (
-          <CloneCard key={plant.id} plant={plant} />
+          <PlantCard key={plant.id} plant={plant} />
         ))}
       </Box>
     </Box>

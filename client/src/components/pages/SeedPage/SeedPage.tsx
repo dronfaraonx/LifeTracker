@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import CloneCard from '../CloneCard/CloneCard';
+// import CloneCard from '../CloneCard/CloneCard';
 import '../SeedCard/plant.css';
 import { Select, MenuItem, Typography, Box, InputLabel, FormControl, Slider } from '@mui/material';
+import PlantCard from '../ShopList/PlantCard';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -45,7 +46,7 @@ export default function SeedPage() {
   return (
  <Box sx={{ display:"flex", minHeight:"80vh"}}>
      <Box sx={{ display: "flex" }}>
-  <Box sx={{ width: '300px', padding: '20px', borderRight: '2px solid black' }}>
+  <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
@@ -104,10 +105,9 @@ export default function SeedPage() {
     </FormControl>
         </Box>
 
-        {/* <Filters plants={plants} setPlants={setPlants/> */}
       <Box className="plant-list">
         {filteredPlants.map((plant) => (
-          <CloneCard key={plant.id} plant={plant} />
+          <PlantCard key={plant.id} plant={plant} />
         ))}
       </Box>
     </Box>
