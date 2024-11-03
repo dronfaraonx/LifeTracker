@@ -66,6 +66,11 @@ const OrderForm = ({ cart, onClose }) => {
          await axios.post(`${API_URL}/api/userInfo`, userInfo, { withCredentials: true });
          eraseCartCounter()
       setThankYou(true)
+      await axios.post(`${API_URL}/api/send-order`, {
+        cart: cartItems,
+        total: calculateTotal(cartItems),
+        user: userInfo,
+      })
     } catch (error) {
       console.error("Ошибка создания заказа:", error);
     }
