@@ -49,7 +49,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
 
       const res = await axios.post(endpoint, requestData, { withCredentials: true });
       setUser(res.data.user);
-      navigate(-1);
+      navigate('/');
       onClose();
     } catch (error) {
       console.log(error);
@@ -67,7 +67,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle sx={{ margin: '16px' }}>
-        {activeTab === 0 ? "Вход" : "Регистрация"}
+       Чтобы купить растения, надо быть зарегистрированным пользователем
       </DialogTitle>
       <DialogContent>
         <Tabs value={activeTab} onChange={handleTabChange} centered>
@@ -117,7 +117,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
               type="password"
               required
               error={formData.repeat.length > 0 && formData.repeat !== formData.password}
-              helperText={formData.repeat.length > 0 && formData.repeat !== formData.password ? "Пароли должны совпадать" : ""}
+              helperText={formData.repeat.length > 3 && formData.repeat !== formData.password ? "Пароли должны совпадать" : ""}
             />
           )}
 

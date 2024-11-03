@@ -13,10 +13,15 @@ const Layout = React.lazy(() => import('./components/Layout'));
 const Cart = React.lazy(() => import('./components/pages/Cart/Cart'));
 const BuyerPage = React.lazy(() => import('./components/pages/BuyerPage/BuyerPage'));
 const ClonesPage = React.lazy(() => import('./components/pages/ClonesPage/ClonesPage'))
+const OrderDashboard = React.lazy(() => import('./components/pages/BuyerPage/OrderDashboard'))
+const PlantsPage = React.lazy(() => import('./components/pages/PlantsPage/PlantsPage'))
+const SeedPage = React.lazy(() => import('./components/pages/SeedPage/SeedPage'))
+const FAQPage = React.lazy(() => import('./components/pages/BuyerPage/FaqPage'))
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
-import SeedPage from './components/pages/SeedPage/SeedPage';
+import PersonalInfoPage from './components/pages/BuyerPage/PersonalInfoPage';
+
 
 
 function App() {
@@ -57,7 +62,7 @@ function App() {
           ),
         },
         {
-          path: "/clones",
+          path: "/allclones",
           element: (
             <Suspense fallback={<Loading />}>
               <ClonesPage />
@@ -65,10 +70,18 @@ function App() {
           ),
         },
         {
-          path: "/seeds",
+          path: "/allseeds",
           element: (
             <Suspense fallback={<Loading />}>
               <SeedPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/allplants",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <PlantsPage />
             </Suspense>
           ),
         },
@@ -89,7 +102,32 @@ function App() {
           )
         },
         {
-          path: "/account",
+          path: "/dashboard",
+          element: (
+            <Suspense fallback={<Loading/>}>
+              <OrderDashboard/>
+            </Suspense>
+          )
+        },
+        {
+          path: "/myaccount",
+          element: (
+            <Suspense fallback={<Loading/>}>
+              <PersonalInfoPage/>
+            </Suspense>
+          )
+        },
+         {
+          path: "/info",
+          element: (
+            <Suspense fallback={<Loading/>}>
+              <FAQPage/>
+            </Suspense>
+          )
+        },
+
+         {
+          path: "/order-details/:uuid_order",
           element: (
             <Suspense fallback={<Loading/>}>
                 <BuyerPage />

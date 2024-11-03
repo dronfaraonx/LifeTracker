@@ -60,13 +60,13 @@ export default function PlantCard({ plant }) {
             image={plant.photo}
             className="plant-image"
           />
-          <CardContent className="card-content">
-            <Typography variant="h1" className="plant-name">
+          <CardContent className="card-content" >
+            <Typography variant="h1" className="plant-name" >
               {plant.type} 
               <br/>
               {plant.name}
             </Typography>
-            <Typography variant="body2" color="textSecondary">
+            <Typography variant="h6" color="textSecondary">
               {plant.price ? `${plant.price}р.` : 'Цена не указана'}
             </Typography>
             </CardContent>
@@ -77,7 +77,7 @@ export default function PlantCard({ plant }) {
               color="primary"
               onClick={handleOpenModal}
               aria-label="добавить в корзину"
-              style={{ position: 'absolute', bottom: '15px', right: '10px', border:'1px solid black'}} 
+              style={{ position: 'absolute', bottom: '55px', right: '10px', border:'1px solid black', color: '#00ab84'}} 
             >
               <ShoppingCartIcon />
             </IconButton>

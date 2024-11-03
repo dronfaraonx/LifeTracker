@@ -6,6 +6,7 @@ export interface CartContextType {
   cartCounter: number;
   handleAddtoCartCounter: (quantity: number) => void;
   handleRemoveFromCartCounter: (quantity: number) => void;
+  eraseCartCounter: () => void
 }
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -23,18 +24,28 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
   const [cartCounter, setCartCounter] = useState<number>(0);
   const { user } = useUser();
 
-  useEffect(() => {
-    const fetchQuantity = async() => {
-      try {
-        const response = await axios.get(`${API_URL}/api/plants`);
-        const fetchedQuantityData = response.data;
-        // const total = fetchedQuantityData.reduce((acc, plant) => acc + plant.quantity, 0)
 
-      } catch (error) {
-        
+  useEffect(() => {
+    const fetchCart = async () => {
+      if (user?.id) {
+        try {
+          const response = await axios.get(`${API_URL}/api/cart/check/${user.id}`);
+          const totalQuantity = response.data.reduce((total, oneItem) => total + oneItem.quantity, 0);
+          
+          setCartCounter(totalQuantity);
+          localStorage.setItem(`cartCount_${user.id}`, totalQuantity.toString());
+
+          console.log('Fetched cart quantities: ', response.data);
+        } catch (error) {
+          console.error("Ошибка при получении корзины:", error);
+        }
       }
-    }
-  })
+    };
+
+    fetchCart();
+  }, [user]);
+
+
 
   useEffect(() => {
     if (user?.id) {
@@ -51,16 +62,10 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
       const currentCount = parseInt(localStorage.getItem(`cartCount_${user.id}`) || '0', 10);
       
       const newCount = currentCount + quantity;
-      console.log("neqcount", newCount);
-      console.log("activeQuantity: ",quantity);
-      console.log("current ",currentCount);
-      
-      
-
+    
       localStorage.setItem(`cartCount_${user.id}`, newCount.toString()); 
       setCartCounter(newCount);
       
-
       console.log(`Новый заказ для юзера ${user.id}:`, newCount);
     } else {
       console.log('Не залогинен');
@@ -76,9 +81,18 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
     }
   };
 
+  const eraseCartCounter = () => {
+    if (user?.id) {
+      localStorage.removeItem(`cartCount_${user.id}`);
+      setCartCounter(0);
+      console.log(`Корзина пользователя ${user.id} была очищена.`);
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ cartCounter, handleAddtoCartCounter, handleRemoveFromCartCounter }}>
+    <CartContext.Provider value={{ cartCounter, handleAddtoCartCounter, handleRemoveFromCartCounter, eraseCartCounter }}>
       {children}
     </CartContext.Provider>
   );
 };
+

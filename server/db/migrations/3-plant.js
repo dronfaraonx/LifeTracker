@@ -13,10 +13,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       photo: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       price: {
         type: Sequelize.INTEGER
@@ -25,7 +25,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       category_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER, 
+        references: {
+          model: 'Categories',
+          key: 'id'
+        }
       },
       type: {
         type: Sequelize.STRING

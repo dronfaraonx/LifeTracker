@@ -19,9 +19,11 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Cart() {
   const { user } = useUser();
-  const {handleAddToCartCounter} = useCart()
+  const { handleAddtoCartCounter, handleRemoveFromCartCounter} = useCart()
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
+console.log('cart: ',cart);
+
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -35,7 +37,6 @@ export default function Cart() {
     fetchCart();
   }, [user?.id]);
 
-  const { handleRemoveFromCartCounter } = useCart();
 
 const handleRemove = async (plantId: number) => {
   try {
@@ -72,7 +73,7 @@ const handleRemove = async (plantId: number) => {
           item.id === plantId ? { ...item, quantity: newQuantity } : item
     )
     setCart( updateQuantity);
-    handleAddToCartCounter(change);
+    handleAddtoCartCounter(change);
     } catch (error) {
       console.log("Ошибка при обновлении количества растения в корзине", error);
     }

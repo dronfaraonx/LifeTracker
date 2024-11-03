@@ -1,38 +1,37 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 // import CloneCard from '../CloneCard/CloneCard';
-import '../SeedCard/plant.css';
+import '../ShopList/plant.css';
 import { Select, MenuItem, Typography, Box, InputLabel, FormControl, Slider } from '@mui/material';
+import Plant from '../ShopList/Plant';
 import PlantCard from '../ShopList/PlantCard';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export default function SeedPage() {
-  const [plants, setPlants] = useState([]);
-  const [plantType, setPlantType] = useState('');
-    const [priceRange, setPriceRange] = useState([0, 500]); 
-  const [maxPrice, setMaxPrice] = useState(500); 
-  const [size, setSize] = useState('');
-  const [lightRequirement, setLightRequirement] = useState('');
+export default function PlantPage() {
+  const [plants, setPlants] = useState<Plant[]>([]);
+  const [plantType, setPlantType] = useState<string>('');
+      const [priceRange, setPriceRange] = useState<number[]>([0, 500]); 
+  const [maxPrice, setMaxPrice] = useState<number>(500); 
+  const [size, setSize] = useState<string>('');
+  const [lightRequirement, setLightRequirement] = useState<string>('');
 
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/allseeds`);
-        const seedsData = response.data
-        setPlants(seedsData);
-              const highestPrice = Math.max(...seedsData.map(plant => plant.price));
+        const response = await axios.get(`${API_URL}/api/allplants`);
+        const PlantsData = response.data
+        setPlants(PlantsData);
+              const highestPrice = Math.max(...PlantsData.map(plant => plant.price));
       setMaxPrice(highestPrice);
-      setPriceRange([0, highestPrice]);
-      } catch (error) {
+      setPriceRange([0, highestPrice]);      } catch (error) {
         console.error('Ошибка при загрузке растений:', error);
       }
     };
 
     fetchPlants();
   }, []);
-
-    const filteredPlants = plants.filter(plant => {
+const filteredPlants = plants.filter(plant => {
     const matchesType = plantType ? plant.type === plantType : true;
     const matchesPrice = plant.price >= priceRange[0] && plant.price <= priceRange[1];
     const matchesSize = size ? plant.size === size : true;
@@ -43,14 +42,15 @@ export default function SeedPage() {
 
   const uniqueTypes = [...new Set(plants.map((plant) => plant.type))];
 
+
   return (
- <Box sx={{ display:"flex", minHeight:"80vh"}}>
+    <Box sx={{ display:"flex", minHeight:"80vh"}}>
      <Box sx={{ display: "flex" }}>
   <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
 
         <FormControl fullWidth sx={{ marginBottom: '20px', width: '200px' }}>
-          <InputLabel id="type-select-label">Тип семян</InputLabel>
+          <InputLabel id="type-select-label">Тип растений</InputLabel>
           <Select
             labelId="type-select-label"
             value={plantType}
@@ -105,7 +105,8 @@ export default function SeedPage() {
     </FormControl>
         </Box>
 
-      <Box className="plant-list">
+
+      <Box className="plant-list" sx={{ padding: '20px' }}>
         {filteredPlants.map((plant) => (
           <PlantCard key={plant.id} plant={plant} />
         ))}

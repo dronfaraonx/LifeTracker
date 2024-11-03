@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'; // Import the ShoppingCartIcon
-import './plant.css'; 
+import './../ShopList/plant.css'; 
 import { Link } from 'react-router-dom';
 
 export default function CloneCard({ plant }) {
@@ -34,7 +34,7 @@ export default function CloneCard({ plant }) {
               color="primary"
               onClick={handleAddToCart}
               aria-label="добавить в корзину"
-              style={{ position: 'absolute', bottom: '15px', right: '10px', border:'1px solid black'}} 
+              style={{ position: 'absolute', bottom: '65px', right: '10px', border:'1px solid black', color: '#00ab84'}} 
             >
               <ShoppingCartIcon />
             </IconButton>
