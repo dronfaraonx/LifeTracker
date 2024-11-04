@@ -93,7 +93,7 @@ export default function Navbar() {
                   }}
                   onClick={handlePlantsClick}
                 >
-                  Растения
+                  РАСТЕНИЯ
                 </Typography>
                 <Typography
                   variant="body1"
@@ -114,7 +114,7 @@ export default function Navbar() {
                   }}
                   onClick={handleClonesClick}
                 >
-                  Клоны
+                  КЛОНЫ
                 </Typography>
                 <Typography
                   variant="body1"
@@ -135,7 +135,7 @@ export default function Navbar() {
                   }}
                   onClick={handleSeedsClick}
                 >
-                  Семена
+                  СЕМЕНА
                 </Typography>
               </>
             ) : (

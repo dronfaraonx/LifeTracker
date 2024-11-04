@@ -14,6 +14,7 @@ import {
 import { Card } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckoutForm from "../OrderForm/OrderForm";
+import { bottom } from "@popperjs/core";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -248,8 +249,8 @@ export default function Cart() {
           <Box sx={{ flex: 1, padding: "20px" }}>
             <CheckoutForm cart={cart} onClose={() => setShowOrderForm(false)} />
           </Box>
-          <Box sx={{ flex: 1, padding: "20px", textAlign: "center" }}>
-            <Typography variant="h5">Список товаров в корзине</Typography>
+          <Box sx={{ flex: 1, padding: "20px", textAlign: "center"}}>
+            <Typography variant="h5" sx={{ marginBottom: "10px" }}>Список товаров в корзине:</Typography>
             <Stack spacing={2}>
               {cart.map((cartPlant) => (
                 <Card
@@ -279,7 +280,7 @@ export default function Cart() {
                       alt={cartPlant.name}
                     />
                   )}
-                  <CardContent sx={{ flex: 1, padding: "5px", width: "20vh" }}>
+                  <CardContent sx={{ flex: 1, padding: "10px", width: "20vh" }}>
                     <Typography variant="h6" component="div">
                       {cartPlant.type} {cartPlant.name}
                     </Typography>
