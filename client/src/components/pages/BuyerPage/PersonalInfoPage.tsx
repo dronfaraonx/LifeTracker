@@ -249,6 +249,7 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
               label="Дом"
               variant="outlined"
               fullWidth
+              required
               value={house}
               onChange={(e) => setHouse(e.target.value)}
               onBlur={() => setTouched({ ...touched, house: true })}
@@ -272,6 +273,7 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
               label="Индекс"
               variant="outlined"
               fullWidth
+              required
               value={zip}
               onChange={(e) => setZip(e.target.value)}
               onBlur={() => setTouched({ ...touched, zip: true })}
@@ -288,12 +290,14 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
           <Box sx={{ marginTop: "20px" }}>
             <FormControl
               fullWidth
+              required
               variant="outlined"
               sx={{ marginBottom: "16px" }}
             >
               <InputLabel>Способ связи</InputLabel>
               <Select
                 label="Способ связи"
+                
                 value={contactMethod}
                 onChange={handleContactMethodChange}
               >
