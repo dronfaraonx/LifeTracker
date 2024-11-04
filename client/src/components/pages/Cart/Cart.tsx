@@ -22,7 +22,6 @@ export default function Cart() {
   const { handleAddtoCartCounter, handleRemoveFromCartCounter } = useCart();
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
-  console.log("cart: ", cart);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -44,7 +43,6 @@ export default function Cart() {
       await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
       setCart((prevCart) => {
         const updatedCart = prevCart.filter((item) => item.id !== plantId);
-        // Закрыть форму, если корзина пустая
         if (updatedCart.length === 0) {
           setShowOrderForm(false);
         }
@@ -76,6 +74,13 @@ export default function Cart() {
     } catch (error) {
       console.log("Ошибка при обновлении количества растения в корзине", error);
     }
+  };
+
+
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => {
+      return total + (item.price ? item.price * item.quantity : 0);
+    }, 0);
   };
 
   return (
@@ -132,19 +137,14 @@ export default function Cart() {
                       {cartPlant.type} {cartPlant.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Цена:{" "}
-                      {cartPlant.price
-                        ? `${cartPlant.price}р.`
-                        : "Цена не указана"}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Количество: {cartPlant.quantity || "0"}
+                      Цена: <strong>{cartPlant.price ? `${cartPlant.price}р.` : "Цена не указана"}</strong>
                     </Typography>
                     <Box
                       sx={{
                         display: "flex",
                         alignItems: "center",
                         marginTop: 1,
+                        marginBottom: "10px",
                       }}
                     >
                       <Button
@@ -194,13 +194,17 @@ export default function Cart() {
                       position: "absolute",
                       top: 8,
                       right: 8,
-                      color: "#ff4d4d",
+                      color: "black",
                     }}
                   >
                     <CloseIcon />
                   </IconButton>
                 </Card>
               ))}
+              {/* Итоговая сумма */}
+              <Typography variant="h6" sx={{ marginTop: "20px" }}>
+                Итого к оплате: <strong>{calculateTotal()}р.</strong>
+              </Typography>
             </Stack>
           )}
 
@@ -269,16 +273,14 @@ export default function Cart() {
                       {cartPlant.type} {cartPlant.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Цена:{" "}
-                      {cartPlant.price
-                        ? `${cartPlant.price}р.`
-                        : "Цена не указана"}
+                      Цена: <strong>{cartPlant.price ? `${cartPlant.price}р.` : "Цена не указана"}</strong>
                     </Typography>
                     <Box
                       sx={{
                         display: "flex",
                         alignItems: "center",
                         marginTop: 1,
+                        marginBottom: "10px",
                       }}
                     >
                       <Button
@@ -328,13 +330,16 @@ export default function Cart() {
                       position: "absolute",
                       top: 8,
                       right: 8,
-                      color: "#ff4d4d",
+                      color: "black",
                     }}
                   >
                     <CloseIcon />
                   </IconButton>
                 </Card>
               ))}
+              <Typography variant="h6" sx={{ marginTop: "20px" }}>
+                Итого к оплате: <strong>{calculateTotal()}р.</strong>
+              </Typography>
             </Stack>
           </Box>
         </Box>
