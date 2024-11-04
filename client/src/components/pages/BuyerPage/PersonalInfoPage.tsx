@@ -113,6 +113,9 @@ const PersonalInfoPage = () => {
         { withCredentials: true }
       );
       alert("Пароль успешно обновлен");
+      setOldPassword("")
+      setNewPassword("")
+      setConfirmPassword("")
       setShowPasswordFields(false);
     } catch (error) {
       console.log("Ошибка изменения пароля пользователя", error);
@@ -356,7 +359,7 @@ const PersonalInfoPage = () => {
               margin="normal"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              error={newPassword.length < 6 && newPassword.length > 0}
+              // error={newPassword.length < 6 && newPassword.length > 0}
               helperText={
                 newPassword.length < 6 && newPassword.length > 0
                   ? "Пароль должен содержать минимум 6 символов"
@@ -372,17 +375,17 @@ const PersonalInfoPage = () => {
               margin="normal"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              error={
-                confirmPassword !== newPassword ||
-                (confirmPassword.length < 6 && confirmPassword.length > 0)
-              }
-              helperText={
-                confirmPassword !== newPassword
-                  ? "Пароли не совпадают"
-                  : confirmPassword.length < 6 && confirmPassword.length > 0
-                  ? "Пароль должен содержать минимум 6 символов"
-                  : ""
-              }
+              // error={
+              //   confirmPassword !== newPassword ||
+              //   (confirmPassword.length < 6 && confirmPassword.length > 0)
+              // }
+              // helperText={
+              //   confirmPassword.length < 6 && confirmPassword !== newPassword
+              //     ? "Пароли не совпадают"
+              //     : confirmPassword.length < 6 && confirmPassword.length > 0
+              //     ? "Пароль должен содержать минимум 6 символов"
+              //     : ""
+              // }
             />
 
             <Button
