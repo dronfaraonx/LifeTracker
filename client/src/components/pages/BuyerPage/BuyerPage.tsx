@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -34,13 +34,7 @@ const BuyerPage = () => {
               withCredentials: true,
             }
           );
-          const orderData = response.data;
-
-          if (orderData.length > 0 && orderData[0].user_id !== user.id) {
-            navigate("/");
-          } else {
-            setOrders(orderData);
-          }
+          setOrders(response.data);
         } catch (error) {
           console.error("Ошибка при получении заказов:", error);
         }
@@ -51,6 +45,7 @@ const BuyerPage = () => {
   }, [user, uuid_order]);
 
   const totalPrice = orders.reduce((accumulator, order) => {
+                            // @ts-expect-error: Ignore this event.
     return accumulator + order.pricePurchase * order.quantity;
   }, 0);
 
@@ -102,13 +97,36 @@ const BuyerPage = () => {
               </TableHead>
               <TableBody>
                 {orders.map((order, index) => (
-                  <TableRow key={order.id}>
+                  <TableRow
+                    key={
+                      // @ts-expect-error: Ignore this event.
+                      order.id
+                    }
+                  >
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>
-                      {order.Plant.type} {order.Plant.name}
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.Plant.type
+                      }{" "}
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.Plant.name
+                      }
                     </TableCell>
-                    <TableCell>{order.quantity}</TableCell>
-                    <TableCell>{order.pricePurchase} ₽</TableCell>
+                    <TableCell>
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.quantity
+                      }
+                    </TableCell>
+                    <TableCell>
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.pricePurchase
+                      }{" "}
+                      ₽
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

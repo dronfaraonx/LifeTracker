@@ -1,11 +1,16 @@
-import { PersonAdd, Logout } from "@mui/icons-material";
+import { PersonAdd } from "@mui/icons-material";
 import { Menu, MenuItem, ListItemIcon } from "@mui/material";
-import React from "react";
 import { IoShieldHalfSharp } from "react-icons/io5";
 import LogoutButton from "../../../ui/btns/LogoutBtn";
 import { useNavigate } from "react-router-dom";
 
-export default function AccountModal({ anchorEl, open, onClose }) {
+
+interface AccountModalProps {
+  anchorEl: HTMLElement | null; 
+  open: boolean; 
+  onClose: () => void; 
+}
+export default function AccountModal({ anchorEl, open, onClose }: AccountModalProps) {
   const navigate = useNavigate();
   const handleAccClick = () => {
     navigate('/dashboard');

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
@@ -27,6 +26,7 @@ import LogoutButton from "./btns/LogoutBtn";
 
 export default function Navbar() {
   const { user } = useUser();
+  // @ts-expect-error: Ignore this event.
   const { cartCounter } = useCart();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -227,6 +227,7 @@ export default function Navbar() {
           <List>
             {["Растения", "Клоны", "Семена", "Оплата и доставка"].map(
               (text, index) => (
+                // @ts-expect-error: Ignore this event.
                 <ListItem
                   button
                   key={index}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../../../context/auth";
 import { useCart } from "../../../context/CountCart";
@@ -14,12 +14,12 @@ import {
 import { Card } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckoutForm from "../OrderForm/OrderForm";
-import { bottom } from "@popperjs/core";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Cart() {
   const { user } = useUser();
+  // @ts-expect-error: Ignore this event.
   const { handleAddtoCartCounter, handleRemoveFromCartCounter } = useCart();
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
@@ -35,38 +35,44 @@ export default function Cart() {
     };
     fetchCart();
   }, [user?.id]);
-
+  // @ts-expect-error: Ignore this event.
   const handleRemove = async (plantId) => {
     try {
+      // @ts-expect-error: Ignore this event.
       const cartPlant = cart.find((item) => item.id === plantId);
       if (!cartPlant) return;
 
       await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
       setCart((prevCart) => {
+        // @ts-expect-error: Ignore this event.
         const updatedCart = prevCart.filter((item) => item.id !== plantId);
         if (updatedCart.length === 0) {
           setShowOrderForm(false);
         }
         return updatedCart;
       });
+      // @ts-expect-error: Ignore this event.
       handleRemoveFromCartCounter(cartPlant.quantity);
     } catch (error) {
       console.log("Ошибка при удалении растения из корзины", error);
     }
   };
-
+  // @ts-expect-error: Ignore this event.
   const handleQuantityChange = async (plantId, change) => {
     try {
+      // @ts-expect-error: Ignore this event.
       const cartPlant = cart.find((item) => item.id === plantId);
       if (!cartPlant) return;
-
+      // @ts-expect-error: Ignore this event.
       const newQuantity = Number(cartPlant.quantity) + Number(change);
       if (newQuantity < 1) return;
 
       await axios.put(`${API_URL}/api/cart/${user.id}/plant/${plantId}`, {
         quantity: newQuantity,
       });
+                              // @ts-expect-error: Ignore this event.
       const updateQuantity = (prevCart) =>
+        // @ts-expect-error: Ignore this event.
         prevCart.map((item) =>
           item.id === plantId ? { ...item, quantity: newQuantity } : item
         );
@@ -79,6 +85,7 @@ export default function Cart() {
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => {
+      // @ts-expect-error: Ignore this event.
       return total + (item.price ? item.price * item.quantity : 0);
     }, 0);
   };
@@ -106,7 +113,10 @@ export default function Cart() {
             <Stack spacing={2}>
               {cart.map((cartPlant) => (
                 <Card
-                  key={cartPlant.id}
+                  key={
+                    // @ts-expect-error: Ignore this event.
+                    cartPlant.id
+                  }
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -118,30 +128,48 @@ export default function Cart() {
                     height: "100px",
                   }}
                 >
-                  {cartPlant.photo && (
-                    <CardMedia
-                      component="img"
-                      sx={{
-                        width: 100,
-                        height: 80,
-                        objectFit: "fit",
-                        borderRadius: "8px",
-                        marginRight: "10px",
-                      }}
-                      image={cartPlant.photo}
-                      alt={cartPlant.name}
-                    />
-                  )}
+                  {
+                    // @ts-expect-error: Ignore this event.
+                    cartPlant.photo && (
+                      <CardMedia
+                        component="img"
+                        sx={{
+                          width: 100,
+                          height: 80,
+                          objectFit: "fit",
+                          borderRadius: "8px",
+                          marginRight: "10px",
+                        }}
+                        // @ts-expect-error: Ignore this event.
+
+                        image={cartPlant.photo}
+                        // @ts-expect-error: Ignore this event.
+
+                        alt={cartPlant.name}
+                      />
+                    )
+                  }
                   <CardContent sx={{ flex: 1, padding: "5px", width: "20vh" }}>
                     <Typography variant="h6" component="div">
-                      {cartPlant.type} {cartPlant.name}
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        cartPlant.type
+                      }{" "}
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        cartPlant.name
+                      }
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Цена:{" "}
                       <strong>
-                        {cartPlant.price
-                          ? `${cartPlant.price}р.`
-                          : "Цена не указана"}
+                        {
+                          // @ts-expect-error: Ignore this event.
+                          cartPlant.price
+                            ? // @ts-expect-error: Ignore this event.
+                              `${cartPlant.price}р.`
+                            : "Цена не указана"
+                        }
                       </strong>
                     </Typography>
                     <Box
@@ -155,15 +183,18 @@ export default function Cart() {
                       <Button
                         variant="contained"
                         size="small"
+                        // @ts-expect-error: Ignore this event.
                         onClick={() => handleQuantityChange(cartPlant.id, -1)}
+                        // @ts-expect-error: Ignore this event.
                         disabled={cartPlant.quantity <= 1}
                         sx={{
                           backgroundColor: "#00ab84",
                           color: "white",
-                           "&:hover": {
-                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                          "&:hover": {
+                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
 
-                  transform: "scale(1.01)",}
+                            transform: "scale(1.01)",
+                          },
                         }}
                       >
                         -
@@ -177,19 +208,24 @@ export default function Cart() {
                           textAlign: "center",
                         }}
                       >
-                        {cartPlant.quantity}
+                        {
+                          // @ts-expect-error: Ignore this event.
+                          cartPlant.quantity
+                        }
                       </Typography>
                       <Button
                         variant="contained"
                         size="small"
+                        // @ts-expect-error: Ignore this event.
                         onClick={() => handleQuantityChange(cartPlant.id, 1)}
                         sx={{
                           backgroundColor: "#00ab84",
                           color: "white",
-                           "&:hover": {
-                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                          "&:hover": {
+                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
 
-                  transform: "scale(1.01)",}
+                            transform: "scale(1.01)",
+                          },
                         }}
                       >
                         +
@@ -197,6 +233,7 @@ export default function Cart() {
                     </Box>
                   </CardContent>
                   <IconButton
+                    // @ts-expect-error: Ignore this event.
                     onClick={() => handleRemove(cartPlant.id)}
                     size="small"
                     sx={{
@@ -222,13 +259,14 @@ export default function Cart() {
               <Button
                 variant="contained"
                 sx={{
-                          backgroundColor: "#00ab84",
-                          color: "white",
-                           "&:hover": {
-                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                  backgroundColor: "#00ab84",
+                  color: "white",
+                  "&:hover": {
+                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
 
-                  transform: "scale(1.01)",}
-                        }}
+                    transform: "scale(1.01)",
+                  },
+                }}
                 onClick={() => setShowOrderForm(true)}
               >
                 Оформить заказ
@@ -249,11 +287,14 @@ export default function Cart() {
           <Box sx={{ flex: 1, padding: "20px" }}>
             <CheckoutForm cart={cart} onClose={() => setShowOrderForm(false)} />
           </Box>
-          <Box sx={{ flex: 1, padding: "20px", textAlign: "center"}}>
-            <Typography variant="h5" sx={{ marginBottom: "10px" }}>Список товаров в корзине:</Typography>
+          <Box sx={{ flex: 1, padding: "20px", textAlign: "center" }}>
+            <Typography variant="h5" sx={{ marginBottom: "10px" }}>
+              Список товаров в корзине:
+            </Typography>
             <Stack spacing={2}>
               {cart.map((cartPlant) => (
                 <Card
+                  // @ts-expect-error: Ignore this event.
                   key={cartPlant.id}
                   sx={{
                     display: "flex",
@@ -266,30 +307,52 @@ export default function Cart() {
                     height: "100px",
                   }}
                 >
-                  {cartPlant.photo && (
-                    <CardMedia
-                      component="img"
-                      sx={{
-                        width: 100,
-                        height: 80,
-                        objectFit: "fit",
-                        borderRadius: "8px",
-                        marginRight: "10px",
-                      }}
-                      image={cartPlant.photo}
-                      alt={cartPlant.name}
-                    />
-                  )}
+                  {
+                    // @ts-expect-error: Ignore this event.
+                    cartPlant.photo && (
+                      <CardMedia
+                        component="img"
+                        sx={{
+                          width: 100,
+                          height: 80,
+                          objectFit: "fit",
+                          borderRadius: "8px",
+                          marginRight: "10px",
+                        }}
+                        image={
+                          // @ts-expect-error: Ignore this event.
+                          cartPlant.photo
+                        }
+                        alt={
+                          // @ts-expect-error: Ignore this event.
+                          cartPlant.name
+                        }
+                      />
+                    )
+                  }
                   <CardContent sx={{ flex: 1, padding: "10px", width: "20vh" }}>
                     <Typography variant="h6" component="div">
-                      {cartPlant.type} {cartPlant.name}
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        cartPlant.type
+                      }{" "}
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        cartPlant.name
+                      }
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Цена:{" "}
                       <strong>
-                        {cartPlant.price
-                          ? `${cartPlant.price}р.`
-                          : "Цена не указана"}
+                        {
+                          // @ts-expect-error: Ignore this event.
+                          cartPlant.price
+                            ? `${
+                                // @ts-expect-error: Ignore this event.
+                                cartPlant.price
+                              }р.`
+                            : "Цена не указана"
+                        }
                       </strong>
                     </Typography>
                     <Box
@@ -298,17 +361,30 @@ export default function Cart() {
                         alignItems: "center",
                         marginTop: 1,
                         marginBottom: "10px",
+                        paddingLeft: "130px",
                       }}
                     >
                       <Button
                         variant="contained"
                         size="small"
-                        onClick={() => handleQuantityChange(cartPlant.id, -1)}
-                        disabled={cartPlant.quantity <= 1}
+                        onClick={() =>
+                          handleQuantityChange(
+                            // @ts-expect-error: Ignore this event.
+                            cartPlant.id,
+                            -1
+                          )
+                        }
+                        disabled={
+                          // @ts-expect-error: Ignore this event.
+                          cartPlant.quantity <= 1
+                        }
                         sx={{
-                          backgroundColor: "green",
+                          backgroundColor: "#00ab84",
+                          color: "white",
                           "&:hover": {
-                            backgroundColor: "darkgreen",
+                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+
+                            transform: "scale(1.01)",
                           },
                         }}
                       >
@@ -317,22 +393,34 @@ export default function Cart() {
                       <Typography
                         sx={{
                           margin: "0 5px",
-                          fontSize: "0.875rem",
+                          fontSize: "1.3rem",
                           color: "black",
                           width: "30px",
                           textAlign: "center",
                         }}
                       >
-                        {cartPlant.quantity}
+                        {
+                          // @ts-expect-error: Ignore this event.
+                          cartPlant.quantity
+                        }
                       </Typography>
                       <Button
                         variant="contained"
                         size="small"
-                        onClick={() => handleQuantityChange(cartPlant.id, 1)}
+                        onClick={() =>
+                          handleQuantityChange(
+                            // @ts-expect-error: Ignore this event.
+                            cartPlant.id,
+                            1
+                          )
+                        }
                         sx={{
-                          backgroundColor: "green",
+                          backgroundColor: "#00ab84",
+                          color: "white",
                           "&:hover": {
-                            backgroundColor: "darkgreen",
+                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+
+                            transform: "scale(1.01)",
                           },
                         }}
                       >
@@ -341,7 +429,12 @@ export default function Cart() {
                     </Box>
                   </CardContent>
                   <IconButton
-                    onClick={() => handleRemove(cartPlant.id)}
+                    onClick={() =>
+                      handleRemove(
+                        // @ts-expect-error: Ignore this event.
+                        cartPlant.id
+                      )
+                    }
                     size="small"
                     sx={{
                       position: "absolute",

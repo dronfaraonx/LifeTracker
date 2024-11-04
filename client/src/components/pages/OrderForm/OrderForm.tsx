@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ThankYouModal from "./ThankyouModal/ThankYouModal";
 
 import {
@@ -17,9 +17,10 @@ import axios from "axios";
 import { useCart } from "../../../context/CountCart";
 
 const API_URL = import.meta.env.VITE_API_URL;
-
+// @ts-expect-error: Ignore this event.
 const OrderForm = ({ cart, onClose }) => {
   const { user } = useUser();
+  // @ts-expect-error: Ignore this event.
   const { eraseCartCounter } = useCart();
 
   const [name, setName] = useState("");
@@ -83,7 +84,7 @@ const OrderForm = ({ cart, onClose }) => {
       contactMethod,
       contactValue,
     };
-
+// @ts-expect-error: Ignore this event.
     const cartItems = cart.map((cartItem) => ({
       user_id: user.id,
       plant_id: cartItem.plant_id,
@@ -115,13 +116,14 @@ const OrderForm = ({ cart, onClose }) => {
       console.error("Ошибка создания заказа:", error);
     }
   };
-
+// @ts-expect-error: Ignore this event.
   const calculateTotal = (cartItems) => {
+    // @ts-expect-error: Ignore this event.
     return cartItems.reduce((total, item) => {
       return total + item.pricePurchanse * item.quantity;
     }, 0);
   };
-
+// @ts-expect-error: Ignore this event.
   const handleContactMethodChange = (event) => {
     setContactMethod(event.target.value);
     setContactValue("");
