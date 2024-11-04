@@ -55,8 +55,10 @@ const OrderDashboard = () => {
       uuid_order: uniqueOrder,
       createdAt: order ? order.createdAt : null,
       items: order ? order.items : [],
+      status: order ? order.status : ""
     };
   });
+
 
   const handleOrderClick = (uuid) => {
     navigate(`/order-details/${uuid}`);
@@ -118,15 +120,15 @@ const OrderDashboard = () => {
                       <Typography
                         variant="caption"
                         sx={{
-                          bgcolor: "#c6f6d5",
-                          color: "black",
+                          bgcolor: "#fff3cd",
+                          color: "#856404",
                           borderRadius: 1,
                           px: 1,
                           py: 0.5,
                           fontSize: "1.2rem",
                         }}
                       >
-                        Отправлено
+                        Обработка заказа
                       </Typography>
                     </Grid>
                     <Grid item xs={4}>
