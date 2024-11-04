@@ -76,7 +76,6 @@ export default function Cart() {
     }
   };
 
-
   const calculateTotal = () => {
     return cart.reduce((total, item) => {
       return total + (item.price ? item.price * item.quantity : 0);
@@ -86,7 +85,7 @@ export default function Cart() {
   return (
     <div
       style={{
-minHeight: "calc(100vh - 10vh - 5.3vh)",
+        minHeight: "calc(100vh - 10vh - 5.3vh)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -137,7 +136,12 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
                       {cartPlant.type} {cartPlant.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Цена: <strong>{cartPlant.price ? `${cartPlant.price}р.` : "Цена не указана"}</strong>
+                      Цена:{" "}
+                      <strong>
+                        {cartPlant.price
+                          ? `${cartPlant.price}р.`
+                          : "Цена не указана"}
+                      </strong>
                     </Typography>
                     <Box
                       sx={{
@@ -153,10 +157,12 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
                         onClick={() => handleQuantityChange(cartPlant.id, -1)}
                         disabled={cartPlant.quantity <= 1}
                         sx={{
-                          backgroundColor: "green",
-                          "&:hover": {
-                            backgroundColor: "darkgreen",
-                          },
+                          backgroundColor: "#00ab84",
+                          color: "white",
+                           "&:hover": {
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+
+                  transform: "scale(1.01)",}
                         }}
                       >
                         -
@@ -164,7 +170,7 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
                       <Typography
                         sx={{
                           margin: "0 5px",
-                          fontSize: "0.875rem",
+                          fontSize: "1.3rem",
                           color: "black",
                           width: "30px",
                           textAlign: "center",
@@ -177,10 +183,12 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
                         size="small"
                         onClick={() => handleQuantityChange(cartPlant.id, 1)}
                         sx={{
-                          backgroundColor: "green",
-                          "&:hover": {
-                            backgroundColor: "darkgreen",
-                          },
+                          backgroundColor: "#00ab84",
+                          color: "white",
+                           "&:hover": {
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+
+                  transform: "scale(1.01)",}
                         }}
                       >
                         +
@@ -213,10 +221,13 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: "green",
-                  color: "white",
-                  marginBottom: "20px",
-                }}
+                          backgroundColor: "#00ab84",
+                          color: "white",
+                           "&:hover": {
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+
+                  transform: "scale(1.01)",}
+                        }}
                 onClick={() => setShowOrderForm(true)}
               >
                 Оформить заказ
@@ -273,7 +284,12 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
                       {cartPlant.type} {cartPlant.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Цена: <strong>{cartPlant.price ? `${cartPlant.price}р.` : "Цена не указана"}</strong>
+                      Цена:{" "}
+                      <strong>
+                        {cartPlant.price
+                          ? `${cartPlant.price}р.`
+                          : "Цена не указана"}
+                      </strong>
                     </Typography>
                     <Box
                       sx={{
