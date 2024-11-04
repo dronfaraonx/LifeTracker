@@ -11,10 +11,10 @@ export const Footer: FC = (): ReactElement => {
     <Box
       sx={{
         width: "100%",
-        height: "10vh",
+        height: "12vh",
         backgroundColor: "#00ab84",
         borderTop: "1px solid black",
-        padding: "1rem 0",
+        // padding: "1rem 0",
         position: "static",
       }}
     >
@@ -27,7 +27,7 @@ export const Footer: FC = (): ReactElement => {
             justifyContent: "space-around",
           }}
         >
-          <Box sx={{ display: "flex", justifyContent: "center", gap: 3 }}>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: 6 }}>
                 <IconButton
       aria-label="VKontakte"
       component={Link}
@@ -69,7 +69,7 @@ export const Footer: FC = (): ReactElement => {
               }}
             >
               <Box>
-                <img src="/LOGO circle.png" alt="Logo" style={{ height: 40 }} />
+                <img src="/LOGO circle.png" alt="Logo" style={{ height: 30 }} />
               </Box>
               <Typography color="black" variant="h5" fontSize="1rem" ml={2}>
                 Талад - магазин экзотических растений

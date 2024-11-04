@@ -17,11 +17,10 @@ const OrderDashboard = React.lazy(() => import('./components/pages/BuyerPage/Ord
 const PlantsPage = React.lazy(() => import('./components/pages/PlantsPage/PlantsPage'))
 const SeedPage = React.lazy(() => import('./components/pages/SeedPage/SeedPage'))
 const FAQPage = React.lazy(() => import('./components/pages/BuyerPage/FaqPage'))
+const PersonalInfoPage = React.lazy(() => import('./components/pages/BuyerPage/PersonalInfoPage'))
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
-import PersonalInfoPage from './components/pages/BuyerPage/PersonalInfoPage';
-
 
 
 function App() {

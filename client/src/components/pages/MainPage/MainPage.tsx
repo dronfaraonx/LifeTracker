@@ -8,7 +8,7 @@ const MainPage = () => {
   return (
     <Box
       sx={{
-        height: "calc(100vh - 10vh - 10vh)",
+        height: "calc(100vh - 10vh - 13.5vh)",
         position: "relative",
         width: "100vw",
         overflow: "hidden",

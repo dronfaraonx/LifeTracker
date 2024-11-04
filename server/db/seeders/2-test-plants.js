@@ -57,7 +57,7 @@ module.exports = {
        {
         name: 'Ливистона Ротундифолия',
         description: 'Семена пальм в наличии',
-        photo: 'https://3.downloader.disk.yandex.ru/preview/cb3f83cdb0e0e357c91276d69f73227955b145779c5782c9751a2604d09c5235/inf/Kb-ufMrpxlCrtaXwph1VnWp0XFOKQgFw6J3y0gIcIZX2WgZkTmq-BW7a8e_nEyjUeBM3_IMwsbJ4Jza0i8qCww%3D%3D?uid=2043300011&filename=2.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: '/images/seeds/4.webp',
         price: 100,
         category_id: 3,
         type: 'Пальма',
@@ -67,7 +67,7 @@ module.exports = {
          {
         name: 'Коперниция Прунифера',
         description: 'lorem',
-        photo: 'https://4.downloader.disk.yandex.ru/preview/7a366d011b9d9c103f819d131595be5a1e833e9ac6ab41b0bafcd60dca203e5d/inf/W_u4qbn5KhgxpyfRJbjfyLCDn9bVsYuK_91ulLrftAJnzXBDFM4FwpC1OztWYCg_vyzrORH49eerPFYy7-jkzg%3D%3D?uid=2043300011&filename=10.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: '/images/seeds/10.webp',
         price: 100,
         category_id: 3,
         type: 'Пальма',
@@ -77,7 +77,7 @@ module.exports = {
        {
         name: 'Дипсис желтоватый',
         description: 'Растение предпочитает яркий рассеянный свет и регулярный полив.',
-        photo: 'https://thumb.cloud.mail.ru/thumb/xw1/3.webp',
+        photo: '/images/seeds/3.webp',
         price: 80,
         category_id: 3,
         type: 'Пальма',
@@ -85,9 +85,9 @@ module.exports = {
         updatedAt: new Date()
        },
        {
-        name: 'Лисий Хвост',
+        name: 'Ликуала Грандис',
         description: 'Растения обладают яркими цветами и нежными листьями, идеальны для тенистых уголков.',
-        photo: 'https://3.downloader.disk.yandex.ru/preview/49b3d156a0fe9fdbd6625dbed497e99603abd3086bc34719d50f4dd164066555/inf/HYaDiSwIJKiyZsTfHEGCOHeSMTpCCBvzK0lSI4rBUyntYXN0Nmct_e3V7dEdOtaTFjjVlu532pHfeUzgNFBVpg%3D%3D?uid=2043300011&filename=12.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: 'https://disk.yandex.ru/i/aOkWx1MErAJv_A',
         price: 80,
         category_id: 3,
         type: 'Пальма',
