@@ -62,7 +62,7 @@ export default function PlantCard({ plant }) {
           <CardMedia
             component="img"
             alt={plant.name}
-            height="300"
+            // height="200"
             image={plant.photo}
             className="plant-image"
           />

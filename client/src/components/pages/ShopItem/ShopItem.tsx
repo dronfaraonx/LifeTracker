@@ -71,7 +71,7 @@ export default function ShopItem() {
   return (
     <div
       className="itemContainer"
-      style={{ height: "calc(100vh - 10vh - 10vh)" }}
+      style={{ minHeight: "calc(100vh - 10vh - 5.3vh)" }}
     >
       <div className="plant-item">
         <div className="imageBlock">
@@ -87,7 +87,9 @@ export default function ShopItem() {
             {plant.type} {plant.name}
           </h5>
           <p>Описание: {plant.description || "Описание не указано."}</p>
-            <p style={{color: "black", fontSize: "2rem"}}>Цена: {plant.price ? `${plant.price}р.` : "Цена не указана"}</p>
+          <p style={{ color: "black", fontSize: "2rem" }}>
+            Цена: {plant.price ? `${plant.price}р.` : "Цена не указана"}
+          </p>
           <div className="plant-card-actions">
             <QuantityInput quantity={quantity} setQuantity={setQuantity} />
             <Button
@@ -97,12 +99,12 @@ export default function ShopItem() {
               sx={{
                 padding: "10px 20px",
                 fontSize: "1rem",
-              backgroundColor: "#00ab84",
+                backgroundColor: "#00ab84",
                 color: "white",
-              borderRadius: "8px",
+                borderRadius: "8px",
                 transition: "background-color 0.3s, transform 0.2s",
                 "&:hover": {
-                                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
 
                   transform: "scale(1.01)",
                 },

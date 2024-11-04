@@ -74,7 +74,8 @@ export default function ShopList() {
   const uniqueCategories = [...new Set(plants.map(plant => plant.type))];
 
   return (
-    <div className='shopListContainer' style={{ position: "relative", minHeight: "calc(100vh - 10vh - 13.5vh)"}}>
+    <div className='shopListContainer' style={{ position: "relative", minHeight: "calc(100vh - 10vh - 5.3vh)",
+}}>
 
       <Box sx={{ display: "flex",  }}>
         <Box sx={{ display: "flex" }}>

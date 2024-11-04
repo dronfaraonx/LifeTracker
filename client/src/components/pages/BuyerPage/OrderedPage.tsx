@@ -44,7 +44,7 @@ const OrderedPage = () => {
 
   return (
     <div className="buyerContainer">
-      <Box sx={{ padding: "20px" }}>
+      <Box sx={{ padding: "20px", minHeight: "calc(100vh - 10vh - 5.3vh)" }}>
         <Typography variant="h4" gutterBottom>
           Мой заказ:
         </Typography>
