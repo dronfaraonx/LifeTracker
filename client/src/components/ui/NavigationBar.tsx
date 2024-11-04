@@ -197,9 +197,9 @@ export default function Navbar() {
 
             {user && (
               <>
-                <IconButton>
+                {/* <IconButton>
                   <FavoriteIcon sx={{ color: "black" }} />
-                </IconButton>
+                </IconButton> */}
                 <IconButton onClick={handleCartClick}>
                   <Badge
                     badgeContent={cartCounter}

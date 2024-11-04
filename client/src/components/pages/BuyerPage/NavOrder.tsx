@@ -17,7 +17,7 @@ export default function NavOrder() {
   };
 
   const handleDiscountClick = () => {
-    navigate(`/discounts`);
+    navigate(`/discount`);
   };
 
   return (

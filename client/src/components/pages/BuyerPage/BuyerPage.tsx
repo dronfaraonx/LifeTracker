@@ -34,7 +34,13 @@ const BuyerPage = () => {
               withCredentials: true,
             }
           );
-          setOrders(response.data);
+          const orderData = response.data;
+
+          if (orderData.length > 0 && orderData[0].user_id !== user.id) {
+            navigate("/");
+          } else {
+            setOrders(orderData);
+          }
         } catch (error) {
           console.error("Ошибка при получении заказов:", error);
         }
@@ -49,12 +55,19 @@ const BuyerPage = () => {
   }, 0);
 
   return (
-   <Box sx={{ display: "flex", minHeight: "84.3vh", backgroundColor:'#f3fff3', justifyContent: "center",
-    fontSize: "1.2rem",
-    "& .MuiTableCell-root": {
-      fontSize: "1.2rem", 
-    }}}>
-      <NavOrder/>
+    <Box
+      sx={{
+        display: "flex",
+        minHeight: "84.3vh",
+        backgroundColor: "#f3fff3",
+        justifyContent: "center",
+        fontSize: "1.2rem",
+        "& .MuiTableCell-root": {
+          fontSize: "1.2rem",
+        },
+      }}
+    >
+      <NavOrder />
 
       <Box
         sx={{
@@ -123,11 +136,7 @@ const BuyerPage = () => {
             У вас нет заказов.
           </Typography>
         )}
-        <Button
-          variant="outlined"
-          onClick={() => navigate(-1)}
-          sx={{ mt: 2 }}
-        >
+        <Button variant="outlined" onClick={() => navigate(-1)} sx={{ mt: 2 }}>
           Назад
         </Button>
       </Box>

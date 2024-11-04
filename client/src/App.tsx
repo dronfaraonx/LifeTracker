@@ -21,6 +21,7 @@ const PersonalInfoPage = React.lazy(() => import('./components/pages/BuyerPage/P
 
 import { UserProvider } from './context/auth';
 import { CartCounterProvider } from './context/CountCart';
+import DiscountPage from './components/pages/BuyerPage/DiscountPage';
 
 
 function App() {
@@ -113,6 +114,14 @@ function App() {
           element: (
             <Suspense fallback={<Loading/>}>
               <PersonalInfoPage/>
+            </Suspense>
+          )
+        },
+        {
+          path: "/discount",
+          element: (
+            <Suspense fallback={<Loading/>}>
+              <DiscountPage/>
             </Suspense>
           )
         },
