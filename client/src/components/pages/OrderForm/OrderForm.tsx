@@ -311,7 +311,6 @@ const OrderForm = ({ cart, onClose }) => {
           backgroundColor: "#00ab84",
           color: "white",
           marginTop: "20px",
-          marginTop: "20px",
           marginBottom: "20px",
           padding: "10px 20px",
         }}

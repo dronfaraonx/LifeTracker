@@ -49,7 +49,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
 
       const res = await axios.post(endpoint, requestData, { withCredentials: true });
       setUser(res.data.user);
-      navigate('/');
+      navigate('/plants');
       onClose();
     } catch (error) {
       console.log(error);

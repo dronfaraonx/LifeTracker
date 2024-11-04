@@ -7,6 +7,7 @@ import { useCart } from '../../../context/CountCart';
 import axios from 'axios';
 import { useUser } from '../../../context/auth';
 import QuantityInput from '../../ui/btns/NumberInput';
+import SignupModal from '../Authorization/modal/SignUpModal';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -16,8 +17,13 @@ export default function PlantCard({ plant }) {
     const {user} = useUser() 
     const [quantity, setQuantity] = useState<number>(1)
     const [open, setOpen] = useState<boolean>(false)
+    const [openReg, setOpenReg] = useState<boolean>(false)
+
   console.log("Quantity: ",quantity);
-  
+
+
+    const handleModelRegOpen = () => setOpenReg(true);
+  const handleModelRegClose = () => setOpenReg(false);
 
       const handleOpenModal = (event: any) => {
     event.stopPropagation(); 
@@ -75,13 +81,14 @@ export default function PlantCard({ plant }) {
         <div>
             <IconButton
               color="primary"
-              onClick={handleOpenModal}
+              onClick={user ? handleOpenModal : handleModelRegOpen}
               aria-label="добавить в корзину"
               style={{ position: 'absolute', bottom: '55px', right: '10px', border:'1px solid black', color: '#00ab84'}} 
             >
               <ShoppingCartIcon />
             </IconButton>
 
+            <SignupModal open={openReg} onClose={handleModelRegClose} />
 
              <Dialog open={open} onClose={handleCloseModal}>
           <DialogTitle>Выберите количество</DialogTitle>
