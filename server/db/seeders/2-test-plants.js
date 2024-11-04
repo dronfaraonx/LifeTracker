@@ -7,7 +7,7 @@ module.exports = {
      {
         name: 'Бамбино Пинк',
         description: 'Алоказия Бамбино — миниатюрное растение с узкими тёмно-зелёными листьями и яркими прожилками. ',
-        photo: 'http://localhost:8000/images/Seeds/Palms/2.png',
+        photo: 'https://sun9-79.userapi.com/s/v1/ig2/7GxuyfqEJYwIYFGBlcQ_MHAcH-tzKbChiXYIogWdLsaZIij9Yti5nvKyQrZE145IZzBkulGPEUcgRvk-BSvhdUUV.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1080x1080,1280x1280,1440x1440,1600x1600&from=bu&u=k6m7wQpg3U6SdHPO35tamE7iJpCE5m4n4t1D7OIQjI4&cs=510x510',
         price: 2900,
         category_id: 2,
         type: 'Алоказия',
@@ -85,12 +85,12 @@ module.exports = {
         updatedAt: new Date()
        },
        {
-        name: 'Ликуала Грандис',
-        description: 'Растения обладают яркими цветами и нежными листьями, идеальны для тенистых уголков.',
-        photo: 'https://disk.yandex.ru/i/aOkWx1MErAJv_A',
-        price: 80,
-        category_id: 3,
-        type: 'Пальма',
+        name: ' Замифолия',
+        description: 'легантное комнатное растение с плотными, глянцевыми листьями, выносливое к недостатку света и засухе, прекрасно очищает воздух.',
+        photo: 'https://sun9-40.userapi.com/s/v1/ig2/h8mwecy-sTNl-r3snYiu4HhqQ9F3rl3XX011Ndu2SFzdkcjMCIdkixh7oirOB4kXc5_OYEVhV4jsXVz5rAHfk_Ur.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1080x1080,1280x1280,1440x1440,1600x1600&from=bu&u=gRZUCeLoxTQ1aWU23CJVT_M82ioX4vVK3yVdFUjloeo&cs=510x510',
+        price: 1200,
+        category_id: 1,
+        type: 'Замиокулькас',
         createdAt: new Date(),
         updatedAt: new Date()
        },
