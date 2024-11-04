@@ -237,6 +237,7 @@ const OrderForm = ({ cart, onClose }) => {
             label="Дом"
             variant="outlined"
             fullWidth
+            required
             value={house}
             onChange={(e) => setHouse(e.target.value)}
             onBlur={() => setTouched({ ...touched, house: true })}
@@ -260,6 +261,7 @@ const OrderForm = ({ cart, onClose }) => {
             label="Индекс"
             variant="outlined"
             fullWidth
+            required
             value={zip}
             onChange={(e) => setZip(e.target.value)}
             onBlur={() => setTouched({ ...touched, zip: true })}
@@ -276,6 +278,7 @@ const OrderForm = ({ cart, onClose }) => {
         <Box sx={{ marginTop: "20px" }}>
           <FormControl
             fullWidth
+            required
             variant="outlined"
             sx={{ marginBottom: "16px" }}
           >
