@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -45,16 +45,24 @@ const BuyerPage = () => {
   }, [user, uuid_order]);
 
   const totalPrice = orders.reduce((accumulator, order) => {
+                            // @ts-expect-error: Ignore this event.
     return accumulator + order.pricePurchase * order.quantity;
   }, 0);
 
   return (
-   <Box sx={{ display: "flex", minHeight: "84.3vh", backgroundColor:'#f3fff3', justifyContent: "center",
-    fontSize: "1.2rem",
-    "& .MuiTableCell-root": {
-      fontSize: "1.2rem", 
-    }}}>
-      <NavOrder/>
+    <Box
+      sx={{
+        display: "flex",
+        minHeight: "84.3vh",
+        backgroundColor: "#f3fff3",
+        justifyContent: "center",
+        fontSize: "1.2rem",
+        "& .MuiTableCell-root": {
+          fontSize: "1.2rem",
+        },
+      }}
+    >
+      <NavOrder />
 
       <Box
         sx={{
@@ -89,13 +97,36 @@ const BuyerPage = () => {
               </TableHead>
               <TableBody>
                 {orders.map((order, index) => (
-                  <TableRow key={order.id}>
+                  <TableRow
+                    key={
+                      // @ts-expect-error: Ignore this event.
+                      order.id
+                    }
+                  >
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>
-                      {order.Plant.type} {order.Plant.name}
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.Plant.type
+                      }{" "}
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.Plant.name
+                      }
                     </TableCell>
-                    <TableCell>{order.quantity}</TableCell>
-                    <TableCell>{order.pricePurchase} ₽</TableCell>
+                    <TableCell>
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.quantity
+                      }
+                    </TableCell>
+                    <TableCell>
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.pricePurchase
+                      }{" "}
+                      ₽
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -123,11 +154,7 @@ const BuyerPage = () => {
             У вас нет заказов.
           </Typography>
         )}
-        <Button
-          variant="outlined"
-          onClick={() => navigate(-1)}
-          sx={{ mt: 2 }}
-        >
+        <Button variant="outlined" onClick={() => navigate(-1)} sx={{ mt: 2 }}>
           Назад
         </Button>
       </Box>

@@ -32,6 +32,10 @@ module.exports = {
       pricePurchase: {
         type: Sequelize.INTEGER
       },
+      status: {
+        type: Sequelize.STRING,
+        defaultValue: "process"
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

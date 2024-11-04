@@ -7,7 +7,7 @@ module.exports = {
      {
         name: 'Бамбино Пинк',
         description: 'Алоказия Бамбино — миниатюрное растение с узкими тёмно-зелёными листьями и яркими прожилками. ',
-        photo: 'http://localhost:8000/images/Seeds/Palms/2.png',
+        photo: 'https://sun9-79.userapi.com/s/v1/ig2/7GxuyfqEJYwIYFGBlcQ_MHAcH-tzKbChiXYIogWdLsaZIij9Yti5nvKyQrZE145IZzBkulGPEUcgRvk-BSvhdUUV.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1080x1080,1280x1280,1440x1440,1600x1600&from=bu&u=k6m7wQpg3U6SdHPO35tamE7iJpCE5m4n4t1D7OIQjI4&cs=510x510',
         price: 2900,
         category_id: 2,
         type: 'Алоказия',
@@ -57,7 +57,7 @@ module.exports = {
        {
         name: 'Ливистона Ротундифолия',
         description: 'Семена пальм в наличии',
-        photo: 'https://3.downloader.disk.yandex.ru/preview/cb3f83cdb0e0e357c91276d69f73227955b145779c5782c9751a2604d09c5235/inf/Kb-ufMrpxlCrtaXwph1VnWp0XFOKQgFw6J3y0gIcIZX2WgZkTmq-BW7a8e_nEyjUeBM3_IMwsbJ4Jza0i8qCww%3D%3D?uid=2043300011&filename=2.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: '/images/seeds/4.webp',
         price: 100,
         category_id: 3,
         type: 'Пальма',
@@ -67,7 +67,7 @@ module.exports = {
          {
         name: 'Коперниция Прунифера',
         description: 'lorem',
-        photo: 'https://4.downloader.disk.yandex.ru/preview/7a366d011b9d9c103f819d131595be5a1e833e9ac6ab41b0bafcd60dca203e5d/inf/W_u4qbn5KhgxpyfRJbjfyLCDn9bVsYuK_91ulLrftAJnzXBDFM4FwpC1OztWYCg_vyzrORH49eerPFYy7-jkzg%3D%3D?uid=2043300011&filename=10.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: '/images/seeds/10.webp',
         price: 100,
         category_id: 3,
         type: 'Пальма',
@@ -77,7 +77,7 @@ module.exports = {
        {
         name: 'Дипсис желтоватый',
         description: 'Растение предпочитает яркий рассеянный свет и регулярный полив.',
-        photo: 'https://1.downloader.disk.yandex.ru/preview/54b6108c5dfcd15299e475d1c393ffa4057755a125ef3ad3465bc50787c6166c/inf/h4otgYfQijqln48fNGi7stvYUXUKFKHr2QyZ7a61Vz1vHzrB0vvhLTb7iYZdUDcSGNxfbheycecu9U5Q07x_vQ%3D%3D?uid=2043300011&filename=11.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: '/images/seeds/3.webp',
         price: 80,
         category_id: 3,
         type: 'Пальма',
@@ -85,12 +85,12 @@ module.exports = {
         updatedAt: new Date()
        },
        {
-        name: 'Лисий Хвост',
-        description: 'Растения обладают яркими цветами и нежными листьями, идеальны для тенистых уголков.',
-        photo: 'https://3.downloader.disk.yandex.ru/preview/49b3d156a0fe9fdbd6625dbed497e99603abd3086bc34719d50f4dd164066555/inf/HYaDiSwIJKiyZsTfHEGCOHeSMTpCCBvzK0lSI4rBUyntYXN0Nmct_e3V7dEdOtaTFjjVlu532pHfeUzgNFBVpg%3D%3D?uid=2043300011&filename=12.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
-        price: 80,
-        category_id: 3,
-        type: 'Пальма',
+        name: ' Замифолия',
+        description: 'легантное комнатное растение с плотными, глянцевыми листьями, выносливое к недостатку света и засухе, прекрасно очищает воздух.',
+        photo: 'https://sun9-40.userapi.com/s/v1/ig2/h8mwecy-sTNl-r3snYiu4HhqQ9F3rl3XX011Ndu2SFzdkcjMCIdkixh7oirOB4kXc5_OYEVhV4jsXVz5rAHfk_Ur.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1080x1080,1280x1280,1440x1440,1600x1600&from=bu&u=gRZUCeLoxTQ1aWU23CJVT_M82ioX4vVK3yVdFUjloeo&cs=510x510',
+        price: 1200,
+        category_id: 1,
+        type: 'Замиокулькас',
         createdAt: new Date(),
         updatedAt: new Date()
        },

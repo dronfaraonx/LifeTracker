@@ -7,7 +7,7 @@ userInfoRouter.get("/:id", async (req, res) => {
   try {
     const userInfo = await User.findOne({
       where: { id: req.params.id },
-      attributes: ["firstName", "email", "lastName", "phone", "city", "address"],
+      // attributes: ["firstName", "email", "lastName", "phone", "city", "address"],
     });
     if (userInfo) {
       res.json(userInfo);
@@ -22,7 +22,12 @@ userInfoRouter.get("/:id", async (req, res) => {
 
 
 userInfoRouter.post('/', async (req, res) => {
-  const { id, name, firstName, lastName, phone, city, address } = req.body;
+  const id = req.session.user_sid
+  const {  firstName, lastName, phone, city, address, house,
+          apartment,
+          zip,
+          contactMethod,
+          contactValue } = req.body;
 
   if (!firstName || !lastName || !phone || !city || !address) {
     return res.status(400).json({ error: 'Заполните всю информацию.' });
@@ -33,15 +38,20 @@ userInfoRouter.post('/', async (req, res) => {
 
     if (user) {
       if (user.alreadyBought) {
-        await user.update({ firstName, lastName, phone, city, address });
+        await user.update({ firstName, lastName, phone, city, address,           house,
+          apartment,
+          zip,
+          contactMethod,
+          contactValue });
         res.status(200).json({ message: 'Информация изменена', user });
       } else {
-        await user.update({ firstName, lastName, phone, city, address, alreadyBought: true });
+        await user.update({ firstName, lastName, phone, city, address, alreadyBought: true,  house,
+          apartment,
+          zip,
+          contactMethod,
+          contactValue });
         res.status(200).json({ message: 'Информация добавлена и статус покупки обновлен', user });
       }
-    } else {
-      user = await User.create({ uuid_user, firstName, lastName, phone, city, address, alreadyBought: true });
-      res.status(201).json({ message: 'Информация о юзере добавлена', user });
     }
   } catch (error) {
     console.error('Ошибка при добавлении информации о юзере:', error);

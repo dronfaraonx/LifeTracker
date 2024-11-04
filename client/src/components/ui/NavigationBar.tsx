@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -15,24 +15,24 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
-import { useUser } from "../../context/auth";
 import AccountModal from "../pages/Authorization/modal/AccountModal";
 import SignupModal from "../pages/Authorization/modal/SignUpModal";
 import { useCart } from "../../context/CountCart";
+import { useUser } from "../../context/auth";
 import LogoutButton from "./btns/LogoutBtn";
 
 export default function Navbar() {
   const { user } = useUser();
+  // @ts-expect-error: Ignore this event.
   const { cartCounter } = useCart();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -46,7 +46,8 @@ export default function Navbar() {
   const handleCloseLogin = () => setIsLoginOpen(false);
 
   const handleDrawerToggle = () => setDrawerOpen(!drawerOpen);
-    const handleAccClick = () => {navigate('/dashboard');
+  const handleAccClick = () => {
+    navigate("/dashboard");
   };
 
   return (
@@ -77,42 +78,64 @@ export default function Navbar() {
                   variant="body1"
                   sx={{
                     cursor: "pointer",
+                    textDecoration:
+                      location.pathname === "/allplants" ? "underline" : "none",
+                    textShadow:
+                      location.pathname === "/allplants"
+                        ? "0 0 4px rgba(255, 255, 255, 0.6)"
+                        : "none",
                     fontSize: "1.3rem",
-                    textDecoration: location.pathname === '/allplants' ? "underline" : "none",
-                    transition: "color 0.3s",
-                    "&:hover": { color: "#ffffff" },
+                   transition: "color 0.3s, transform 0.3s",
+                    "&:hover": {
+                      color: "#ffffff",
+                      transform: "scale(1.05)",
+                    },
                   }}
                   onClick={handlePlantsClick}
                 >
-                  Растения
+                  РАСТЕНИЯ
                 </Typography>
                 <Typography
                   variant="body1"
                   sx={{
                     cursor: "pointer",
                     fontSize: "1.3rem",
-                                        textDecoration: location.pathname === '/allclones' ? "underline" : "none",
-
-                    transition: "color 0.3s",
-                    "&:hover": { color: "#ffffff" },
+                    textDecoration:
+                      location.pathname === "/allclones" ? "underline" : "none",
+                    textShadow:
+                      location.pathname === "/allclones"
+                        ? "0 0 4px rgba(255, 255, 255, 0.6)"
+                        : "none",
+                    transition: "color 0.3s, transform 0.3s",
+                    "&:hover": {
+                      color: "#ffffff",
+                      transform: "scale(1.05)",
+                    },
                   }}
                   onClick={handleClonesClick}
                 >
-                  Клоны
+                  КЛОНЫ
                 </Typography>
                 <Typography
                   variant="body1"
                   sx={{
                     cursor: "pointer",
                     fontSize: "1.3rem",
-                    transition: "color 0.3s",
-                                        textDecoration: location.pathname === '/allseeds' ? "underline" : "none",
-
-                    "&:hover": { color: "#ffffff" },
+                    textDecoration:
+                      location.pathname === "/allseeds" ? "underline" : "none",
+                    textShadow:
+                      location.pathname === "/allseeds"
+                        ? "0 0 4px rgba(255, 255, 255, 0.6)"
+                        : "none",
+                    transition: "color 0.3s, transform 0.3s",
+                    "&:hover": {
+                      color: "#ffffff",
+                      transform: "scale(1.05)",
+                    },
                   }}
                   onClick={handleSeedsClick}
                 >
-                  Семена
+                  СЕМЕНА
                 </Typography>
               </>
             ) : (
@@ -174,9 +197,9 @@ export default function Navbar() {
 
             {user && (
               <>
-                <IconButton>
+                {/* <IconButton>
                   <FavoriteIcon sx={{ color: "black" }} />
-                </IconButton>
+                </IconButton> */}
                 <IconButton onClick={handleCartClick}>
                   <Badge
                     badgeContent={cartCounter}
@@ -204,6 +227,7 @@ export default function Navbar() {
           <List>
             {["Растения", "Клоны", "Семена", "Оплата и доставка"].map(
               (text, index) => (
+                // @ts-expect-error: Ignore this event.
                 <ListItem
                   button
                   key={index}

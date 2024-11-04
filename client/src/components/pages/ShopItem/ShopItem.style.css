@@ -15,7 +15,7 @@
   width: 80vw
 }
 .imageBlock img {
-  width: 80%;
+  /* width: 80%; */
   height: 60vh;
   object-fit: cover;
   /* border-right: 1px solid #ddd; */
@@ -41,9 +41,11 @@
 }
 
 .plant-card-content p {
-  margin: 8px 0;
+  /* margin: 8px 0; */
   color: #555;
-  font-size: 2vh;
+  font-size: 3vh;
+      /* padding: 15px; */
+
 }
 
 .plant-card-actions {
@@ -61,44 +63,43 @@
   transition: background-color 0.3s ease;
 }
 
+        .price {
+          color: rgb(140, 28, 28);
+        }
 /* .add-to-cart-button:hover {
   background-color: rgb(136, 217, 136);
-} */
+  } */
+  
+  .back-button {
+    display: flex;
+    width: 15vh;
+    background-color: transparent;
+    color: black;
+    border: 2px solid #ccc;
+    /* padding: 15px 30px; */
+    font-size: 1.2rem;
+    border-radius: 6px;
+    margin-top: 5vh;
+    margin-left: 20vh;
+    cursor: pointer;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    border-color: black;
+    color: green;
+  }
+  
 
-.back-button {
-  display: flex;
-  width: 15vh;
-  background-color: transparent;
-  color: black;
-  border: 2px solid #ccc;
-  /* padding: 15px 30px; */
-  font-size: 1.2rem;
-  border-radius: 6px;
-  margin-top: 10vh;
-  margin-left: 25vh;
-  cursor: pointer;
-  transition: border-color 0.3s ease, color 0.3s ease;
+  @media (max-width: 768px) {
+    .plant-card {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .plant-card img {
+      width: 100%;
+      height: auto;
+    }
 }
 
-.back-button:hover {
-  border-color: black;
-  color: green;
-}
-
-.bac
-
-@media (max-width: 768px) {
-  .plant-card {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .plant-card img {
-    width: 100%;
-    height: auto;
-  }
-
-  .plant-card-content {
-    padding: 15px;
-  }
-}

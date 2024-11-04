@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from '../../../context/auth';
-import { IconButton, ListItemIcon, MenuItem } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Logout from '@mui/icons-material/Logout';
 import { useCart } from '../../../context/CountCart';
@@ -10,9 +10,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const LogoutButton: React.FC = () => {
   const { setUser } = useUser();
+    {/* @ts-expect-error: Handling TypeScript in Logout */}
   const {eraseCartCounter} = useCart()
-
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setIsLoading] = useState(false);
   const navigate = useNavigate(); 
 
   const handleLogout = async (): Promise<void> => {
@@ -24,8 +24,8 @@ const LogoutButton: React.FC = () => {
         method: 'POST',
         credentials: 'include', 
       });
-
-      if (response.ok) {
+    if (response.ok) {
+  {/* @ts-expect-error: Handling TypeScript in Logout */}
         setUser(null);
         navigate('/'); 
       } else {

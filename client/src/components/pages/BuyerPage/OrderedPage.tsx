@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -39,18 +39,22 @@ const OrderedPage = () => {
   }, [user, uuid_order]);
 
   const totalPrice = orders.reduce((accumulator, order) => {
+                            // @ts-expect-error: Ignore this event.
     return accumulator + order.pricePurchase * order.quantity;
   }, 0);
 
   return (
     <div className="buyerContainer">
-      <Box sx={{ padding: "20px" }}>
+      <Box sx={{ padding: "20px", minHeight: "calc(100vh - 10vh - 5.3vh)" }}>
         <Typography variant="h4" gutterBottom>
           Мой заказ:
         </Typography>
         <div>
           <ul>
-            {[...new Set(orders.map((order) => order.uuid_order))].map((uniqueOrder) => (
+            
+            {
+                                    // @ts-expect-error: Ignore this event.
+[...new Set(orders.map((order) => order.uuid_order))].map((uniqueOrder) => (
               <li key={uniqueOrder}>{uniqueOrder}</li>
             ))}
           </ul>

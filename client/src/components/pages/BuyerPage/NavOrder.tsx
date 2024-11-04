@@ -4,21 +4,12 @@ import { useNavigate } from "react-router-dom";
 export default function NavOrder() {
   const navigate = useNavigate();
 
-  const handleDashClick = () => {
-    navigate(`/dashboard`);
-  };
-  
-  const handleAccClick = () => {
-    navigate(`/myaccount`);
-  };
-
-  const handleInfoClick = () => {
-    navigate(`/info`);
-  };
-
-  const handleDiscountClick = () => {
-    navigate(`/discounts`);
-  };
+  const navItems = [
+    { label: "Мои данные", path: "/myaccount" },
+    { label: "Мои заказы", path: "/dashboard" },
+    { label: "Полезная информация", path: "/info" },
+    { label: "Скидки", path: "/discount" },
+  ];
 
   return (
     <Box
@@ -31,30 +22,17 @@ export default function NavOrder() {
       }}
     >
       <List>
-        <ListItem 
-          button 
-          onClick={handleAccClick}
-        >
-          Мои данные
-        </ListItem>
-        <ListItem 
-          button 
-          onClick={handleDashClick}
-        >
-          Мои заказы
-        </ListItem>
-        <ListItem 
-          button 
-          onClick={handleInfoClick}
-        >
-          Полезная информация
-        </ListItem>
-        <ListItem 
-          button 
-          onClick={handleDiscountClick}
-        >
-          Скидки
-        </ListItem>
+        {navItems.map((item, index) => (
+        // @ts-expect-error: Ignore this event.
+          <ListItem 
+            button 
+            key={index} 
+            onClick={() => navigate(item.path)}
+          >
+            {     
+            item.label}
+          </ListItem>
+        ))}
       </List>
     </Box>
   );

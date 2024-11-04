@@ -1,14 +1,11 @@
-import React from "react";
 import { Typography, Box, Link, Button } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { useUser } from "../../../context/auth";
 
 const MainPage = () => {
-  const { user } = useUser();
   return (
     <Box
       sx={{
-        height: "calc(100vh - 10vh - 10vh)",
+        height: "calc(100vh - 10vh - 5.3vh)",
         position: "relative",
         width: "100vw",
         overflow: "hidden",
@@ -48,7 +45,7 @@ const MainPage = () => {
             textTransform: "uppercase",
             textShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)",
             mb: 2,
-            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" }, // Responsive font size
+            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
           }}
         >
           Лучшие растения для современной жизни

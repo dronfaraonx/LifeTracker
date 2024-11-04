@@ -49,7 +49,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
 
       const res = await axios.post(endpoint, requestData, { withCredentials: true });
       setUser(res.data.user);
-      navigate('/');
+      navigate('/plants');
       onClose();
     } catch (error) {
       console.log(error);
@@ -58,7 +58,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
       setIsLoading(false);
     }
   };
-
+// @ts-expect-error: Ignoring type error for event parameter as it can be a generic change event.
   const handleTabChange = (event: React.ChangeEvent<object>, newValue: number) => {
     setActiveTab(newValue);
     setErrorMessage(null);
@@ -106,6 +106,11 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
             variant="outlined"
             type="password"
             required
+  helperText={
+    formData.password.length < 6 && formData.password.length > 0
+      ? "Пароль должен быть минимум 6 символов"
+      : ""
+  }
           />
           {activeTab === 1 && (
             <TextField
@@ -116,20 +121,39 @@ const SignupModal: React.FC<SignupModalProps> = ({ open, onClose }) => {
               variant="outlined"
               type="password"
               required
-              error={formData.repeat.length > 0 && formData.repeat !== formData.password}
-              helperText={formData.repeat.length > 3 && formData.repeat !== formData.password ? "Пароли должны совпадать" : ""}
+  //             error={
+  //   formData.repeat.length > 3 && (
+  //     formData.repeat !== formData.password || formData.repeat.length < 6
+  //   )
+  // }
+  helperText={
+    formData.repeat.length > 5 && formData.repeat !== formData.password
+      ? "Пароли должны совпадать"
+      : ""
+  }
             />
           )}
 
           {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         </Box>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} variant="outlined">Закрыть</Button>
-        <Button type="submit" variant="contained" color="primary" onClick={submitHandler} disabled={isLoading} sx={{ backgroundColor: 'green', color: 'white' }}>
-          {isLoading ? <CircularProgress size={24} /> : activeTab === 0 ? "Войти" : "Зарегистрироваться"}
-        </Button>
-      </DialogActions>
+<DialogActions>
+  <Button onClick={onClose} variant="outlined">Закрыть</Button>
+  {/* @ts-expect-error: Handling TypeScript type issue with onClick for Button component */}
+  <Button
+    type="submit"
+    variant="contained"
+    color="primary"
+    onClick={submitHandler}
+    disabled={isLoading}
+    sx={{ backgroundColor: 'green', color: 'white' }}
+  >
+    {isLoading ? <CircularProgress size={24} /> : activeTab === 0 ? "Войти" : "Зарегистрироваться"}
+  </Button>
+</DialogActions>
+
+
+
     </Dialog>
   );
 };

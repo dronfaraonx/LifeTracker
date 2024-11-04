@@ -14,9 +14,14 @@ import {
 } from "@mui/material";
 import { useUser } from "../../../../context/auth";
 
+interface LoginModalProps {
+  open: boolean; 
+  handleClose: () => void; 
+}
+
 const API_URL = import.meta.env.VITE_API_URL;
 
-const LoginModal = ({ open, handleClose }) => {
+  const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose }) => {
   const { setUser } = useUser();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

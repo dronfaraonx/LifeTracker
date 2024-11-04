@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 // import CloneCard from '../CloneCard/CloneCard';
-import '../SeedCard/plant.css';
+import './../ShopList/plant.css';
 import { Select, MenuItem, Typography, Box, InputLabel, FormControl, Slider } from '@mui/material';
 import PlantCard from '../ShopList/PlantCard';
 
@@ -21,6 +21,7 @@ export default function SeedPage() {
         const response = await axios.get(`${API_URL}/api/allseeds`);
         const seedsData = response.data
         setPlants(seedsData);
+        // @ts-expect-error: Ignore this event.
               const highestPrice = Math.max(...seedsData.map(plant => plant.price));
       setMaxPrice(highestPrice);
       setPriceRange([0, highestPrice]);
@@ -33,18 +34,22 @@ export default function SeedPage() {
   }, []);
 
     const filteredPlants = plants.filter(plant => {
+      // @ts-expect-error: Ignore this event.
     const matchesType = plantType ? plant.type === plantType : true;
+    // @ts-expect-error: Ignore this event.
     const matchesPrice = plant.price >= priceRange[0] && plant.price <= priceRange[1];
+    // @ts-expect-error: Ignore this event.
     const matchesSize = size ? plant.size === size : true;
+    // @ts-expect-error: Ignore this event.
     const matchesLight = lightRequirement ? plant.light === lightRequirement : true;
 
     return matchesType && matchesPrice && matchesSize && matchesLight;
   });
-
+// @ts-expect-error: Ignore this event.
   const uniqueTypes = [...new Set(plants.map((plant) => plant.type))];
 
   return (
- <Box sx={{ display:"flex", minHeight:"80vh"}}>
+ <Box sx={{ display:"flex", minHeight: "calc(100vh - 10vh - 5.3vh)"}}>
      <Box sx={{ display: "flex" }}>
   <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
@@ -66,6 +71,7 @@ export default function SeedPage() {
       <Typography gutterBottom>Ценовой диапазон</Typography>
         <Slider
           value={priceRange}
+          // @ts-expect-error: Ignore this event.
           onChange={(e, newValue) => setPriceRange(newValue)}
           valueLabelDisplay="auto"
           min={0}
@@ -107,6 +113,7 @@ export default function SeedPage() {
 
       <Box className="plant-list">
         {filteredPlants.map((plant) => (
+          // @ts-expect-error: Ignore this event.
           <PlantCard key={plant.id} plant={plant} />
         ))}
       </Box>

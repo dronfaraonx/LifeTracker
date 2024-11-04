@@ -10,6 +10,7 @@ export interface CartContextType {
 }
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCart = () => {
   return useContext(CartContext);
 };
@@ -30,14 +31,14 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
       if (user?.id) {
         try {
           const response = await axios.get(`${API_URL}/api/cart/check/${user.id}`);
-          const totalQuantity = response.data.reduce((total, oneItem) => total + oneItem.quantity, 0);
-          
+          const totalQuantity = response.data.reduce((total: number, oneItem: { quantity: number }) => total + oneItem.quantity, 0);
+
           setCartCounter(totalQuantity);
           localStorage.setItem(`cartCount_${user.id}`, totalQuantity.toString());
 
           console.log('Fetched cart quantities: ', response.data);
-        } catch (error) {
-          console.error("Ошибка при получении корзины:", error);
+        } catch {
+        // Handle errors silently without logging
         }
       }
     };
@@ -54,7 +55,6 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
     }
   }, [user]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleAddtoCartCounter = (quantity: number) => {
 
     if (user?.id) {

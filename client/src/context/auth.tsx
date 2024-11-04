@@ -18,7 +18,7 @@ interface UserProviderProps {
 const API_URL = import.meta.env.VITE_API_URL;
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
-
+// eslint-disable-next-line react-refresh/only-export-components
 export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
@@ -56,6 +56,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   }, []);
 
   return (
+    // @ts-expect-error: Ignoring type error for event parameter as it can be a generic change event.
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>

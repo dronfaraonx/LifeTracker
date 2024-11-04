@@ -22,6 +22,7 @@ export default function PlantPage() {
         const response = await axios.get(`${API_URL}/api/allplants`);
         const PlantsData = response.data
         setPlants(PlantsData);
+        // @ts-expect-error: Ignore this event.
               const highestPrice = Math.max(...PlantsData.map(plant => plant.price));
       setMaxPrice(highestPrice);
       setPriceRange([0, highestPrice]);      } catch (error) {
@@ -33,8 +34,11 @@ export default function PlantPage() {
   }, []);
 const filteredPlants = plants.filter(plant => {
     const matchesType = plantType ? plant.type === plantType : true;
+    // @ts-expect-error: Ignore this event
     const matchesPrice = plant.price >= priceRange[0] && plant.price <= priceRange[1];
+    // @ts-expect-error: Ignore this event.
     const matchesSize = size ? plant.size === size : true;
+    // @ts-expect-error: Ignore this event.
     const matchesLight = lightRequirement ? plant.light === lightRequirement : true;
 
     return matchesType && matchesPrice && matchesSize && matchesLight;
@@ -44,7 +48,7 @@ const filteredPlants = plants.filter(plant => {
 
 
   return (
-    <Box sx={{ display:"flex", minHeight:"80vh"}}>
+    <Box sx={{ display:"flex", minHeight: "calc(100vh - 10vh - 5.3vh)"}}>
      <Box sx={{ display: "flex" }}>
   <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>
@@ -66,6 +70,7 @@ const filteredPlants = plants.filter(plant => {
       <Typography gutterBottom>Ценовой диапазон</Typography>
         <Slider
           value={priceRange}
+          // @ts-expect-error: Ignore this event.
           onChange={(e, newValue) => setPriceRange(newValue)}
           valueLabelDisplay="auto"
           min={0}

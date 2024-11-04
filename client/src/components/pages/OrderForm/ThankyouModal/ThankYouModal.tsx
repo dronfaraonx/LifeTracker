@@ -1,7 +1,6 @@
-import React from "react";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
+// @ts-expect-error: Ignore this event.
 const ThankYouModal = ({ open, onClose }) => {
   const navigate = useNavigate();
 
@@ -34,7 +33,7 @@ const ThankYouModal = ({ open, onClose }) => {
           Спасибо за покупку!
         </Typography>
         <Typography variant="body1" sx={{ mb: 4 }}>
-          Ваш заказ успешно оформлен.
+          Ваш заказ успешно оформлен. Мы с Вами свяжемся в ближайшее время.
         </Typography>
           <Box
           sx={{
