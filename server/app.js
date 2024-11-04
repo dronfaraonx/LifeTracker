@@ -75,7 +75,8 @@ app.post("/api/send-order", (req, res) => {
       <p><strong>Имя покупателя:</strong> ${user.firstName} ${user.lastName}</p>
       <p><strong>Телефон:</strong> ${user.phone}</p>
       <p><strong>Город:</strong> ${user.city}</p>
-      <p><strong>Адрес:</strong> ${user.address}</p>
+      <p><strong>Адрес:</strong> ${user.zip}, ул. ${user.address}, дом ${user.house}, кв. ${user.apartment}</p>
+      <p><strong>Способ связи:</strong>${user.contactValue}</p>
       <h3>Детали заказа:</h3>
       ${formatOrderItems(cart)}
       <p><strong>Общая сумма:</strong> ${total} р.</p>
