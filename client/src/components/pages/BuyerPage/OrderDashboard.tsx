@@ -72,7 +72,7 @@ const OrderDashboard = () => {
     <Box
       sx={{
         display: "flex",
-minHeight: "calc(100vh - 10vh - 13.5vh)",
+minHeight: "calc(100vh - 10vh - 5.3vh)",
         backgroundColor: "#f3fff3",
         justifyContent: "center",
         fontSize: "1.2rem",

@@ -53,7 +53,7 @@ export default function ClonesPage() {
 
 
   return (
-    <Box sx={{ display: "flex", minHeight: "calc(100vh - 10vh - 13.5vh)"}}>
+    <Box sx={{ display: "flex", minHeight: "calc(100vh - 10vh - 5.3vh)"}}>
       <Box sx={{ display: "flex" }}>
         <Box
           sx={{

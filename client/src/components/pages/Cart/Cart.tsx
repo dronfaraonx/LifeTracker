@@ -86,7 +86,7 @@ export default function Cart() {
   return (
     <div
       style={{
-minHeight: "calc(100vh - 10vh - 13.5vh)",
+minHeight: "calc(100vh - 10vh - 5.3vh)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 // import CloneCard from '../CloneCard/CloneCard';
-import '../SeedCard/plant.css';
+import './../ShopList/plant.css';
 import { Select, MenuItem, Typography, Box, InputLabel, FormControl, Slider } from '@mui/material';
 import PlantCard from '../ShopList/PlantCard';
 
@@ -44,7 +44,7 @@ export default function SeedPage() {
   const uniqueTypes = [...new Set(plants.map((plant) => plant.type))];
 
   return (
- <Box sx={{ display:"flex", minHeight: "calc(100vh - 10vh - 13.5vh)"}}>
+ <Box sx={{ display:"flex", minHeight: "calc(100vh - 10vh - 5.3vh)"}}>
      <Box sx={{ display: "flex" }}>
   <Box sx={{ width: '250px', padding: '20px', borderRight: '2px solid black' }}>
         <Typography variant="h6" gutterBottom>Фильтры</Typography>

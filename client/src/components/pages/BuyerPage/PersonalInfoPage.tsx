@@ -131,7 +131,7 @@ const PersonalInfoPage = () => {
     <Box
       sx={{
         display: "flex",
-        minHeight: "84.4vh",
+minHeight: "calc(100vh - 10vh - 5.3vh)",
         justifyContent: "center",
         fontSize: "1.2rem",
         "& .MuiTableCell-root": {
