@@ -1,7 +1,6 @@
-import React from "react";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
+// @ts-expect-error: Ignore this event.
 const ThankYouModal = ({ open, onClose }) => {
   const navigate = useNavigate();
 

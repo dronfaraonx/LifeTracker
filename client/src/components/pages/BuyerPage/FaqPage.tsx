@@ -9,14 +9,18 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import NavOrder from './NavOrder';
 
-export default function FAQPage() {
-  const [expanded, setExpanded] = useState<number | false>(0);
+interface FAQItem {
+  question: string;
+  answer: string;
+}
 
-  const handleChange = (index: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+const FAQPage: React.FC = () => {
+  const [expanded, setExpanded] = useState<number | false>(false);
+  const handleChange = (index: number) => (_: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? index : false);
   };
 
-  const faqData = [
+  const faqData: FAQItem[] = [
     {
       question: "Можно ли отменить заказ?",
       answer: "Да, вы можете отменить заказ до момента отправки. Свяжитесь с нами как можно скорее для уточнения статуса заказа.",
@@ -52,11 +56,15 @@ export default function FAQPage() {
   ];
 
   return (
-    <Box sx={{ display: "flex", minHeight: "calc(100vh - 10vh - 5.3vh)", backgroundColor:'#f3fff3', justifyContent: "center",
-      fontSize: "1.2rem",
-      "& .MuiTableCell-root": {
-        fontSize: "1.2rem", 
-      }}}>
+    <Box
+      sx={{
+        display: "flex",
+        minHeight: "calc(100vh - 10vh - 5.3vh)",
+        backgroundColor: '#f3fff3',
+        justifyContent: "center",
+        fontSize: "1.2rem",
+      }}
+    >
       <NavOrder />
       <Box sx={{ padding: '20px', maxWidth: '60%', minHeight: '80vh', margin: '0 auto' }}>
         <Typography variant="h4" gutterBottom>
@@ -79,4 +87,6 @@ export default function FAQPage() {
       </Box>
     </Box>
   );
-}
+};
+
+export default FAQPage;

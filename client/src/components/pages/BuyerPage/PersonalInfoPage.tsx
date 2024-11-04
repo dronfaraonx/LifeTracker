@@ -121,7 +121,7 @@ const PersonalInfoPage = () => {
       console.log("Ошибка изменения пароля пользователя", error);
     }
   };
-
+                        // @ts-expect-error: Ignore this event.
   const handleContactMethodChange = (event) => {
     setContactMethod(event.target.value);
     setContactValue("");

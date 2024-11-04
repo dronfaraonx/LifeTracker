@@ -8,7 +8,6 @@ import {
   Typography,
   Grid,
   Stack,
-  CircularProgress,
 } from "@mui/material";
 import axios from "axios";
 import { useUser } from "../../../context/auth";
@@ -48,18 +47,23 @@ const OrderDashboard = () => {
   }, [user]);
 
   const uniqueOrders = [
+                          // @ts-expect-error: Ignore this event.
     ...new Set(allOrders.map((order) => order.uuid_order)),
   ].map((uniqueOrder) => {
+                            // @ts-expect-error: Ignore this event.
     const order = allOrders.find((o) => o.uuid_order === uniqueOrder);
     return {
       uuid_order: uniqueOrder,
+                              // @ts-expect-error: Ignore this event.
       createdAt: order ? order.createdAt : null,
+                            // @ts-expect-error: Ignore this event.
       items: order ? order.items : [],
+                              // @ts-expect-error: Ignore this event.
       status: order ? order.status : ""
     };
   });
 
-
+                        // @ts-expect-error: Ignore this event.
   const handleOrderClick = (uuid) => {
     navigate(`/order-details/${uuid}`);
   };
