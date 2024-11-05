@@ -21,7 +21,7 @@ userInfoRouter.get("/:id", async (req, res) => {
 });
 
 
-userInfoRouter.post('/', async (req, res) => {
+userInfoRouter.put('/', async (req, res) => {
   const id = req.session.user_sid
   const {  firstName, lastName, phone, city, address, house,
           apartment,

@@ -73,7 +73,7 @@ const PersonalInfoPage = () => {
 
   const handleUpdateUserInfo = async () => {
     try {
-      await axios.post(
+      await axios.put(
         `${API_URL}/api/userInfo`,
         {
           firstName: name,
