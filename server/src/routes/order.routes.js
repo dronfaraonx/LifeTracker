@@ -10,6 +10,10 @@ orderRouter.post('/', async (req, res) => {
   const { user } = res.locals;
 
   if (!user || !cartItems || cartItems.length === 0) {
+    console.log('order router post user -> ', user)
+        console.log('order router post cartItem ->', cartItems)
+        console.log('order router post cartItem.length ->', cartItems.lenghth)
+
     return res.status(400).json({ error: 'Нет юзера или заказа' });
   }
 
