@@ -67,7 +67,7 @@ const PersonalInfoPage = () => {
         console.error("Ошибка при получении информации о пользователе:", error);
       }
     };
-    
+
     fetchUserInfo();
   }, [user]);
 
@@ -82,11 +82,11 @@ const PersonalInfoPage = () => {
           phone,
           city,
           address,
-          house,
-          apartment,
-          zip,
-          contactMethod,
-          contactValue
+          house: house || null,
+          apartment: apartment || null,
+          zip: zip || null,
+          contactMethod: contactMethod || null,
+          contactValue: contactValue || null,
         },
         { withCredentials: true }
       );
@@ -113,15 +113,15 @@ const PersonalInfoPage = () => {
         { withCredentials: true }
       );
       alert("Пароль успешно обновлен");
-      setOldPassword("")
-      setNewPassword("")
-      setConfirmPassword("")
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
       setShowPasswordFields(false);
     } catch (error) {
       console.log("Ошибка изменения пароля пользователя", error);
     }
   };
-                        // @ts-expect-error: Ignore this event.
+  // @ts-expect-error: Ignore this event.
   const handleContactMethodChange = (event) => {
     setContactMethod(event.target.value);
     setContactValue("");
@@ -131,7 +131,7 @@ const PersonalInfoPage = () => {
     <Box
       sx={{
         display: "flex",
-minHeight: "calc(100vh - 10vh - 5.3vh)",
+        minHeight: "calc(100vh - 10vh - 5.3vh)",
         justifyContent: "center",
         fontSize: "1.2rem",
         "& .MuiTableCell-root": {
@@ -297,7 +297,6 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
               <InputLabel>Способ связи</InputLabel>
               <Select
                 label="Способ связи"
-                
                 value={contactMethod}
                 onChange={handleContactMethodChange}
               >
