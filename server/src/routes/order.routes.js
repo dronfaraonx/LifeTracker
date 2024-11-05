@@ -25,6 +25,7 @@ orderRouter.post('/', async (req, res) => {
     );
 
     await Promise.all(orderPromises);
+console.log(orderPromises);
 
     await Cart.destroy({ where: { user_id: user.id } });
 
