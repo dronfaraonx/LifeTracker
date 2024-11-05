@@ -33,6 +33,7 @@ const OrderDashboard = () => {
         setAllOrders(response.data);
       } catch (error) {
         console.error("Ошибка при получении заказов:", error);
+        // @ts-expect-error: Ignore this event.
         setError("Не удалось загрузить заказы. Попробуйте еще раз.");
       } finally {
         setLoading(false);
@@ -47,23 +48,23 @@ const OrderDashboard = () => {
   }, [user]);
 
   const uniqueOrders = [
-                          // @ts-expect-error: Ignore this event.
+    // @ts-expect-error: Ignore this event.
     ...new Set(allOrders.map((order) => order.uuid_order)),
   ].map((uniqueOrder) => {
-                            // @ts-expect-error: Ignore this event.
+    // @ts-expect-error: Ignore this event.
     const order = allOrders.find((o) => o.uuid_order === uniqueOrder);
     return {
       uuid_order: uniqueOrder,
-                              // @ts-expect-error: Ignore this event.
+      // @ts-expect-error: Ignore this event.
       createdAt: order ? order.createdAt : null,
-                            // @ts-expect-error: Ignore this event.
+      // @ts-expect-error: Ignore this event.
       items: order ? order.items : [],
-                              // @ts-expect-error: Ignore this event.
-      status: order ? order.status : ""
+      // @ts-expect-error: Ignore this event.
+      status: order ? order.status : "",
     };
   });
 
-                        // @ts-expect-error: Ignore this event.
+  // @ts-expect-error: Ignore this event.
   const handleOrderClick = (uuid) => {
     navigate(`/order-details/${uuid}`);
   };
@@ -76,7 +77,7 @@ const OrderDashboard = () => {
     <Box
       sx={{
         display: "flex",
-minHeight: "calc(100vh - 10vh - 5.3vh)",
+        minHeight: "calc(100vh - 10vh - 5.3vh)",
         backgroundColor: "#f3fff3",
         justifyContent: "center",
         fontSize: "1.2rem",
