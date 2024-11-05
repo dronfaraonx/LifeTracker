@@ -32,6 +32,8 @@ authRouter.post("/signup", async (req, res) => {
     const newUser = await User.create({ name, email, hashpass });
     
     req.session.user_sid = newUser.id;
+    console.log("req.session.user_sid signup", req.session.user_sid);
+    
     return res.json({ user: newUser });
   } catch (error) {
     console.error("Error during signup:", error);
@@ -54,6 +56,7 @@ authRouter.post("/login", async (req, res) => {
     }
 
     req.session.user_sid = user.id;
+        console.log("req.session.user_sid login", req.session.user_sid);
     return res.json({ user });
   } catch (error) {
     console.error("Error during login:", error);
