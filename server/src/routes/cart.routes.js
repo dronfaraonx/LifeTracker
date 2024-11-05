@@ -28,7 +28,7 @@ cartRouter.get('/check/:id', async (req, res) => {
   const user_id = req.params.id;
 
   if (!user_id) {
-    return res.status(423).json({ message: 'Пользователь не авторизован' });
+    return res.json({ message: 'Пользователь не авторизован' });
   }
 
   try {
