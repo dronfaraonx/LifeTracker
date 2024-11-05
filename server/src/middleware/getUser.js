@@ -3,6 +3,7 @@ const { User } = require("../../db/models");
 const userSession = async (req, res, next) => {  
   try {
     console.log("req.session.user_sid middleware check",req.session.user_sid);
+    console.log("req.session",req.session);
     
     if (req.session?.user_sid) {
       const user = await User.findByPk(req.session.user_sid);
