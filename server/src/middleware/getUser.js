@@ -15,6 +15,7 @@ const userSession = async (req, res, next) => {
         console.log("middleware res.locals check: ", res.locals);
         
       } else {
+        console.log("------check before destroy-------");
         req.session.destroy();  
         res.clearCookie('user_sid'); 
         res.locals.user = null;
