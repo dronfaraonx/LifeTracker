@@ -17,11 +17,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const PersonalInfoPage = () => {
   const { user } = useUser();
-  console.log("user ----> ", user);
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
@@ -53,7 +52,7 @@ const PersonalInfoPage = () => {
         if (response.data) {
           setName(response.data.firstName);
           setLastName(response.data.lastName);
-          setEmail(response.data.email);
+          // setEmail(response.data.email);
           setPhone(response.data.phone);
           setCity(response.data.city);
           setAddress(response.data.address);
@@ -63,22 +62,23 @@ const PersonalInfoPage = () => {
           setContactMethod(response.data.contactMethod);
           setContactValue(response.data.contactValue);
         }
+        console.log("response", response.data);
       } catch (error) {
         console.error("Ошибка при получении информации о пользователе:", error);
       }
     };
-
+    
     fetchUserInfo();
   }, [user]);
 
   const handleUpdateUserInfo = async () => {
     try {
-      await axios.put(
+      await axios.post(
         `${API_URL}/api/userInfo`,
         {
           firstName: name,
           lastName,
-          email,
+          // email,
           phone,
           city,
           address,

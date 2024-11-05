@@ -12,7 +12,7 @@ userInfoRouter.get("/:id", async (req, res) => {
     if (userInfo) {
       res.json(userInfo);
     } else {
-      res.status(404).json({ message: "Информация о юзере не найдена" });
+      res.status(419).json({ message: "Информация о юзере не найдена" });
     }
   } catch (error) {
     console.error("Ошибка получения информации", error);
