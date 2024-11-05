@@ -7,12 +7,12 @@ const orderRouter = express.Router();
 orderRouter.post('/', async (req, res) => {
   const uuid_order = uuidv4().slice(0, 8);
   const { cartItems } = req.body;
-  const { user } = res.locals;
+  // const { user } = res.locals;
 
-  if (!user || !cartItems || cartItems.length === 0) {
+  if (!req.session.user_sid || !cartItems || cartItems.length === 0) {
     console.log('order router post user -> ', user)
         console.log('order router post cartItem ->', cartItems)
-        console.log('order router post cartItem.length ->', cartItems.lenghth)
+        console.log('order router post cartItem.length ->', cartItems.length)
 
     return res.status(400).json({ error: 'Нет юзера или заказа' });
   }
