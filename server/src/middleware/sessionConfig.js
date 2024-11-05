@@ -10,6 +10,7 @@ const sessionConfig = {
   resave: false, // не пересохранять куку при каждом запросе
   saveUninitialized: false, // не создавать сессию без записи в req.session
   cookie: {
+    // secure: false,
     maxAge: 1000 * 60 * 60 * 12, // срок действия куки в миллисекундах
     httpOnly: true,
   },
