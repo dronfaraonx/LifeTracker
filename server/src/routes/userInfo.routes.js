@@ -20,8 +20,7 @@ userInfoRouter.get("/:id", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-userInfoRouter.post("/", async (req, res) => {
+userInfoRouter.put("/", async (req, res) => {
   const id = req.session.user_sid;
   const {
     firstName,
@@ -35,16 +34,6 @@ userInfoRouter.post("/", async (req, res) => {
     contactMethod,
     contactValue,
   } = req.body;
-=======
-
-userInfoRouter.put('/', async (req, res) => {
-  const id = req.session.user_sid
-  const {  firstName, lastName, phone, city, address, house,
-          apartment,
-          zip,
-          contactMethod,
-          contactValue } = req.body;
->>>>>>> 9d2febfb7d5e84717979f868b372b7c5a3f88546
 
   if (!firstName || !lastName || !phone || !city || !address) {
     return res.status(400).json({ error: "Заполните всю информацию." });
@@ -80,13 +69,8 @@ userInfoRouter.put('/', async (req, res) => {
           apartment,
           zip,
           contactMethod,
-          contactValue,
-        });
-        res
-          .status(200)
-          .json({
-            message: "Информация добавлена и статус покупки обновлен"
-                    });
+          contactValue });
+        res.status(200).json({ message: 'Информация добавлена и статус покупки обновлен', user });
       }
     }
   } catch (error) {
