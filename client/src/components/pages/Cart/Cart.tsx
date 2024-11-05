@@ -70,7 +70,7 @@ export default function Cart() {
       await axios.put(`${API_URL}/api/cart/${user.id}/plant/${plantId}`, {
         quantity: newQuantity,
       });
-                              // @ts-expect-error: Ignore this event.
+      // @ts-expect-error: Ignore this event.
       const updateQuantity = (prevCart) =>
         // @ts-expect-error: Ignore this event.
         prevCart.map((item) =>

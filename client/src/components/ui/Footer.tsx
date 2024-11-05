@@ -1,6 +1,6 @@
 import { FC, ReactElement } from "react";
-import { Box, Container, Typography, IconButton, Link, useTheme, useMediaQuery, SvgIcon } from "@mui/material";
-import { Email, Telegram, WhatsApp } from "@mui/icons-material";
+import { Box, Container, Typography, IconButton, Link, useTheme, useMediaQuery } from "@mui/material";
+import { Email, Telegram,  } from "@mui/icons-material";
 import { FaVk } from 'react-icons/fa';
 
 export const Footer: FC = (): ReactElement => {

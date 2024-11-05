@@ -56,7 +56,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    // @ts-expect-error: Ignoring type error for event parameter as it can be a generic change event.
+    // @ts-expect-error: Ignore this event.
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>

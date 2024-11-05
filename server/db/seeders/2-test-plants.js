@@ -27,7 +27,7 @@ module.exports = {
        {
         name: 'Тайское созвездие',
         description: 'редкое и популярное растение с уникальной пестрой листвой. ',
-        photo: 'https://4.downloader.disk.yandex.ru/preview/fb85d83e33f68bf418da0f21bc00ce1faabf88fcbc7da14939f296b736357ce9/inf/kEbSGVFP5piDQouKJziz9E7s04oAjqDccRLDzs11MxPgkPby3CCRjPCJrhrpbp1TYeQ44Ly1nkR88jLWYS695A%3D%3D?uid=2043300011&filename=29.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: 'https://i.etsystatic.com/23449873/r/il/44202f/4497245548/il_570xN.4497245548_d7yy.jpg',
         price: 1900,
         category_id: 2,
         type: 'Монстера',
@@ -37,7 +37,7 @@ module.exports = {
        {
         name: 'Бурле Маркс',
         description: 'редкое и популярное растение с уникальной пестрой листвой. ',
-        photo: 'https://1.downloader.disk.yandex.ru/preview/af5939e2c63a8e945338e45c0dc6668ba96f2c91c868ab395a1b4402163f3a4d/inf/oC79399NoKkxRtm3eqBzU87OSuVJTGw4IgN1zpJykiiLThlXCEeaEOHA08Jh2kTMRYuw83_apruXY8dHZpjq6Q%3D%3D?uid=2043300011&filename=33.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: 'https://traumseerose.de/media/image/ce/1a/31/430782370_914795863728822_381182605561828458_n.jpg',
         price: 3200,
         category_id: 2,
         type: 'Монстера',
@@ -47,7 +47,7 @@ module.exports = {
         {
         name: 'Желтый Мерлин',
         description: 'редкое и популярное растение с уникальной пестрой листвой. ',
-        photo: 'https://3.downloader.disk.yandex.ru/preview/87f0977d20d256b697eeff0f4217e5371f3a71a3e5d1bd04329d09c964116270/inf/aeYXSyK9jwfPf3f7ksAX5k-Idi7A7CYSi-n9-4q4FKuHZX2fc-PEEGWd1Dci2Zeb3YOXsRoaCvV9u9o-erWlNQ%3D%3D?uid=2043300011&filename=35.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: 'https://orchidbox.io/cdn/shop/files/924fd4e0-0edb-4f66-87e7-f08a40cb977d_1500x.jpg?v=1708462614',
         price: 6500,
         category_id: 2,
         type: 'Монстера',
@@ -97,7 +97,7 @@ module.exports = {
        {
         name: 'Ливистона Ротундуфолия',
         description: 'редкое и популярное растение с уникальной пестрой листвой. Его крупные зеленые листья украшают кремовые и белые вкрапления, что придает ему особую декоративность.',
-        photo: 'https://3.downloader.disk.yandex.ru/preview/cb3f83cdb0e0e357c91276d69f73227955b145779c5782c9751a2604d09c5235/inf/Kb-ufMrpxlCrtaXwph1VnWp0XFOKQgFw6J3y0gIcIZX2WgZkTmq-BW7a8e_nEyjUeBM3_IMwsbJ4Jza0i8qCww%3D%3D?uid=2043300011&filename=2.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: '/images/seeds/7.webp',
         price: 80,
         category_id: 3,
         type: 'Пальма',
@@ -107,7 +107,7 @@ module.exports = {
        {
         name: 'Ливистона Ротундифолия',
         description: 'редкое и популярное растение с уникальной пестрой листвой. Его крупные зеленые листья украшают кремовые и белые вкрапления, что придает ему особую декоративность.',
-        photo: 'https://4.downloader.disk.yandex.ru/preview/dd6e6c14a7815078042b655f2e2b69ebb7d50e73ef8e891c5cfc3293a0759f3c/inf/jrXgtvGpNpuuy7gKUkb1nlHIJ8wE5YdMBQo8iLK8G88_ZivwuMn7YRpK24cmbOLEWKImRGzXNk-xgvpP9FTH-g%3D%3D?uid=2043300011&filename=4.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=2043300011&tknv=v2&size=1920x992',
+        photo: '/images/seeds/6.webp',
         price: 90,
         category_id: 3,
         type: 'Пальма',

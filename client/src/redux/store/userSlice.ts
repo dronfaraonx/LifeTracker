@@ -57,6 +57,7 @@ const userSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
+          // @ts-expect-error: Ignore this event.
       .addCase(fetchUser.fulfilled, (state, action: PayloadAction<User>) => {
         state.loading = false;
         state.user = action.payload;
