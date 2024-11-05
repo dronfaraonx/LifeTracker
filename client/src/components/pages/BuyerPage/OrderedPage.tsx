@@ -25,9 +25,12 @@ const OrderedPage = () => {
     const fetchOrders = async () => {
       if (user?.id && uuid_order) {
         try {
-          const response = await axios.get(`${API_URL}/api/orders/order-details/${uuid_order}`, {
-            withCredentials: true,
-          });
+          const response = await axios.get(
+            `${API_URL}/api/orders/order-details/${uuid_order}`,
+            {
+              withCredentials: true,
+            }
+          );
           setOrders(response.data);
         } catch (error) {
           console.error("Ошибка при получении заказов:", error);
@@ -39,7 +42,7 @@ const OrderedPage = () => {
   }, [user, uuid_order]);
 
   const totalPrice = orders.reduce((accumulator, order) => {
-                            // @ts-expect-error: Ignore this event.
+    // @ts-expect-error: Ignore this event.
     return accumulator + order.pricePurchase * order.quantity;
   }, 0);
 
@@ -51,12 +54,14 @@ const OrderedPage = () => {
         </Typography>
         <div>
           <ul>
-            
             {
-                                    // @ts-expect-error: Ignore this event.
-[...new Set(orders.map((order) => order.uuid_order))].map((uniqueOrder) => (
-              <li key={uniqueOrder}>{uniqueOrder}</li>
-            ))}
+              // @ts-expect-error: Ignore this event.
+              [...new Set(orders.map((order) => order.uuid_order))].map(
+                (uniqueOrder) => (
+                  <li key={uniqueOrder}>{uniqueOrder}</li>
+                )
+              )
+            }
           </ul>
         </div>
 
@@ -73,17 +78,48 @@ const OrderedPage = () => {
               </TableHead>
               <TableBody>
                 {orders.map((order) => (
+                  // @ts-expect-error: Ignore this event.
                   <TableRow key={order.id}>
-                    <TableCell>{order.id}</TableCell>
-                    <TableCell>{new Date(order.createdAt).toLocaleDateString()}</TableCell>
-                    <TableCell>{order.Plant.name}</TableCell>
-                    <TableCell>{order.pricePurchase} ₽</TableCell>
+                    <TableCell>
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.id
+                      }
+                    </TableCell>
+                    <TableCell>
+                      {new Date(
+                        // @ts-expect-error: Ignore this event.
+                        order.createdAt
+                      ).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.Plant.name
+                      }
+                    </TableCell>
+                    <TableCell>
+                      {
+                        // @ts-expect-error: Ignore this event.
+                        order.pricePurchase
+                      }{" "}
+                      ₽
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-            <Box sx={{ display: "flex", justifyContent: "flex-end", padding: "10px" }}>
-              <Typography variant="h6" sx={{ fontWeight: "bold", marginRight: "10px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                padding: "10px",
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: "bold", marginRight: "10px" }}
+              >
                 Общая сумма:
               </Typography>
               <Typography variant="h6" sx={{ color: "#00ab84" }}>
