@@ -33,6 +33,8 @@ authRouter.post("/signup", async (req, res) => {
     
     req.session.user_sid = newUser.id;
     console.log("req.session.user_sid signup", req.session.user_sid);
+    console.log("req.session sugnup ----->",req.session);
+
     
     return res.json({ user: newUser });
   } catch (error) {
@@ -57,6 +59,8 @@ authRouter.post("/login", async (req, res) => {
 
     req.session.user_sid = user.id;
         console.log("req.session.user_sid login", req.session.user_sid);
+            console.log("req.session login ----->",req.session);
+
     return res.json({ user });
   } catch (error) {
     console.error("Error during login:", error);

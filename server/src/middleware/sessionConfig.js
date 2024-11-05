@@ -8,7 +8,7 @@ const sessionConfig = {
   name: 'user_sid', // имя куки для хранения id сессии
   secret: process.env.SESSION_SECRET ?? 'tesasdffdsfsadf123123at', // для шифрования id сессии
   resave: false, // не пересохранять куку при каждом запросе
-  saveUninitialized: true, // не создавать сессию без записи в req.session
+  saveUninitialized: false, // не создавать сессию без записи в req.session
   cookie: {
     maxAge: 1000 * 60 * 60 * 12, // срок действия куки в миллисекундах
     httpOnly: true,
