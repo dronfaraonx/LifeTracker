@@ -2,11 +2,17 @@ const { User } = require("../../db/models");
 
 const userSession = async (req, res, next) => {  
   try {
+    console.log("req.session.user_sid middleware check",req.session.user_sid);
+    
     if (req.session?.user_sid) {
       const user = await User.findByPk(req.session.user_sid);
+      console.log("middleware user", user);
+      
       
       if (user) {
         res.locals.user = user;  
+        console.log("middleware res.locals check: ", res.locals);
+        
       } else {
         req.session.destroy();  
         res.clearCookie('user_sid'); 
