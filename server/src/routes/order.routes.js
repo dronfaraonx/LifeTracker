@@ -10,7 +10,7 @@ orderRouter.post('/', async (req, res) => {
   // const { user } = res.locals;
 
   if (!req.session.user_sid || !cartItems || cartItems.length === 0) {
-    console.log('order router post user -> ', user)
+    // console.log('order router post user -> ', user)
         console.log('order router post cartItem ->', cartItems)
         console.log('order router post cartItem.length ->', cartItems.length)
 
