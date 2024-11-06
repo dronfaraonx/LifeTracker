@@ -111,7 +111,7 @@ const OrderForm = ({ cart, onClose }) => {
         cart: cartItems,
         total: calculateTotal(cartItems),
         user: userInfo,
-      });
+      },  { withCredentials: true });
     } catch (error) {
       console.error("Ошибка создания заказа:", error);
     }

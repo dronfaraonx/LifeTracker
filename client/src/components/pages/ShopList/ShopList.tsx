@@ -54,7 +54,7 @@ export default function ShopList() {
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/plants`);
+        const response = await axios.get(`${API_URL}/api/plants` );
         const plantsData = response.data;
 
         setPlants(plantsData);
@@ -72,7 +72,7 @@ export default function ShopList() {
 
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/categories`);
+        const response = await axios.get(`${API_URL}/api/categories` );
         const uniqueCategories = Array.from(
                     // @ts-expect-error: Ignore event.
           new Set(response.data.map((category) => category.name))
