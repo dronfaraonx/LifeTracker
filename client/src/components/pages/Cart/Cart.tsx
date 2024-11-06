@@ -10,6 +10,7 @@ import {
   IconButton,
   Box,
   Stack,
+  TextField,
 } from "@mui/material";
 import { Card } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -23,11 +24,15 @@ export default function Cart() {
   const { handleAddtoCartCounter, handleRemoveFromCartCounter } = useCart();
   const [cart, setCart] = useState([]);
   const [showOrderForm, setShowOrderForm] = useState(false);
+  const [promoCode, setPromoCode] = useState("");
+  const [discount, setDiscount] = useState(0);
 
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/cart/${user.id}`, { withCredentials: true });
+        const response = await axios.get(`${API_URL}/api/cart/${user.id}`, {
+          withCredentials: true,
+        });
         setCart(response.data);
       } catch (error) {
         console.log("Ошибка при получении растений из корзины", error);
@@ -42,7 +47,9 @@ export default function Cart() {
       const cartPlant = cart.find((item) => item.id === plantId);
       if (!cartPlant) return;
 
-      await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`, { withCredentials: true });
+      await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`, {
+        withCredentials: true,
+      });
       setCart((prevCart) => {
         // @ts-expect-error: Ignore this event.
         const updatedCart = prevCart.filter((item) => item.id !== plantId);
@@ -67,9 +74,13 @@ export default function Cart() {
       const newQuantity = Number(cartPlant.quantity) + Number(change);
       if (newQuantity < 1) return;
 
-      await axios.put(`${API_URL}/api/cart/${user.id}/plant/${plantId}`, {
-        quantity: newQuantity,
-      }, { withCredentials: true });
+      await axios.put(
+        `${API_URL}/api/cart/${user.id}/plant/${plantId}`,
+        {
+          quantity: newQuantity,
+        },
+        { withCredentials: true }
+      );
       // @ts-expect-error: Ignore this event.
       const updateQuantity = (prevCart) =>
         // @ts-expect-error: Ignore this event.
@@ -82,12 +93,26 @@ export default function Cart() {
       console.log("Ошибка при обновлении количества растения в корзине", error);
     }
   };
+  const handlePromo = () => {
+    if (promoCode === "ELBRUS") {
+      setDiscount(0.1);
+      console.log("скидка добавлена");
+    } else {
+      setDiscount(0);
+      alert("Промокод недействителен");
+    }
+  };
+  const calculateDiscountedPrice = (price: number) => {
+    return (price * (1 - discount)).toFixed(2);
+  };
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => {
-      // @ts-expect-error: Ignore this event.
-      return total + (item.price ? item.price * item.quantity : 0);
-    }, 0);
+    const subtotal = cart.reduce(
+                              // @ts-expect-error: Ignore this event.
+      (total, item) => total + (item.price * item.quantity || 0),
+      0
+    );
+    return (subtotal * (1 - discount)).toFixed(2);
   };
 
   return (
@@ -162,15 +187,41 @@ export default function Cart() {
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Цена:{" "}
-                      <strong>
-                        {
-                          // @ts-expect-error: Ignore this event.
-                          cartPlant.price
-                            ? // @ts-expect-error: Ignore this event.
-                              `${cartPlant.price}р.`
-                            : "Цена не указана"
-                        }
-                      </strong>
+                      {discount > 0 ? (
+                        <>
+                          <span
+                            style={{
+                              textDecoration: "line-through",
+                              color: "gray",
+                            }}
+                          >
+                            {
+                              // @ts-expect-error: Ignore this event.
+                              cartPlant.price
+                            }
+                            р.
+                          </span>{" "}
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            {calculateDiscountedPrice(
+                              // @ts-expect-error: Ignore this event.
+                              cartPlant.price
+                            )}
+                            р.
+                          </span>
+                        </>
+                      ) : (
+                        <strong>
+                          {
+                            // @ts-expect-error: Ignore this event.
+                            cartPlant.price
+                              ? `${
+                                  // @ts-expect-error: Ignore this event.
+                                  cartPlant.price
+                                }р.`
+                              : "Цена не указана"
+                          }
+                        </strong>
+                      )}
                     </Typography>
                     <Box
                       sx={{
@@ -245,13 +296,30 @@ export default function Cart() {
                   >
                     <CloseIcon />
                   </IconButton>
-                </Card>
-                
-              ))}
-              {/* Итоговая сумма */}
-                 {/* <Typography variant="h6" sx={{ marginTop: "20px" }}>
-                Промокод: 
-              </Typography> */}
+                </Card>))}
+              <Box sx={{ marginTop: "20px", textAlign: "center" }}>
+                <TextField
+                  label="Промокод"
+                  variant="outlined"
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                  sx={{ marginBottom: "10px", width: "80%" }}
+                />
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#00ab84",
+                    color: "white",
+                    "&:hover": {
+                      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                      transform: "scale(1.01)",
+                    },
+                  }}
+                  onClick={handlePromo}
+                >
+                  Применить промокод
+                </Button>
+              </Box>
               <Typography variant="h6" sx={{ marginTop: "20px" }}>
                 Итого к оплате: <strong>{calculateTotal()}р.</strong>
               </Typography>
@@ -347,17 +415,34 @@ export default function Cart() {
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Цена:{" "}
-                      <strong>
-                        {
-                          // @ts-expect-error: Ignore this event.
-                          cartPlant.price
+                      {discount > 0 ? (
+                        <>
+                          <span
+                            style={{
+                              textDecoration: "line-through",
+                              color: "gray",
+                            }}
+                          >
+                            {
+                                                    // @ts-expect-error: Ignore this event.
+cartPlant.price}р.
+                          </span>{" "}
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            {calculateDiscountedPrice(
+                                                      // @ts-expect-error: Ignore this event.
+cartPlant.price)}р.
+                          </span>
+                        </>
+                      ) : (
+                        <strong>
+                          {                        // @ts-expect-error: Ignore this event.
+cartPlant.price
                             ? `${
-                                // @ts-expect-error: Ignore this event.
-                                cartPlant.price
-                              }р.`
-                            : "Цена не указана"
-                        }
-                      </strong>
+                                                      // @ts-expect-error: Ignore this event.
+cartPlant.price}р.`
+                            : "Цена не указана"}
+                        </strong>
+                      )}
                     </Typography>
                     <Box
                       sx={{

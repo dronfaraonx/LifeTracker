@@ -34,6 +34,8 @@ const OrderForm = ({ cart, onClose }) => {
   const [thankyou, setThankYou] = useState(false);
   const [contactMethod, setContactMethod] = useState("");
   const [contactValue, setContactValue] = useState("");
+  // const [promoCode, ] = useState("");
+    const [discount, ] = useState(0);
   const [touched, setTouched] = useState({
     name: false,
     lastName: false,
@@ -43,7 +45,6 @@ const OrderForm = ({ cart, onClose }) => {
     house: false,
     zip: false,
   });
-
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -109,6 +110,7 @@ const OrderForm = ({ cart, onClose }) => {
       setThankYou(true);
       await axios.post(`${API_URL}/api/send-order`, {
         cart: cartItems,
+          // @ts-expect-error: Ignore this event.
         total: calculateTotal(cartItems),
         user: userInfo,
       },  { withCredentials: true });
@@ -116,13 +118,14 @@ const OrderForm = ({ cart, onClose }) => {
       console.error("Ошибка создания заказа:", error);
     }
   };
-// @ts-expect-error: Ignore this event.
-  const calculateTotal = (cartItems) => {
-    // @ts-expect-error: Ignore this event.
-    return cartItems.reduce((total, item) => {
-      return total + item.pricePurchanse * item.quantity;
-    }, 0);
-  };
+
+const calculateTotal = () => {
+  // @ts-expect-error: Ignore this event.
+  const subtotal = cart.reduce((total, item) => {
+    return total + (item.price ? item.price * item.quantity : 0);
+  }, 0);
+  return subtotal - subtotal * discount;
+};
 // @ts-expect-error: Ignore this event.
   const handleContactMethodChange = (event) => {
     setContactMethod(event.target.value);
