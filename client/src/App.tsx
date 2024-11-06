@@ -2,8 +2,8 @@ import React, { Suspense } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+ // @ts-expect-error: Ignore this event.
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
-
 
 const MainPage = React.lazy(
   () => import("./components/pages/MainPage/MainPage")
@@ -175,8 +175,8 @@ function App() {
     <>
       <div className="App">
         <TawkMessengerReact
-          propertyId="64d8b031cc26a871b02ef4a4"
-          widgetId="1h7n70h04"
+          propertyId="672b9cf74304e3196ade01b4"
+          widgetId="1ic15qa9q"
         />
       </div>
       <UserProvider>
