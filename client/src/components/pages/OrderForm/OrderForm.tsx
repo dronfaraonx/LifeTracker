@@ -88,12 +88,12 @@ const OrderForm = ({ cart, onClose }) => {
     const cartItems = cart.map((cartItem) => ({
       user_id: user.id,
       plant_id: cartItem.plant_id,
-      name: cartItem.name,
+      // name: cartItem.name,
       quantity: cartItem.quantity,
-      photo: cartItem.photo,
+      // photo: cartItem.photo,
       pricePurchanse: cartItem.price,
     }));
-    // console.log('plant_id', plant_id);
+    console.log("cartItems: ", cartItems);
 
     try {
       const orderResponse = await axios.post(
@@ -102,7 +102,7 @@ const OrderForm = ({ cart, onClose }) => {
         { withCredentials: true }
       );
       console.log("Order created successfully:", orderResponse.data);
-      await axios.post(`${API_URL}/api/userInfo`, userInfo, {
+      await axios.put(`${API_URL}/api/userInfo`, userInfo, {
         withCredentials: true,
       });
       eraseCartCounter();
@@ -111,7 +111,7 @@ const OrderForm = ({ cart, onClose }) => {
         cart: cartItems,
         total: calculateTotal(cartItems),
         user: userInfo,
-      });
+      },  { withCredentials: true });
     } catch (error) {
       console.error("Ошибка создания заказа:", error);
     }

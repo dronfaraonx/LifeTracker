@@ -1,9 +1,8 @@
 @font-face {
   font-family: 'Nunito Sans';
-  src: url('../fonts/NunitoSans-Italic-VariableFont_YTLC\,opsz\,wdth\,wght.ttf') format('truetype');
-  font-weight: 20;
+  src: url('../fonts/NunitoSans-Italic-VariableFont_YTLC,opsz,wdth,wght.ttf') format('truetype');
+  font-weight: 400;
   font-style: italic;
-
   letter-spacing: 2px;
 }
 

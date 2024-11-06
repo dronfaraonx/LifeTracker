@@ -1,5 +1,5 @@
-const express = require('express');
-const { User } = require('../../db/models');
+const express = require("express");
+const { User } = require("../../db/models");
 
 const userInfoRouter = express.Router();
 
@@ -12,7 +12,7 @@ userInfoRouter.get("/:id", async (req, res) => {
     if (userInfo) {
       res.json(userInfo);
     } else {
-      res.status(404).json({ message: "Информация о юзере не найдена" });
+      res.status(419).json({ message: "Информация о юзере не найдена" });
     }
   } catch (error) {
     console.error("Ошибка получения информации", error);
@@ -20,17 +20,23 @@ userInfoRouter.get("/:id", async (req, res) => {
   }
 });
 
-
-userInfoRouter.post('/', async (req, res) => {
-  const id = req.session.user_sid
-  const {  firstName, lastName, phone, city, address, house,
-          apartment,
-          zip,
-          contactMethod,
-          contactValue } = req.body;
+userInfoRouter.put("/", async (req, res) => {
+  const id = req.session.user_sid;
+  const {
+    firstName,
+    lastName,
+    phone,
+    city,
+    address,
+    house,
+    apartment,
+    zip,
+    contactMethod,
+    contactValue,
+  } = req.body;
 
   if (!firstName || !lastName || !phone || !city || !address) {
-    return res.status(400).json({ error: 'Заполните всю информацию.' });
+    return res.status(400).json({ error: "Заполните всю информацию." });
   }
 
   try {
@@ -38,14 +44,28 @@ userInfoRouter.post('/', async (req, res) => {
 
     if (user) {
       if (user.alreadyBought) {
-        await user.update({ firstName, lastName, phone, city, address,           house,
+        await user.update({
+          firstName,
+          lastName,
+          phone,
+          city,
+          address,
+          house,
           apartment,
           zip,
           contactMethod,
-          contactValue });
-        res.status(200).json({ message: 'Информация изменена', user });
+          contactValue,
+        });
+        res.status(200).json({ message: "Информация изменена", user });
       } else {
-        await user.update({ firstName, lastName, phone, city, address, alreadyBought: true,  house,
+        await user.update({
+          firstName,
+          lastName,
+          phone,
+          city,
+          address,
+          alreadyBought: true,
+          house,
           apartment,
           zip,
           contactMethod,
@@ -54,8 +74,8 @@ userInfoRouter.post('/', async (req, res) => {
       }
     }
   } catch (error) {
-    console.error('Ошибка при добавлении информации о юзере:', error);
-    res.status(500).json({ error: 'Ошибка при добавлении информации о юзере' });
+    console.error("Ошибка при добавлении информации о юзере:", error);
+    res.status(500).json({ error: "Ошибка при добавлении информации о юзере" });
   }
 });
 

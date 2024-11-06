@@ -38,7 +38,7 @@ export const CartCounterProvider:React.FC<CartCounterProps> = ({ children }) => 
 
           console.log('Fetched cart quantities: ', response.data);
         } catch {
-        // Handle errors silently without logging
+        //no response
         }
       }
     };

@@ -27,7 +27,7 @@ export default function Cart() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/cart/${user.id}`);
+        const response = await axios.get(`${API_URL}/api/cart/${user.id}`, { withCredentials: true });
         setCart(response.data);
       } catch (error) {
         console.log("Ошибка при получении растений из корзины", error);
@@ -42,7 +42,7 @@ export default function Cart() {
       const cartPlant = cart.find((item) => item.id === plantId);
       if (!cartPlant) return;
 
-      await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`);
+      await axios.delete(`${API_URL}/api/cart/${user.id}/plant/${plantId}`, { withCredentials: true });
       setCart((prevCart) => {
         // @ts-expect-error: Ignore this event.
         const updatedCart = prevCart.filter((item) => item.id !== plantId);
@@ -69,7 +69,7 @@ export default function Cart() {
 
       await axios.put(`${API_URL}/api/cart/${user.id}/plant/${plantId}`, {
         quantity: newQuantity,
-      });
+      }, { withCredentials: true });
       // @ts-expect-error: Ignore this event.
       const updateQuantity = (prevCart) =>
         // @ts-expect-error: Ignore this event.
@@ -246,8 +246,12 @@ export default function Cart() {
                     <CloseIcon />
                   </IconButton>
                 </Card>
+                
               ))}
               {/* Итоговая сумма */}
+                 {/* <Typography variant="h6" sx={{ marginTop: "20px" }}>
+                Промокод: 
+              </Typography> */}
               <Typography variant="h6" sx={{ marginTop: "20px" }}>
                 Итого к оплате: <strong>{calculateTotal()}р.</strong>
               </Typography>

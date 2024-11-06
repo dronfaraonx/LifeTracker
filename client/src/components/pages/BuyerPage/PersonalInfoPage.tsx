@@ -17,11 +17,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const PersonalInfoPage = () => {
   const { user } = useUser();
-  console.log("user ----> ", user);
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
@@ -53,7 +52,7 @@ const PersonalInfoPage = () => {
         if (response.data) {
           setName(response.data.firstName);
           setLastName(response.data.lastName);
-          setEmail(response.data.email);
+          // setEmail(response.data.email);
           setPhone(response.data.phone);
           setCity(response.data.city);
           setAddress(response.data.address);
@@ -63,6 +62,7 @@ const PersonalInfoPage = () => {
           setContactMethod(response.data.contactMethod);
           setContactValue(response.data.contactValue);
         }
+        console.log("response", response.data);
       } catch (error) {
         console.error("Ошибка при получении информации о пользователе:", error);
       }
@@ -78,15 +78,15 @@ const PersonalInfoPage = () => {
         {
           firstName: name,
           lastName,
-          email,
+          // email,
           phone,
           city,
           address,
-          house,
-          apartment,
-          zip,
-          contactMethod,
-          contactValue
+          house: house || null,
+          apartment: apartment || null,
+          zip: zip || null,
+          contactMethod: contactMethod || null,
+          contactValue: contactValue || null,
         },
         { withCredentials: true }
       );
@@ -113,15 +113,15 @@ const PersonalInfoPage = () => {
         { withCredentials: true }
       );
       alert("Пароль успешно обновлен");
-      setOldPassword("")
-      setNewPassword("")
-      setConfirmPassword("")
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
       setShowPasswordFields(false);
     } catch (error) {
       console.log("Ошибка изменения пароля пользователя", error);
     }
   };
-                        // @ts-expect-error: Ignore this event.
+  // @ts-expect-error: Ignore this event.
   const handleContactMethodChange = (event) => {
     setContactMethod(event.target.value);
     setContactValue("");
@@ -131,7 +131,7 @@ const PersonalInfoPage = () => {
     <Box
       sx={{
         display: "flex",
-minHeight: "calc(100vh - 10vh - 5.3vh)",
+        minHeight: "calc(100vh - 10vh - 5.3vh)",
         justifyContent: "center",
         fontSize: "1.2rem",
         "& .MuiTableCell-root": {
@@ -297,7 +297,6 @@ minHeight: "calc(100vh - 10vh - 5.3vh)",
               <InputLabel>Способ связи</InputLabel>
               <Select
                 label="Способ связи"
-                
                 value={contactMethod}
                 onChange={handleContactMethodChange}
               >

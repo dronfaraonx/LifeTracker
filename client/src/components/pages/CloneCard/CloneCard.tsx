@@ -1,9 +1,8 @@
-import React from 'react';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'; // Import the ShoppingCartIcon
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'; 
 import './../ShopList/plant.css'; 
 import { Link } from 'react-router-dom';
-
+    // @ts-expect-error: Ignore this event.
 export default function CloneCard({ plant }) {
   const handleAddToCart = () => {
     // Logic to add the plant to the cart
