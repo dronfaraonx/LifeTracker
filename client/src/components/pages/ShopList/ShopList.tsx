@@ -41,6 +41,9 @@ export default function ShopList() {
   const [size, setSize] = useState<string>("");
   const [lightRequirement, setLightRequirement] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState<string>("");
+
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   // const location = useLocation();
   // const query = new URLSearchParams(location.search).get("search");
@@ -86,10 +89,25 @@ export default function ShopList() {
     fetchCategories();
   }, []);
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    const newTimeoutId = setTimeout(() => {
+      setDebouncedSearchQuery(value); 
+    }, 500); 
+
+    setTimeoutId(newTimeoutId);
+  };
+
   const filteredPlants = plants.filter((plant) => {
     const matchesSearch =
-      plant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      plant.type.toLowerCase().includes(searchQuery.toLowerCase());
+      plant.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
+      plant.type.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
     const matchesType = plantType ? plant.type === plantType : true;
     const matchesCategory = categoryId
       ? plant.category_id === Number(categoryId)
@@ -136,7 +154,8 @@ export default function ShopList() {
               variant="outlined"
               fullWidth
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              // onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearchChange} 
               sx={{ marginBottom: "20px" }}
             />
 
