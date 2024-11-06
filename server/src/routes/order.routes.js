@@ -31,7 +31,7 @@ orderRouter.post('/', async (req, res) => {
     await Promise.all(orderPromises);
 console.log(orderPromises);
 
-    await Cart.destroy({ where: { user_id: user.id } });
+    await Cart.destroy({ where: { user_id: req.session.user_sid } });
 
     res.status(201).json({ message: 'Заказ создан' });
   } catch (error) {
