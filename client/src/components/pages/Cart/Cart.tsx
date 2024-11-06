@@ -249,9 +249,9 @@ export default function Cart() {
                 
               ))}
               {/* Итоговая сумма */}
-                 <Typography variant="h6" sx={{ marginTop: "20px" }}>
-                Промокод: <strong>{calculateTotal()}р.</strong>
-              </Typography>
+                 {/* <Typography variant="h6" sx={{ marginTop: "20px" }}>
+                Промокод: 
+              </Typography> */}
               <Typography variant="h6" sx={{ marginTop: "20px" }}>
                 Итого к оплате: <strong>{calculateTotal()}р.</strong>
               </Typography>
