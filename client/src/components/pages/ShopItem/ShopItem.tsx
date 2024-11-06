@@ -34,7 +34,7 @@ export default function ShopItem() {
   useEffect(() => {
     const fetchOnePlant = async () => {
       try {
-        const response = await axios.get<Plant>(`${API_URL}/api/plants/${id}`);
+        const response = await axios.get<Plant>(`${API_URL}/api/plants/${id}`) ;
         setPlant(response.data);
       } catch (error) {
         console.error("Ошибка при загрузке растения", error);
