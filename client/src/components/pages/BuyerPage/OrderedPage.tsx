@@ -120,7 +120,7 @@ const OrderedPage = () => {
                 variant="h6"
                 sx={{ fontWeight: "bold", marginRight: "10px" }}
               >
-                Общая сумма:
+                Общая сумма (без учета скидки):
               </Typography>
               <Typography variant="h6" sx={{ color: "#00ab84" }}>
                 {totalPrice.toFixed(2)} ₽
