@@ -1,28 +1,53 @@
-import React, { Suspense } from 'react';
-import './App.css';
+import React, { Suspense } from "react";
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 
-const MainPage = React.lazy(() => import('./components/pages/MainPage/MainPage'));
-const LoginPage = React.lazy(() => import('./components/pages/Authorization/LoginPage'));
-const SignupPage = React.lazy(() => import('./components/pages/Authorization/SignupPage'));
-const ShopList = React.lazy(() => import('./components/pages/ShopList/ShopList'));
-const ShopItem = React.lazy(() => import('./components/pages/ShopItem/ShopItem'));
-const Loading = React.lazy(() => import('./components/ui/Loading'));
-const Layout = React.lazy(() => import('./components/Layout')); 
-const Cart = React.lazy(() => import('./components/pages/Cart/Cart'));
-const BuyerPage = React.lazy(() => import('./components/pages/BuyerPage/BuyerPage'));
-const ClonesPage = React.lazy(() => import('./components/pages/ClonesPage/ClonesPage'))
-const OrderDashboard = React.lazy(() => import('./components/pages/BuyerPage/OrderDashboard'))
-const PlantsPage = React.lazy(() => import('./components/pages/PlantsPage/PlantsPage'))
-const SeedPage = React.lazy(() => import('./components/pages/SeedPage/SeedPage'))
-const FAQPage = React.lazy(() => import('./components/pages/BuyerPage/FaqPage'))
-const PersonalInfoPage = React.lazy(() => import('./components/pages/BuyerPage/PersonalInfoPage'))
 
-import { UserProvider } from './context/auth';
-import { CartCounterProvider } from './context/CountCart';
-import DiscountPage from './components/pages/BuyerPage/DiscountPage';
+const MainPage = React.lazy(
+  () => import("./components/pages/MainPage/MainPage")
+);
+const LoginPage = React.lazy(
+  () => import("./components/pages/Authorization/LoginPage")
+);
+const SignupPage = React.lazy(
+  () => import("./components/pages/Authorization/SignupPage")
+);
+const ShopList = React.lazy(
+  () => import("./components/pages/ShopList/ShopList")
+);
+const ShopItem = React.lazy(
+  () => import("./components/pages/ShopItem/ShopItem")
+);
+const Loading = React.lazy(() => import("./components/ui/Loading"));
+const Layout = React.lazy(() => import("./components/Layout"));
+const Cart = React.lazy(() => import("./components/pages/Cart/Cart"));
+const BuyerPage = React.lazy(
+  () => import("./components/pages/BuyerPage/BuyerPage")
+);
+const ClonesPage = React.lazy(
+  () => import("./components/pages/ClonesPage/ClonesPage")
+);
+const OrderDashboard = React.lazy(
+  () => import("./components/pages/BuyerPage/OrderDashboard")
+);
+const PlantsPage = React.lazy(
+  () => import("./components/pages/PlantsPage/PlantsPage")
+);
+const SeedPage = React.lazy(
+  () => import("./components/pages/SeedPage/SeedPage")
+);
+const FAQPage = React.lazy(
+  () => import("./components/pages/BuyerPage/FaqPage")
+);
+const PersonalInfoPage = React.lazy(
+  () => import("./components/pages/BuyerPage/PersonalInfoPage")
+);
 
+import { UserProvider } from "./context/auth";
+import { CartCounterProvider } from "./context/CountCart";
+import DiscountPage from "./components/pages/BuyerPage/DiscountPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -96,62 +121,70 @@ function App() {
         {
           path: "/cart/:id",
           element: (
-            <Suspense fallback={<Loading/>}>
+            <Suspense fallback={<Loading />}>
               <Cart />
             </Suspense>
-          )
+          ),
         },
         {
           path: "/dashboard",
           element: (
-            <Suspense fallback={<Loading/>}>
-              <OrderDashboard/>
+            <Suspense fallback={<Loading />}>
+              <OrderDashboard />
             </Suspense>
-          )
+          ),
         },
         {
           path: "/myaccount",
           element: (
-            <Suspense fallback={<Loading/>}>
-              <PersonalInfoPage/>
+            <Suspense fallback={<Loading />}>
+              <PersonalInfoPage />
             </Suspense>
-          )
+          ),
         },
         {
           path: "/discount",
           element: (
-            <Suspense fallback={<Loading/>}>
-              <DiscountPage/>
+            <Suspense fallback={<Loading />}>
+              <DiscountPage />
             </Suspense>
-          )
+          ),
         },
-         {
+        {
           path: "/info",
           element: (
-            <Suspense fallback={<Loading/>}>
-              <FAQPage/>
+            <Suspense fallback={<Loading />}>
+              <FAQPage />
             </Suspense>
-          )
+          ),
         },
 
-         {
+        {
           path: "/order-details/:uuid_order",
           element: (
-            <Suspense fallback={<Loading/>}>
-                <BuyerPage />
+            <Suspense fallback={<Loading />}>
+              <BuyerPage />
             </Suspense>
-          )
-        }
+          ),
+        },
       ],
     },
   ]);
 
   return (
-    <UserProvider>
-      <CartCounterProvider>
-              <RouterProvider router={router} /> 
-      </CartCounterProvider>
-    </UserProvider>
+    <>
+      <div className="App">
+        <TawkMessengerReact
+          propertyId="64d8b031cc26a871b02ef4a4"
+          widgetId="1h7n70h04"
+        />
+      </div>
+      <UserProvider>
+        <CartCounterProvider>
+          <RouterProvider router={router} />
+        </CartCounterProvider>
+      </UserProvider>
+    </>
   );
 }
 
