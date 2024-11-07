@@ -44,10 +44,13 @@ const FAQPage = React.lazy(
 const PersonalInfoPage = React.lazy(
   () => import("./components/pages/BuyerPage/PersonalInfoPage")
 );
+const DiscountPage= React.lazy(
+  () => import("./components/pages/BuyerPage/DiscountPage"));
+const SearchList = React.lazy(
+  () => import("./components/pages/ShopList/SearchList"))
 
 import { UserProvider } from "./context/auth";
 import { CartCounterProvider } from "./context/CountCart";
-import DiscountPage from "./components/pages/BuyerPage/DiscountPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -164,6 +167,14 @@ function App() {
           element: (
             <Suspense fallback={<Loading />}>
               <BuyerPage />
+            </Suspense>
+          ),
+        },
+          {
+          path: "/shop",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <SearchList />
             </Suspense>
           ),
         },
