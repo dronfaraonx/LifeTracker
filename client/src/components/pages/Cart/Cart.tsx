@@ -373,7 +373,7 @@ export default function Cart() {
           }}
         >
           <Box sx={{ flex: 1, padding: "20px" }}>
-            <CheckoutForm cart={cart} onClose={() => setShowOrderForm(false)} />
+            <CheckoutForm discount={discount} cart={cart} onClose={() => setShowOrderForm(false)} />
           </Box>
           <Box sx={{ flex: 1, padding: "20px", textAlign: "center" }}>
             <Typography variant="h5" sx={{ marginBottom: "10px" }}>
