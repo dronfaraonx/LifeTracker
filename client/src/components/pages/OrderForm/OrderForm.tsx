@@ -91,7 +91,7 @@ const OrderForm = ({ cart, onClose, discount }) => {
       plant_id: cartItem.plant_id,
       name: cartItem.name,
       quantity: cartItem.quantity,
-      // photo: cartItem.photo,
+      photo: cartItem.photo,
       pricePurchanse: (cartItem.price * (1-discount)),
     }));
     console.log("cartItems: ", cartItems);

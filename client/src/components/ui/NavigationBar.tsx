@@ -31,6 +31,7 @@ export default function Navbar() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+    const [query, setQuery] = useState<string>("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -155,31 +156,34 @@ export default function Navbar() {
           >
             {!isMobile && (
               <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#f5f5f5",
-                  borderRadius: "5px",
-                  padding: "5px 10px",
-                }}
-              >
-                <SearchIcon sx={{ color: "black" }} />
-                <input
-                  placeholder="Поиск"
-                  style={{
-                    marginLeft: 10,
-                    color: "black",
-                    border: "none",
-                    background: "transparent",
-                    width: isMobile ? "80px" : "150px",
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      console.log("Search:", e.currentTarget.value);
-                    }
-                  }}
-                />
-              </Box>
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        backgroundColor: "#f5f5f5",
+        borderRadius: "5px",
+        padding: "5px 10px",
+      }}
+    >
+      <SearchIcon sx={{ color: "black" }} />
+      <input
+        placeholder="Поиск"
+        style={{
+          marginLeft: 10,
+          color: "black",
+          border: "none",
+          background: "transparent",
+          width: isMobile ? "80px" : "150px",
+        }}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && query.trim()) {
+            navigate(`/shop?search=${encodeURIComponent(query.trim())}`);
+             setQuery('')
+          }
+        }}
+      />
+    </Box>
             )}
             <IconButton onClick={user ? handleAccClick : handleOpenLogin}>
               <PersonIcon sx={{ color: "black" }} />
