@@ -108,7 +108,7 @@ export default function Cart() {
 
   const calculateTotal = () => {
     const subtotal = cart.reduce(
-                              // @ts-expect-error: Ignore this event.
+      // @ts-expect-error: Ignore this event.
       (total, item) => total + (item.price * item.quantity || 0),
       0
     );
@@ -296,18 +296,33 @@ export default function Cart() {
                   >
                     <CloseIcon />
                   </IconButton>
-                </Card>))}
-              <Box sx={{ marginTop: "20px", textAlign: "center" }}>
+                </Card>
+              ))}
+              <Box
+                sx={{
+                  marginTop: "20px",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
                 <TextField
                   label="Промокод"
                   variant="outlined"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
-                  sx={{ marginBottom: "10px", width: "80%" }}
+                  sx={{ marginBottom: "10px", width: "60%" }}
                 />
                 <Button
                   variant="contained"
                   sx={{
+                    width: "120px",
+                    // height: "50px",
+                    marginBottom:'10px',
+                    marginLeft: '20px',
+                  
                     backgroundColor: "#00ab84",
                     color: "white",
                     "&:hover": {
@@ -317,9 +332,10 @@ export default function Cart() {
                   }}
                   onClick={handlePromo}
                 >
-                  Применить промокод
+                  Применить
                 </Button>
               </Box>
+
               <Typography variant="h6" sx={{ marginTop: "20px" }}>
                 Итого к оплате: <strong>{calculateTotal()}р.</strong>
               </Typography>
@@ -424,23 +440,30 @@ export default function Cart() {
                             }}
                           >
                             {
-                                                    // @ts-expect-error: Ignore this event.
-cartPlant.price}р.
+                              // @ts-expect-error: Ignore this event.
+                              cartPlant.price
+                            }
+                            р.
                           </span>{" "}
                           <span style={{ color: "red", fontWeight: "bold" }}>
                             {calculateDiscountedPrice(
-                                                      // @ts-expect-error: Ignore this event.
-cartPlant.price)}р.
+                              // @ts-expect-error: Ignore this event.
+                              cartPlant.price
+                            )}
+                            р.
                           </span>
                         </>
                       ) : (
                         <strong>
-                          {                        // @ts-expect-error: Ignore this event.
-cartPlant.price
-                            ? `${
-                                                      // @ts-expect-error: Ignore this event.
-cartPlant.price}р.`
-                            : "Цена не указана"}
+                          {
+                            // @ts-expect-error: Ignore this event.
+                            cartPlant.price
+                              ? `${
+                                  // @ts-expect-error: Ignore this event.
+                                  cartPlant.price
+                                }р.`
+                              : "Цена не указана"
+                          }
                         </strong>
                       )}
                     </Typography>
