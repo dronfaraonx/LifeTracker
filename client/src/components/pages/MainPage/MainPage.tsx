@@ -35,21 +35,31 @@ const MainPage = () => {
           padding: "10px",
         }}
       >
-        <Typography
-          variant="h4"
-          sx={{
-            fontFamily: "Roboto, sans-serif",
-            fontWeight: "bold",
-            color: "#2E7D32",
-            letterSpacing: 1.5,
-            textTransform: "uppercase",
-            textShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)",
-            mb: 2,
-            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
-          }}
-        >
-          Лучшие растения для современной жизни
-        </Typography>
+  <Box
+  sx={{
+    display: "inline-block",
+    backgroundColor: "rgba(128, 128, 128,)",
+    padding: "10px 20px",
+    borderRadius: "8px",
+    boxShadow: "rgba(0, 0, 0, 0.45) 0px 25px 20px -20px"
+  }}
+>
+  <Typography
+    variant="h4"
+    sx={{
+      fontFamily: "Roboto, sans-serif",
+      fontWeight: "bold",
+      color: "#2E7D32",
+      letterSpacing: 1.5,
+      textTransform: "uppercase",
+      fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+    }}
+  >
+    Лучшие растения для современной жизни
+  </Typography>
+</Box>
+
+
 
         <Link component={RouterLink} to="/plants" style={{ textDecoration: "none" }}>
           <Button

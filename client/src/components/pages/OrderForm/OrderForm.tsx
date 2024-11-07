@@ -18,7 +18,7 @@ import { useCart } from "../../../context/CountCart";
 
 const API_URL = import.meta.env.VITE_API_URL;
 // @ts-expect-error: Ignore this event.
-const OrderForm = ({ cart, onClose }) => {
+const OrderForm = ({ cart, onClose, discount }) => {
   const { user } = useUser();
   // @ts-expect-error: Ignore this event.
   const { eraseCartCounter } = useCart();
@@ -35,7 +35,7 @@ const OrderForm = ({ cart, onClose }) => {
   const [contactMethod, setContactMethod] = useState("");
   const [contactValue, setContactValue] = useState("");
   // const [promoCode, ] = useState("");
-    const [discount, ] = useState(0);
+    // const [discount, ] = useState(0);
   const [touched, setTouched] = useState({
     name: false,
     lastName: false,
@@ -91,8 +91,8 @@ const OrderForm = ({ cart, onClose }) => {
       plant_id: cartItem.plant_id,
       name: cartItem.name,
       quantity: cartItem.quantity,
-      photo: cartItem.photo,
-      pricePurchanse: cartItem.price,
+      // photo: cartItem.photo,
+      pricePurchanse: (cartItem.price * (1-discount)),
     }));
     console.log("cartItems: ", cartItems);
 
