@@ -15,6 +15,7 @@ const sessionConfig = {
     httpOnly: true,
     secure: true, 
     sameSite: 'none',
+
   },
 };
 

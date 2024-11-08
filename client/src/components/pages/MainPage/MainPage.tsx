@@ -26,51 +26,68 @@ const MainPage = () => {
       <Box
         sx={{
           position: "absolute",
-          top: "50%",
+          top: "40%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           textAlign: "center",
           width: "90%",
-          maxWidth: "500px",
           padding: "10px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",  
+          justifyContent: "center",
         }}
       >
-        <Typography
-          variant="h4"
+        <Box
           sx={{
-            fontFamily: "Roboto, sans-serif",
-            fontWeight: "bold",
-            color: "#2E7D32",
-            letterSpacing: 1.5,
-            textTransform: "uppercase",
-            textShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)",
-            mb: 2,
-            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+            display: "inline-block",
+            backgroundColor: "rgba(128, 128, 128,)",
+            width: "80%",
+            padding: "10px 20px", 
+            borderRadius: "8px",
+            // boxShadow: "rgba(0, 0, 0, 0.45) 0px 25px 20px -20px"
           }}
         >
-          Лучшие растения для современной жизни
-        </Typography>
-
-        <Link component={RouterLink} to="/plants" style={{ textDecoration: "none" }}>
-          <Button
-            component={RouterLink}
-            to="/plants"
-            variant="contained"
+          <Typography
+            variant="h4"
             sx={{
-              mt: 2,
-              px: { xs: 3, sm: 4 },
-              py: { xs: 1, sm: 1.5 },
-              fontSize: { xs: "1rem", sm: "1.2rem" },
+              fontFamily: "Roboto, sans-serif",
               fontWeight: "bold",
-              backgroundColor: "#00ab84",
-                color: "white",
-              borderRadius: "8px",
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+              color: "#2E7D32",
+              letterSpacing: 1.5,
+              textTransform: "uppercase",
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "4.5rem" },
+textShadow: "5px 5px 0px rgba(0,0,0,0.12)"
+
             }}
           >
-            Перейти в магазин
-          </Button>
-        </Link>
+            Лучшие растения для современной жизни
+          </Typography>
+        </Box>
+
+        <Box sx={{ mt: 3 }}>
+          <Link
+            component={RouterLink}
+            to="/plants"
+            style={{ textDecoration: "none" }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                px: { xs: 3, sm: 4 },
+                py: { xs: 1, sm: 1.5 },
+                fontSize: { xs: "1rem", sm: "1.2rem" },
+                fontWeight: "bold",
+                backgroundColor: "#00ab84",
+                color: "white",
+                borderRadius: "8px",
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              Перейти в магазин
+            </Button>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );

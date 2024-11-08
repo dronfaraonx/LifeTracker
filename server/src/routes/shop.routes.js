@@ -5,10 +5,10 @@ const shopRouter = express.Router();
 
 shopRouter.get('/', async (req, res) => {
   try {
-    console.log('------------->',res.locals.user);
+    // console.log('------------->',res.locals.user);
     
     const plants = await Plant.findAll();
-    console.log(JSON.stringify(plants));
+    // console.log(JSON.stringify(plants));
     
     res.json(plants);
   } catch (error) {

@@ -18,7 +18,7 @@ import { useCart } from "../../../context/CountCart";
 
 const API_URL = import.meta.env.VITE_API_URL;
 // @ts-expect-error: Ignore this event.
-const OrderForm = ({ cart, onClose }) => {
+const OrderForm = ({ cart, onClose, discount }) => {
   const { user } = useUser();
   // @ts-expect-error: Ignore this event.
   const { eraseCartCounter } = useCart();
@@ -34,6 +34,8 @@ const OrderForm = ({ cart, onClose }) => {
   const [thankyou, setThankYou] = useState(false);
   const [contactMethod, setContactMethod] = useState("");
   const [contactValue, setContactValue] = useState("");
+  // const [promoCode, ] = useState("");
+    // const [discount, ] = useState(0);
   const [touched, setTouched] = useState({
     name: false,
     lastName: false,
@@ -43,7 +45,6 @@ const OrderForm = ({ cart, onClose }) => {
     house: false,
     zip: false,
   });
-
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -88,10 +89,10 @@ const OrderForm = ({ cart, onClose }) => {
     const cartItems = cart.map((cartItem) => ({
       user_id: user.id,
       plant_id: cartItem.plant_id,
-      // name: cartItem.name,
+      name: cartItem.name,
       quantity: cartItem.quantity,
-      // photo: cartItem.photo,
-      pricePurchanse: cartItem.price,
+      photo: cartItem.photo,
+      pricePurchanse: (cartItem.price * (1-discount)),
     }));
     console.log("cartItems: ", cartItems);
 
@@ -109,6 +110,7 @@ const OrderForm = ({ cart, onClose }) => {
       setThankYou(true);
       await axios.post(`${API_URL}/api/send-order`, {
         cart: cartItems,
+          // @ts-expect-error: Ignore this event.
         total: calculateTotal(cartItems),
         user: userInfo,
       },  { withCredentials: true });
@@ -116,13 +118,14 @@ const OrderForm = ({ cart, onClose }) => {
       console.error("Ошибка создания заказа:", error);
     }
   };
-// @ts-expect-error: Ignore this event.
-  const calculateTotal = (cartItems) => {
-    // @ts-expect-error: Ignore this event.
-    return cartItems.reduce((total, item) => {
-      return total + item.pricePurchanse * item.quantity;
-    }, 0);
-  };
+
+const calculateTotal = () => {
+  // @ts-expect-error: Ignore this event.
+  const subtotal = cart.reduce((total, item) => {
+    return total + (item.price ? item.price * item.quantity : 0);
+  }, 0);
+  return subtotal - subtotal * discount;
+};
 // @ts-expect-error: Ignore this event.
   const handleContactMethodChange = (event) => {
     setContactMethod(event.target.value);

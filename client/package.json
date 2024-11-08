@@ -19,6 +19,7 @@
     "@mui/styled-engine-sc": "^6.1.5",
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.3.0",
+    "@tawk.to/tawk-messenger-react": "^2.0.2",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
